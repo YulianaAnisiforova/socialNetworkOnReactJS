@@ -1,0 +1,15 @@
+.header {
+    grid-area: h;
+    background-color: #ffcd7e;
+}
+
+.logoContainer {
+    /*display: flex;*/
+    /*justify-content: center;*/
+}
+
+.header img {
+    width: 100px;
+    margin-left: 50px;
+    margin-top: 10px;
+}

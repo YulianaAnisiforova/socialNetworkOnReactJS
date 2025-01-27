@@ -1,0 +1,30 @@
+.content {
+    grid-area: c;
+    background-color: #ffecbe;
+}
+
+.banner {
+    height: 220px;
+}
+
+.avatarContainer {
+    padding-left: 40px;
+}
+
+.avatar {
+    height: 150px;
+    border: 1px solid #ce7800;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.postsContainer {
+    padding-left: 40px;
+}
+
+.posts {
+
+}
+
+.item {
+}

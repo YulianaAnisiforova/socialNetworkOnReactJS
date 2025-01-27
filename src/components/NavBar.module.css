@@ -1,0 +1,21 @@
+.nav {
+    grid-area: n;
+    background-color: #ffcd7e;
+}
+
+.item {
+    color: #ce7800;
+    font-size: 20px;
+    line-height: 40px;
+    padding-left: 15px;
+    border-radius: 7px;
+}
+
+.item:hover {
+    background-color: #eeba72;
+    cursor: pointer;
+}
+
+.item:active {
+    background-color: #e5b16a;
+}
