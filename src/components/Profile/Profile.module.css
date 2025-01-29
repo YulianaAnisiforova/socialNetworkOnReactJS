@@ -12,19 +12,9 @@
 }
 
 .avatar {
-    height: 150px;
-    border: 1px solid #ce7800;
+    height: 180px;
+    width: 180px;
+    /*border: 1px solid #ce7800;*/
     border-radius: 5px;
     margin-top: 15px;
-}
-
-.postsContainer {
-    padding-left: 40px;
-}
-
-.posts {
-
-}
-
-.item {
 }

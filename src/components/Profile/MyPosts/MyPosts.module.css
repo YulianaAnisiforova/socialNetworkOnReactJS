@@ -1,0 +1,52 @@
+.postsContainer {
+    padding-left: 40px;
+}
+
+.posts {
+
+}
+
+.newPost {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.newPostArea {
+    background-color: #ffecbe;
+    border: none;
+    border-bottom: 1px solid #ce7800;
+    resize: none;
+    outline: none;
+}
+
+.newPostArea:focus {
+    resize: none;
+}
+
+.newPostArea::placeholder {
+    font-size: 15px;
+}
+
+.newPostArea:focus::placeholder {
+    visibility: hidden;
+}
+
+.newPostBtn {
+    background-color: #ffcd7e;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.newPostBtn:hover {
+    background-color: #eeba72;
+}
+
+.newPostBtn:active {
+    background-color: #e5b16a;
+}
