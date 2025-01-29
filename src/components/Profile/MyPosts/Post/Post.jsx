@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './Post.module.css'
 import userAvatar from './../../avatar.jpg'
-import Likes from '../Likes/Likes'
+import Likes from './Likes/Likes'
 
 const Post = (props) => {
     return (
