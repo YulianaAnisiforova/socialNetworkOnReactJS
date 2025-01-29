@@ -1,9 +1,12 @@
 .item {
+    border-bottom: 1px solid #ce7800;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    width: 95%;
 }
 
 .item img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
-
 }
