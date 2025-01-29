@@ -6,7 +6,7 @@ import userBanner from './banner.png'
 
 const Profile = () => {
     return (
-        <div className={style.content}>
+        <div>
             <div>
                 <img className={style.banner} src={userBanner} alt="welcome"/>
             </div>

@@ -13,3 +13,8 @@ body {
   grid-template-rows: 100px 1fr;
   grid-template-columns: 2fr 10fr;
 }
+
+.appWrapperContent {
+    grid-area: c;
+    background-color: #ffecbe;
+}
