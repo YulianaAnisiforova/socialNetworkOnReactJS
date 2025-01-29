@@ -6,8 +6,14 @@ import Likes from './Likes/Likes'
 const Post = (props) => {
     return (
         <div className={style.item}>
-            <img src={userAvatar} alt="avatar"/>
-            {props.message}
+            <div>
+                <img src={userAvatar} alt="avatar"/>
+            </div>
+            <div className={style.textContainer}>
+                <div className={style.text}>
+                    {props.message}
+                </div>
+            </div>
             <div>
                 <Likes likes={props.likes}/>
             </div>
