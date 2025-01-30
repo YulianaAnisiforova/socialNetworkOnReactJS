@@ -10,11 +10,6 @@ const MyPosts = () => {
                 <div className={style.posts}>
                     <Post message='I`m going to visit my gruncle Stan again this summer OMG soooo excited!! Looking forward to meet him again!!!!!' likes='1488'/>
                     <Post message='My brother Dipper is sooooo annoying' likes='2'/>
-                    {/*<Post message='Oh, girl you got me ackin` so cray cray{\n}*/}
-                    {/*      CRAY CRAY{\n}*/}
-                    {/*      You tell me that you won`t be my ba-bay{\n}*/}
-                    {/*We`re non threatening, girl{\n}*/}
-                    {/*Yeah!' likes='9'/>*/}
                     <Post message='la la la la la la la la la la la la la la la la
                         la la la la la la la la la la la la la la la la
                         la la la la la la la la la la la la la la la la

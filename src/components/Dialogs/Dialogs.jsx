@@ -2,30 +2,40 @@ import React from 'react'
 import style from './Dialogs.module.css'
 import {NavLink} from "react-router-dom";
 
+const DialogItem = (props) => {
+    return (
+        <div className={style.dialog + ' ' + style.active}>
+            <NavLink className={navData => navData.isActive ? style.active : style.dialog} to='/dialogs/'${props.id}>
+                {props.user}
+            </NavLink>
+        </div>
+    )
+}
+// '/dialogs/1'
 const Dialogs = () => {
     return (
         <div className={style.dialogs}>
             <div className={style.dialogItems}>
                 <div className={style.dialog + ' ' + style.active}>
-                    <NavLink className={navData => navData.isActive ? style.active : style.dialog} to='/dialogs/1'>Dipper Pines</NavLink>
+                    <DialogItem user='Dipper Pines' id='1' />
                 </div>
                 <div className={style.dialog}>
-                    <NavLink className={navData => navData.isActive ? style.active : style.dialog} to='/dialogs/2'>Stan Pines</NavLink>
+                    <DialogItem user='Stan Pines' id='2' />
                 </div>
                 <div className={style.dialog}>
-                    <NavLink className={navData => navData.isActive ? style.active : style.dialog} to='/dialogs/3'>Wendy Corduroy</NavLink>
+                    <DialogItem user='Wendy Corduroy' id='3' />
                 </div>
                 <div className={style.dialog}>
-                    <NavLink className={navData => navData.isActive ? style.active : style.dialog} to='/dialogs/4'>Ford Pines</NavLink>
+                    <DialogItem user='Ford Pines' id='4' />
                 </div>
                 <div className={style.dialog}>
-                    <NavLink className={navData => navData.isActive ? style.active : style.dialog} to='/dialogs/5'>Pacifica Northwest</NavLink>
+                    <DialogItem user='Pacifica Northwest' id='5' />
                 </div>
                 <div className={style.dialog}>
-                    <NavLink className={navData => navData.isActive ? style.active : style.dialog} to='/dialogs/6'>Mermando</NavLink>
+                    <DialogItem user='Mermando' id='6' />
                 </div>
                 <div className={style.dialog}>
-                    <NavLink className={navData => navData.isActive ? style.active : style.dialog} to='/dialogs/7'>Soos Ramirez</NavLink>
+                    <DialogItem user='Soos Ramirez' id='7' />
                 </div>
             </div>
 
