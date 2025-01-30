@@ -7,7 +7,6 @@
     text-decoration: none;
     font-size: 20px;
     line-height: 40px;
-    padding-left: 15px;
     border-radius: 7px;
     cursor: pointer;
 }
@@ -15,6 +14,8 @@
 .link {
     text-decoration: none;
     color: #ce7800;
+    display: block;
+    padding-left: 15px;
 }
 
 .item:hover {
