@@ -6,8 +6,8 @@ import DialogItems from "./DialogItems/DialogItems";
 const Dialogs = () => {
     return (
         <div className={style.dialogs}>
-            <DialogItems />
-            <Messages />
+            <DialogItems/>
+            <Messages/>
         </div>
     )
 }

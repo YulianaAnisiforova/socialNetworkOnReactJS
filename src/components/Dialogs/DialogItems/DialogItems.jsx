@@ -3,29 +3,22 @@ import style from './DialogItems.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 
 const DialogItems = () => {
+    let dialogsData = [
+        {id: 1, name: 'Dipper Pines',},
+        {id: 2, name: 'Stan Pines',},
+        {id: 3, name: 'Wendy Corduroy',},
+        {id: 4, name: 'Ford Pines',},
+        {id: 5, name: 'Pacifica Northwest',},
+        {id: 6, name: 'Mermando',},
+        {id: 7, name: 'Soos Ramirez',},
+    ]
+
+    let dialogsElements = dialogsData.map(
+        dialog => <DialogItem user={dialog.name} id={dialog.id}/>)
+
     return (
         <div className={style.dialogItems}>
-            <div>
-                <DialogItem user='Dipper Pines' id='1'/>
-            </div>
-            <div>
-                <DialogItem user='Stan Pines' id='2'/>
-            </div>
-            <div>
-                <DialogItem user='Wendy Corduroy' id='3'/>
-            </div>
-            <div>
-                <DialogItem user='Ford Pines' id='4'/>
-            </div>
-            <div>
-                <DialogItem user='Pacifica Northwest' id='5'/>
-            </div>
-            <div>
-                <DialogItem user='Mermando' id='6'/>
-            </div>
-            <div>
-                <DialogItem user='Soos Ramirez' id='7'/>
-            </div>
+            {dialogsElements}
         </div>
     )
 }

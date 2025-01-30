@@ -4,23 +4,36 @@ import Post from "./Post/Post";
 import NewPost from "./NewPost/NewPost";
 
 const MyPosts = () => {
+    let postsData = [
+        {
+            id: 0,
+            message: 'I`m going to visit my gruncle Stan again this summer OMG soooo excited!! Looking forward to meet him again!!!!!',
+            likes: '1488'
+        },
+        {id: 1, message: 'My brother Dipper is sooooo annoying', likes: '2'},
+        {
+            id: 2, message: 'la la la la la la la la la la la la la la la la\n' +
+                'la la la la la la la la la la la la la la la la\n' +
+                'la la la la la la la la la la la la la la la la\n' +
+                'la la la la la la la la la la la la la la la la\n' +
+                'la la la la la la la la la la la la la la la la\n' +
+                'la la la la la la la la la la la la la la la la\n' +
+                'la la la la la la la la la la la la la la la la\n' +
+                'la la la la la la la la la la la la la la la la', likes: '0'
+        },
+        {id: 3, message: 'Hello everyone it`s my first post here haha', likes: '7'},
+    ]
+
+    let postsElements = postsData.map(
+        post => <Post message={post.message} likes={post.likes}/>)
+
     return (
-            <div className={style.postsContainer}>
-                <NewPost />
-                <div className={style.posts}>
-                    <Post message='I`m going to visit my gruncle Stan again this summer OMG soooo excited!! Looking forward to meet him again!!!!!' likes='1488'/>
-                    <Post message='My brother Dipper is sooooo annoying' likes='2'/>
-                    <Post message='la la la la la la la la la la la la la la la la
-                        la la la la la la la la la la la la la la la la
-                        la la la la la la la la la la la la la la la la
-                        la la la la la la la la la la la la la la la la
-                        la la la la la la la la la la la la la la la la
-                        la la la la la la la la la la la la la la la la
-                        la la la la la la la la la la la la la la la la
-                        la la la la la la la la la la la la la la la la ' likes='0'/>
-                    <Post message='Hello everyone it`s my first post here haha' likes='7'/>
-                </div>
-            </div>)
+        <div className={style.postsContainer}>
+            <NewPost/>
+            <div className={style.posts}>
+                {postsElements}
+            </div>
+        </div>)
 }
 
 export default MyPosts
