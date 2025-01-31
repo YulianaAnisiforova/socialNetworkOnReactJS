@@ -2,14 +2,9 @@ import React from 'react'
 import style from './Messages.module.css'
 import Message from "./Message/Message";
 
-const Messages = () => {
-    let messagesData = [
-        {id: 1, message: 'Hi!',},
-        {id: 2, message: 'How are you?',},
-        {id: 3, message: 'I`m pretty good',},
-    ]
+const Messages = (props) => {
 
-    let messagesElements = messagesData.map(
+    let messagesElements = props.messages.map(
         message => <Message message={message.message}/>)
 
     return (

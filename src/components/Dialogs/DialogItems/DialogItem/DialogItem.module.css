@@ -6,6 +6,11 @@
     align-items: center;
 }
 
+.dialog:hover {
+    color: #eeba72;
+    transition: 0.5s;
+}
+
 .dialog .active {
     color: #945701;
     text-decoration: none;
