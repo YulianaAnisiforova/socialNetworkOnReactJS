@@ -1,10 +1,20 @@
 .dialog {
     color: #7c7c7c;
     text-decoration: none;
+    padding: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .dialog .active {
     color: #945701;
     text-decoration: none;
     transition: 0.5s;
+    padding: 10px;
+}
+
+.avatars {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
 }
