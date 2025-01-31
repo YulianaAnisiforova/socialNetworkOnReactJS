@@ -27,6 +27,7 @@
 
 .item:hover {
     background-color: #eeba72;
+    transition: 0.5s;
 }
 
 .item:active {

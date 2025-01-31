@@ -6,4 +6,5 @@
 .dialog .active {
     color: #945701;
     text-decoration: none;
+    transition: 0.5s;
 }
