@@ -33,7 +33,8 @@ const MyPosts = () => {
             <div className={style.posts}>
                 {postsElements}
             </div>
-        </div>)
+        </div>
+    )
 }
 
 export default MyPosts

@@ -25,6 +25,6 @@
     align-items: center;
 }
 
-.text {
-
+.text span {
+    color: black;
 }
