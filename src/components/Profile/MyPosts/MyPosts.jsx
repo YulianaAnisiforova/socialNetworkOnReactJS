@@ -10,7 +10,7 @@ const MyPosts = (props) => {
 
     return (
         <div className={style.postsContainer}>
-            <NewPost/>
+            <NewPost addPost={props.addPost}/>
             <div className={style.posts}>
                 {postsElements}
             </div>
