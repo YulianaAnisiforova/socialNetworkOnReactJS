@@ -8,8 +8,17 @@ const Messages = (props) => {
         message => <Message message={message.message}/>)
 
     return (
-        <div className={style.messages}>
-            {messagesElements}
+        <div className={style.messagesSide}>
+
+            <div className={style.messages}>
+                {messagesElements}
+            </div>
+
+            <div className={style.newMessage}>
+                <textarea className={style.newMessageArea} cols="80" rows="1" placeholder='New message' />
+                <button className={style.newMessageBtn}>Send</button>
+            </div>
+
         </div>
     )
 }

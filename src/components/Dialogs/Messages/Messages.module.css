@@ -1,3 +1,57 @@
+.messagesSide {
+    display: grid;
+    grid-template-rows: 9fr 1fr;
+}
+
 .messages {
     padding: 10px;
+}
+
+.newMessage {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.newMessageArea {
+    background-color: #ffecbe;
+    border: none;
+    border-bottom: 1px solid #ce7800;
+    resize: none;
+    outline: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    margin-top: auto;
+}
+
+.newMessageArea:focus {
+    resize: none;
+}
+
+.newMessageArea::placeholder {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+}
+
+.newMessageArea:focus::placeholder {
+    visibility: hidden;
+}
+
+.newMessageBtn {
+    background-color: #ffcd7e;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.newMessageBtn:hover {
+    background-color: #eeba72;
+    transition: 0.5s;
+}
+
+.newMessageBtn:active {
+    background-color: #e5b16a;
 }

@@ -17,7 +17,7 @@ const NewPost = (props) => {
     return (
         <div className={style.newPost}>
             <textarea className={style.newPostArea}  ref={newPostElement} cols="50" rows="1" placeholder="How are you?"
-                      onChange={ onPostChange } contenteditable="true" value={props.newPostText} />
+                      onChange={ onPostChange } value={props.newPostText} />
             <button onClick={ addPostBtn } className={style.newPostBtn}>Add post</button>
         </div>)
 }
