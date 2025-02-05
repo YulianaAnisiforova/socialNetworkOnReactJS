@@ -1,4 +1,8 @@
 .message span {
     color: black;
+}
 
+.message {
+    margin-top: 10px;
+    margin-left: 20px;
 }

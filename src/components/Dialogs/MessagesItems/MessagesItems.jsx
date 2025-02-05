@@ -7,7 +7,7 @@ const MessagesItems = (props) => {
     return (
         <div className={style.messagesItems}>
             <Messages messages={props.messages}/>
-            <NewMessage/>
+            <NewMessage newMessageText={props.newMessageText} dispatch={props.dispatch}/>
         </div>
     )
 }
