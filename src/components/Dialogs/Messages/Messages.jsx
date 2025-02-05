@@ -15,7 +15,7 @@ const Messages = (props) => {
             </div>
 
             <div className={style.newMessage}>
-                <textarea className={style.newMessageArea} cols="80" rows="1" placeholder='New message' />
+                <textarea className={style.newMessageArea} cols="70" rows="1" placeholder='New message' />
                 <button className={style.newMessageBtn}>Send</button>
             </div>
 

@@ -5,7 +5,7 @@ body {
 .appWrapper {
   margin: auto;
   display: grid;
-  width: 1200px;
+  width: 100%;
 
   grid-template-areas:
   "h h"

@@ -9,6 +9,7 @@ const Post = (props) => {
             <div>
                 <img src={userAvatar} alt="avatar"/>
             </div>
+
             <div className={style.textContainer}>
                 <div className={style.text}>
                     <span>
@@ -16,6 +17,7 @@ const Post = (props) => {
                     </span>
                 </div>
             </div>
+
             <div>
                 <Likes likes={props.likes}/>
             </div>

@@ -1,15 +1,9 @@
 .item {
-    /*border-bottom: 1px solid #ce7800;*/
     margin-bottom: 10px;
     padding-bottom: 10px;
     width: 95%;
-
     display: grid;
-    grid-template-areas:
-    'a t'
-    'l t';
-    /*grid-template-rows: 2fr;*/
-    /*grid-template-columns: 10fr;*/
+    grid-template-columns: 1fr 9fr;
     grid-gap: 5px;
 }
 
