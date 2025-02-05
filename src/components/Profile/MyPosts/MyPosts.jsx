@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './MyPosts.module.css'
 import Post from "./Post/Post";
-import NewPost from "./NewPost/NewPost";
+import NewPostContainer from "./NewPostContainer/NewPostContainer";
 
 const MyPosts = (props) => {
 
@@ -10,7 +10,7 @@ const MyPosts = (props) => {
 
     return (
         <div className={style.postsContainer}>
-            <NewPost dispatch={props.dispatch} newPostText={props.newPostText}/>
+            <NewPostContainer dispatch={props.dispatch} newPostText={props.newPostText}/>
             <div className={style.posts}>
                 {postsElements}
             </div>

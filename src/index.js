@@ -6,6 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import store from "./redux/reduxStore";
 
+window.store = store
 const root = ReactDOM.createRoot(document.getElementById('root'))
 let rerenderEntireTree = (state) => {
 

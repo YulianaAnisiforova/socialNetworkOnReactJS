@@ -1,20 +1,14 @@
 import React from 'react'
 import style from './NewMessage.module.css'
-import {
-    sendMessageActionCreator,
-    updateNewMessageActionCreator,
-} from "../../../../redux/dialogsReducer";
 
 const NewMessage = (props) => {
-    // let newMessageElement = React.createRef()
-
     let onSendBtnClick = () => {
-        props.dispatch(sendMessageActionCreator())
+        props.sendMessage()
     }
 
     let onMessageChange = (event) => {
         let body = event.target.value
-        props.dispatch(updateNewMessageActionCreator(body))
+        props.updateNewMessage(body)
     }
 
     return (
