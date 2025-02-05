@@ -3,10 +3,9 @@ body {
 }
 
 .appWrapper {
-  margin: auto;
+  /*margin: uto;*/
   display: grid;
   width: 100%;
-
   grid-template-areas:
   "h h"
   "n c";

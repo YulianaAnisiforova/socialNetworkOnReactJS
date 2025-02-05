@@ -1,12 +1,3 @@
-.messagesSide {
-    display: grid;
-    grid-template-rows: 9fr 1fr;
-}
-
-.messages {
-    padding: 10px;
-}
-
 .newMessage {
     margin-left: auto;
     margin-right: auto;
