@@ -1,7 +1,6 @@
 import React from 'react'
 import style from './Post.module.css'
 import userAvatar from '../../ProfileInfo/img/avatar.jpg'
-import Likes from './Likes/Likes'
 
 const Post = (props) => {
     return (
@@ -19,7 +18,7 @@ const Post = (props) => {
             </div>
 
             <div>
-                <Likes likes={props.likes}/>
+                <span className={style.likes}> {props.likes} likes</span>
             </div>
         </div>)
 }

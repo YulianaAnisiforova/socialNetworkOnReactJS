@@ -1,7 +1,7 @@
 import React from 'react'
-import style from './Message.module.css'
+import style from './MessageItem.module.css'
 
-const Message = (props) => {
+const MessageItem = (props) => {
     return (
         <div className={style.message}>
             <span>
@@ -11,4 +11,4 @@ const Message = (props) => {
     )
 }
 
-export default Message
+export default MessageItem
