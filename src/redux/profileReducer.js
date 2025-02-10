@@ -3,14 +3,9 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 
 let initialState = {
     posts: [
+        {id: 0, message: 'Hello everyone it`s my first post here haha', likes: '7'},
         {
-            id: 0,
-            message: 'I`m going to visit my gruncle Stan again this summer OMG soooo excited!! Looking forward to meet him again!!!!!',
-            likes: '1488'
-        },
-        {id: 1, message: 'My brother Dipper is sooooo annoying', likes: '2'},
-        {
-            id: 2, message: 'la la la la la la la la la la la la la la la la\n' +
+            id: 1, message: 'la la la la la la la la la la la la la la la la\n' +
                 'la la la la la la la la la la la la la la la la\n' +
                 'la la la la la la la la la la la la la la la la\n' +
                 'la la la la la la la la la la la la la la la la\n' +
@@ -19,7 +14,12 @@ let initialState = {
                 'la la la la la la la la la la la la la la la la\n' +
                 'la la la la la la la la la la la la la la la la', likes: '0'
         },
-        {id: 3, message: 'Hello everyone it`s my first post here haha', likes: '7'},
+        {id: 2, message: 'My brother Dipper is sooooo annoying', likes: '2'},
+        {
+            id: 3,
+            message: 'I`m going to visit my gruncle Stan again this summer OMG soooo excited!! Looking forward to meet him again!!!!!',
+            likes: '1488'
+        },
     ],
     newPostText: '',
 }
@@ -37,8 +37,9 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 newPostText: action.newText,
             }
+        default:
+            return state
     }
-    return state
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST})
