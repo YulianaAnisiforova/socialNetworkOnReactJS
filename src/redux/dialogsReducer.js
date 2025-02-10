@@ -11,13 +11,13 @@ const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let initialState = {
     dialogs: [
-        {id: 1, name: 'Dipper Pines', avatar: userAvatar1, },
-        {id: 2, name: 'Stan Pines', avatar: userAvatar2, },
-        {id: 3, name: 'Wendy Corduroy', avatar: userAvatar3, },
-        {id: 4, name: 'Ford Pines', avatar: userAvatar4, },
-        {id: 5, name: 'Pacifica Northwest', avatar: userAvatar5, },
-        {id: 6, name: 'Mermando', avatar: userAvatar6, },
-        {id: 7, name: 'Soos Ramirez', avatar: userAvatar7, },
+        {id: 1, name: 'Dipper Pines', avatar: userAvatar1,},
+        {id: 2, name: 'Stan Pines', avatar: userAvatar2,},
+        {id: 3, name: 'Wendy Corduroy', avatar: userAvatar3,},
+        {id: 4, name: 'Ford Pines', avatar: userAvatar4,},
+        {id: 5, name: 'Pacifica Northwest', avatar: userAvatar5,},
+        {id: 6, name: 'Mermando', avatar: userAvatar6,},
+        {id: 7, name: 'Soos Ramirez', avatar: userAvatar7,},
     ],
 
     messages: [
@@ -30,17 +30,22 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newMessage
-            break
-        case SEND_MESSAGE:
+        case UPDATE_NEW_MESSAGE_TEXT: {
+            let stateCopy = {...state}
+            stateCopy.newMessageText = action.newMessage
+            return stateCopy
+        }
+        case SEND_MESSAGE: {
             let body = {
                 id: 4,
                 message: state.newMessageText,
             }
-            state.newMessageText = ''
-            state.messages.push(body)
-            break
+            let stateCopy = {...state}
+            stateCopy.messages = [...state.messages]
+            stateCopy.messages.push(body)
+            stateCopy.newMessageText = ''
+            return stateCopy
+        }
     }
 
     return state
