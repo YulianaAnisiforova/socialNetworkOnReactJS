@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Users.module.css'
+import style from './Users.module.css'
 
 const Users = (props) => {
     if (props.users.length === 0) {
@@ -31,7 +31,7 @@ const Users = (props) => {
             {
                 id: 3,
                 followed: true,
-                fullName: 'Will wont',
+                fullName: 'Will Wont',
                 status: 'my name is a joke',
                 location: {city: 'London', country: 'UK'},
                 imgURL: 'https://t4.ftcdn.net/jpg/02/24/86/95/360_F_224869519_aRaeLneqALfPNBzg0xxMZXghtvBXkfIA.jpg',
@@ -42,27 +42,24 @@ const Users = (props) => {
     return (
         <div>
             {
-                props.users.map((user) => <div>
-                    <span>
+                props.users.map((user) => <div key={user.id} className={style.item}>
+                    <div className={style.avatarFollow}>
                         <div>
-                            <img src={user.imgURL} alt="avatar"/>
+                            <img className={style.userAvatar} src={user.imgURL} alt="avatar"/>
                         </div>
                         <div>
-                            {user.followed ? <button onClick={() => {props.unfollowUser(user.id)}}>unfollow</button>
-                                : <button onClick={() => {props.followUser(user.id)}}>follow</button>}
+                            {user.followed ?
+                                <button className={style.followBtn} onClick={() => {props.unfollowUser(user.id)}}>unfollow</button>
+                                : <button className={style.followBtn} onClick={() => {props.followUser(user.id)}}>follow</button>}
                         </div>
-                    </span>
-                    <span>
-                        <span>
-                            <div>{user.fullName}</div>
-                            <div>{user.status}</div>
-                        </span>
-                        <span>
-                            <div>{user.location.country}</div>
-                            <div>{user.location.city}</div>
-                        </span>
-                    </span>
-                </div>
+                    </div>
+                    <div className={style.userInfo}>
+                        <div>{user.fullName}</div>
+                        <div>"{user.status}"</div>
+                        <div>{user.location.country}, {user.location.city}</div>
+                    </div>
+
+                    </div>
                 )
             }
         </div>

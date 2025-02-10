@@ -1,3 +1,38 @@
-img {
+.item {
+    display: flex;
+    margin: 20px;
+}
+
+.avatarFollow {
+    margin: 10px;
+}
+
+.userInfo {
+    margin: 10px;
+}
+
+.userAvatar {
+    width: 100px;
     height: 100px;
+    border-radius: 5px;
+}
+
+.followBtn {
+    background-color: #ffcd7e;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.followBtn:hover {
+    background-color: #eeba72;
+    transition: 0.5s;
+}
+
+.followBtn:active {
+    background-color: #e5b16a;
 }
