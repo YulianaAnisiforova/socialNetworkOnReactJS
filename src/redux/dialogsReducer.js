@@ -11,41 +11,36 @@ const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let initialState = {
     dialogs: [
-        {id: 1, name: 'Dipper Pines', avatar: userAvatar1,},
-        {id: 2, name: 'Stan Pines', avatar: userAvatar2,},
-        {id: 3, name: 'Wendy Corduroy', avatar: userAvatar3,},
-        {id: 4, name: 'Ford Pines', avatar: userAvatar4,},
-        {id: 5, name: 'Pacifica Northwest', avatar: userAvatar5,},
-        {id: 6, name: 'Mermando', avatar: userAvatar6,},
-        {id: 7, name: 'Soos Ramirez', avatar: userAvatar7,},
+        {id: 0, name: 'Dipper Pines', avatar: userAvatar1,},
+        {id: 1, name: 'Stan Pines', avatar: userAvatar2,},
+        {id: 2, name: 'Wendy Corduroy', avatar: userAvatar3,},
+        {id: 3, name: 'Ford Pines', avatar: userAvatar4,},
+        {id: 4, name: 'Pacifica Northwest', avatar: userAvatar5,},
+        {id: 5, name: 'Mermando', avatar: userAvatar6,},
+        {id: 6, name: 'Soos Ramirez', avatar: userAvatar7,},
     ],
 
     messages: [
-        {id: 1, message: 'Hi!',},
-        {id: 2, message: 'How are you?',},
-        {id: 3, message: 'I`m pretty good',},
+        {id: 0, message: 'Hi!',},
+        {id: 1, message: 'How are you?',},
+        {id: 2, message: 'I`m pretty good',},
     ],
     newMessageText: '',
 }
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            let stateCopy = {...state}
-            stateCopy.newMessageText = action.newMessage
-            return stateCopy
-        }
-        case SEND_MESSAGE: {
-            let body = {
-                id: 4,
-                message: state.newMessageText,
+        case UPDATE_NEW_MESSAGE_TEXT:
+            return {
+                ...state,
+                newMessageText: action.newMessage,
             }
-            let stateCopy = {...state}
-            stateCopy.messages = [...state.messages]
-            stateCopy.messages.push(body)
-            stateCopy.newMessageText = ''
-            return stateCopy
-        }
+        case SEND_MESSAGE:
+            return {
+                ...state,
+                messages: [...state.messages, {id: state.messages.length, message: state.newMessageText}],
+                newMessageText: '',
+            }
     }
 
     return state

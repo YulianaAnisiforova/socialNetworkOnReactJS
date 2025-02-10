@@ -5,10 +5,10 @@ import MessageItem from "./MessageItem/MessageItem";
 
 const Dialogs = (props) => {
     let dialogsElements = props.dialogs.map(
-        dialog => <DialogItem user={dialog.name} id={dialog.id} avatar={dialog.avatar}/>)
+        dialog => <DialogItem key={dialog.id} user={dialog.name} id={dialog.id} avatar={dialog.avatar}/>)
 
     let messagesElements = props.messages.map(
-        message => <MessageItem message={message.message}/>)
+        message => <MessageItem key={message.id} message={message.message}/>)
 
     let onSendBtnClick = () => {
         props.sendMessage()
