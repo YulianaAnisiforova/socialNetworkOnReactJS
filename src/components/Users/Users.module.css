@@ -11,6 +11,10 @@
     margin: 10px;
 }
 
+.status {
+    font-style: oblique;
+}
+
 .userAvatar {
     width: 100px;
     height: 100px;
