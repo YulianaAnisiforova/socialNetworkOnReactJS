@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './ProfileInfo.module.css'
-import userAvatar from './img/avatar.jpg'
-import userBanner from './img/banner.png'
+import userAvatar from '../../../img/avatar.jpg'
+import userBanner from '../../../img/banner.png'
 
 const ProfileInfo = () => {
     return (

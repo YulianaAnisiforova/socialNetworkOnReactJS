@@ -8,7 +8,7 @@ import {
 } from '../../redux/usersReducer'
 import axios from 'axios'
 import Users from './Users'
-import Preloader from "../Common/Preloader/Preloader";
+import Preloader from '../Common/Preloader/Preloader'
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
@@ -34,7 +34,7 @@ class UsersAPIContainer extends React.Component {
     render = () => {
         return (
             <>
-                {this.props.isFetching ? <Preloader /> : null}
+                {this.props.isFetching ? <Preloader/> : null}
                 <Users totalUsersCount={this.props.totalUsersCount}
                        pageSize={this.props.pageSize}
                        users={this.props.users}

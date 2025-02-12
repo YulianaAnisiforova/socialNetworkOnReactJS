@@ -1,10 +1,10 @@
-import userAvatar1 from "./../img/dipper.jpg";
-import userAvatar2 from "./../img/stan.webp";
-import userAvatar3 from "./../img/wendy.webp";
-import userAvatar4 from "./../img/ford.webp";
-import userAvatar5 from "./../img/pacifica.jpg";
-import userAvatar6 from "./../img/mermando.webp";
-import userAvatar7 from "./../img/soos.webp";
+import userAvatar1 from './../img/dipper.jpg'
+import userAvatar2 from './../img/stan.webp'
+import userAvatar3 from './../img/wendy.webp'
+import userAvatar4 from './../img/ford.webp'
+import userAvatar5 from './../img/pacifica.jpg'
+import userAvatar6 from './../img/mermando.webp'
+import userAvatar7 from './../img/soos.webp'
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
