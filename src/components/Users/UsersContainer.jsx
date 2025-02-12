@@ -41,7 +41,6 @@ class UsersAPIContainer extends React.Component {
                        follow={this.props.follow}
                        currentPage={this.props.currentPage}
                 />
-                {/*}*/}
             </>
         )
     }
