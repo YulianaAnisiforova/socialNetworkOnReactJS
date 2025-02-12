@@ -22,10 +22,10 @@ const Users = (props) => {
                             <div>
                                 {user.followed ?
                                     <button className={style.followBtn} onClick={() => {
-                                        props.unfollowUser(user.id)
+                                        props.unfollow(user.id)
                                     }}>unfollow</button>
                                     : <button className={style.followBtn} onClick={() => {
-                                        props.followUser(user.id)
+                                        props.follow(user.id)
                                     }}>follow</button>}
                             </div>
                         </div>
