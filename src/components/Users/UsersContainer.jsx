@@ -8,7 +8,7 @@ import {
 } from '../../redux/usersReducer'
 import axios from 'axios'
 import Users from './Users'
-import loader from './../../img/loader.svg'
+import Preloader from "../Common/Preloader/Preloader";
 
 class UsersAPIContainer extends React.Component {
     componentDidMount() {
@@ -34,11 +34,7 @@ class UsersAPIContainer extends React.Component {
     render = () => {
         return (
             <>
-                {this.props.isFetching ?
-                    <div>
-                        <img src={loader} alt="loader"/>
-                    </div>
-                    : null}
+                {this.props.isFetching ? <Preloader /> : null}
                 <Users totalUsersCount={this.props.totalUsersCount}
                        pageSize={this.props.pageSize}
                        users={this.props.users}
