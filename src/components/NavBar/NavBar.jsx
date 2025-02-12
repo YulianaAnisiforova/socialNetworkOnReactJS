@@ -11,7 +11,7 @@ const NavBar = () => {
             </div>
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.link}
-                         to='/users'> Users </NavLink>
+                         to='/users'> Friends </NavLink>
             </div>
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.link}
