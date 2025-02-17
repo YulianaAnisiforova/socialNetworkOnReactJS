@@ -25,24 +25,26 @@ const Users = (props) => {
                             </div>
                             <div>
                                 {user.followed ?
-                                    <button className={style.followBtn} onClick={() => {
-                                        props.toggleIsFetching(true)
-                                        usersAPI.deleteUnfollow(user.id).then(data => {
-                                                props.toggleIsFetching(false)
-                                                if (data.resultCode === 0) {
-                                                    props.unfollow(user.id)
-                                                }
-                                            })
-                                    }}>unfollow</button>
-                                    : <button className={style.followBtn} onClick={() => {
-                                        props.toggleIsFetching(true)
-                                        usersAPI.postFollow(user.id).then(data => {
-                                                props.toggleIsFetching(false)
-                                                if (data.resultCode === 0) {
-                                                    props.follow(user.id)
-                                                }
-                                            })
-                                    }}>follow</button>}
+                                    <button disabled={!props.toggleIsFollowingInProgress}
+                                            className={style.followBtn} onClick={() => {
+                                                props.toggleIsFollowingInProgress(true)
+                                                usersAPI.deleteUnfollow(user.id).then(data => {
+                                                    props.toggleIsFollowingInProgress(false)
+                                                    if (data.resultCode === 0) {
+                                                        props.unfollow(user.id)
+                                                    }
+                                                })
+                                            }}>unfollow</button>
+                                    : <button disabled={!props.toggleIsFollowingInProgress}
+                                              className={style.followBtn} onClick={() => {
+                                                  props.toggleIsFollowingInProgress(true)
+                                                  usersAPI.postFollow(user.id).then(data => {
+                                                      props.toggleIsFollowingInProgress(false)
+                                                      if (data.resultCode === 0) {
+                                                          props.follow(user.id)
+                                                      }
+                                                  })
+                                              }}>follow</button>}
                             </div>
                         </div>
                         <div className={style.userInfo}>
