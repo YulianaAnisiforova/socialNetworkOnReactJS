@@ -1,15 +1,17 @@
 body {
-  background-color: rgba(255, 236, 190, 0.41);
+    background-color: rgba(255, 236, 190, 0.41);
 }
 
 .appWrapper {
-  display: grid;
-  width: 100%;
-  grid-template-areas:
+    display: grid;
+    /*width: 100%;*/
+    width: 1200px;
+    margin: auto;
+    grid-template-areas:
   "n h"
   "n c";
-  grid-template-rows: 100px 1fr;
-  grid-template-columns: 2fr 10fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 2fr 10fr;
 }
 
 .appWrapperContent {
