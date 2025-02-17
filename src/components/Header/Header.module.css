@@ -1,16 +1,38 @@
 .header {
     grid-area: h;
-    background-color: #ffcd7e;
-    /*background-color: #ffecbe;*/
+    /*background-color: #ffcd7e;*/
+    background-color: #ffecbe;
 }
 
 .logoContainer {
-    /*display: flex;*/
-    /*justify-content: center;*/
+    display: flex;
+    justify-content: center;
 }
 
 .header img {
     width: 100px;
     margin-left: 50px;
     margin-top: 10px;
+}
+
+.loginBlock {
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.link {
+    font-size: 20px;
+    text-decoration: none;
+    color: #ce7800;
+}
+
+.link:hover {
+    color: #945701;
+    transition: 0.5s;
+}
+
+.authInfo {
+    font-size: 15px;
+    text-align: right;
 }

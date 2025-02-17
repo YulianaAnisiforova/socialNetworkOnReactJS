@@ -3,11 +3,10 @@ body {
 }
 
 .appWrapper {
-  /*margin: uto;*/
   display: grid;
   width: 100%;
   grid-template-areas:
-  "h h"
+  "n h"
   "n c";
   grid-template-rows: 100px 1fr;
   grid-template-columns: 2fr 10fr;
