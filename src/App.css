@@ -1,14 +1,13 @@
 body {
-    background-color: rgba(255, 236, 190, 0.41);
+    background-color: rgba(255, 205, 126, 0.5);
 }
 
 .appWrapper {
     display: grid;
-    /*width: 100%;*/
-    width: 1200px;
+    width: 1000px;
     margin: auto;
     grid-template-areas:
-  "n h"
+  "h h"
   "n c";
     grid-template-rows: 100px 1fr;
     grid-template-columns: 2fr 10fr;
@@ -16,5 +15,6 @@ body {
 
 .appWrapperContent {
     grid-area: c;
-    background-color: #ffecbe;
+    /*background-color: #ffecbe;*/
+    background-color: rgba(255, 205, 126, 0);
 }

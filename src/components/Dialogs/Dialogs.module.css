@@ -22,7 +22,9 @@
 }
 
 .newMessageArea {
-    background-color: #ffecbe;
+    height: 25px;
+    width: 700px;
+    background: none;
     border: none;
     border-bottom: 1px solid #ce7800;
     resize: none;

@@ -1,26 +1,21 @@
 .header {
     grid-area: h;
-    /*background-color: #ffcd7e;*/
-    background-color: #ffecbe;
-    /*background-color: rgba(255, 205, 126, 0.68);*/
-    border-bottom: 1px solid #ce7800;
+    background-color: rgba(255, 205, 126, 0);
 }
 
 .logoContainer {
-    display: flex;
-    justify-content: center;
 }
 
 .header img {
     width: 100px;
-    margin-left: 50px;
+    margin-left: 10px;
     margin-top: 10px;
 }
 
 .loginBlock {
     float: right;
     margin-top: 20px;
-    margin-right: 80px;
+    margin-right: 20px;
 }
 
 .link {

@@ -22,7 +22,7 @@ const MyPosts = (props) => {
         <div className={style.postsWrapper}>
 
             <div className={style.newPost}>
-            <textarea className={style.newPostArea}  ref={newPostElement} cols="50" rows="1" placeholder="How are you?"
+            <textarea className={style.newPostArea}  ref={newPostElement} placeholder="How are you?"
                       onChange={ onPostChange } value={props.newPostText} />
                 <button onClick={ addPostBtn } className={style.newPostBtn}>Add post</button>
             </div>
