@@ -39,6 +39,7 @@ class UsersAPIContainer extends React.Component {
                        follow={this.props.follow}
                        currentPage={this.props.currentPage}
                        toggleIsFollowingInProgress={this.props.toggleIsFollowingInProgress}
+                       isFollowingInProgress={this.props.isFollowingInProgress}
                 />
             </>
         )

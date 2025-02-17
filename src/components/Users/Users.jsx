@@ -11,7 +11,6 @@ const Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-
     return (
         <div>
             {
@@ -25,21 +24,21 @@ const Users = (props) => {
                             </div>
                             <div>
                                 {user.followed ?
-                                    <button disabled={!props.toggleIsFollowingInProgress}
+                                    <button disabled={props.isFollowingInProgress.some(id => id === user.id)}
                                             className={style.followBtn} onClick={() => {
-                                                props.toggleIsFollowingInProgress(true)
+                                                props.toggleIsFollowingInProgress(true, user.id)
                                                 usersAPI.deleteUnfollow(user.id).then(data => {
-                                                    props.toggleIsFollowingInProgress(false)
+                                                    props.toggleIsFollowingInProgress(false, user.id)
                                                     if (data.resultCode === 0) {
                                                         props.unfollow(user.id)
                                                     }
                                                 })
                                             }}>unfollow</button>
-                                    : <button disabled={!props.toggleIsFollowingInProgress}
+                                    : <button disabled={props.isFollowingInProgress.some(id => id === user.id)}
                                               className={style.followBtn} onClick={() => {
-                                                  props.toggleIsFollowingInProgress(true)
+                                                  props.toggleIsFollowingInProgress(true, user.id)
                                                   usersAPI.postFollow(user.id).then(data => {
-                                                      props.toggleIsFollowingInProgress(false)
+                                                      props.toggleIsFollowingInProgress(false, user.id)
                                                       if (data.resultCode === 0) {
                                                           props.follow(user.id)
                                                       }

@@ -41,6 +41,12 @@
     background-color: #e5b16a;
 }
 
+.followBtn:disabled {
+    background-color: darkgray;
+    color: gray;
+    cursor: auto;
+}
+
 .pagesBtn, .selectedPage {
     background-color: #ffecbe;
     border: none;
