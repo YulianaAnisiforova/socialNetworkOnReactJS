@@ -16,8 +16,8 @@ export const usersAPI = {
             })
     },
 
-    getAuthMe() {
-        return instance.get('auth/me')
+    getUsers2(pageNumber, pageSize = 10) {
+        return instance.get(`users?page=${pageNumber}&count=${pageSize}`)
             .then(response => {
                 return response.data
             })
@@ -37,4 +37,13 @@ export const usersAPI = {
             })
     },
 
+    getProfile(userID) {
+        return instance.get(`profile/${userID}`)
+    },
+}
+
+export const authAPI = {
+    getAuthMe() {
+        return instance.get('auth/me')
+    },
 }

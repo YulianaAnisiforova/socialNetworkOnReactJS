@@ -2,7 +2,6 @@ import React from 'react'
 import style from './Users.module.css'
 import anonymousAvatar from './../../img/cipher.WEBP'
 import {NavLink} from 'react-router-dom'
-import {follow, unfollow} from "../../redux/usersReducer";
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -26,22 +25,17 @@ const Users = (props) => {
                                 {user.followed ?
                                     <button disabled={props.isFollowingInProgress.some(id => id === user.id)}
                                             className={style.followBtn} onClick={() => {
-
                                         props.unfollow(user.id)
-
                                     }}>unfollow</button>
                                     : <button disabled={props.isFollowingInProgress.some(id => id === user.id)}
                                               className={style.followBtn} onClick={() => {
-
                                         props.follow(user.id)
-
                                     }}>follow</button>}
                             </div>
                         </div>
                         <div className={style.userInfo}>
                             <div>{user.name}</div>
                             <div className={style.status}>{user.status}</div>
-                            {/*<div>{user.location.country}, {user.location.city}</div>*/}
                         </div>
 
                     </div>
