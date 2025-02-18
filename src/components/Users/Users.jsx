@@ -2,7 +2,7 @@ import React from 'react'
 import style from './Users.module.css'
 import anonymousAvatar from './../../img/cipher.WEBP'
 import {NavLink} from 'react-router-dom'
-import {usersAPI} from '../../api/api'
+import {follow, unfollow} from "../../redux/usersReducer";
 
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
@@ -26,24 +26,16 @@ const Users = (props) => {
                                 {user.followed ?
                                     <button disabled={props.isFollowingInProgress.some(id => id === user.id)}
                                             className={style.followBtn} onClick={() => {
-                                                props.toggleIsFollowingInProgress(true, user.id)
-                                                usersAPI.deleteUnfollow(user.id).then(data => {
-                                                    props.toggleIsFollowingInProgress(false, user.id)
-                                                    if (data.resultCode === 0) {
-                                                        props.unfollow(user.id)
-                                                    }
-                                                })
-                                            }}>unfollow</button>
+
+                                        props.unfollow(user.id)
+
+                                    }}>unfollow</button>
                                     : <button disabled={props.isFollowingInProgress.some(id => id === user.id)}
                                               className={style.followBtn} onClick={() => {
-                                                  props.toggleIsFollowingInProgress(true, user.id)
-                                                  usersAPI.postFollow(user.id).then(data => {
-                                                      props.toggleIsFollowingInProgress(false, user.id)
-                                                      if (data.resultCode === 0) {
-                                                          props.follow(user.id)
-                                                      }
-                                                  })
-                                              }}>follow</button>}
+
+                                        props.follow(user.id)
+
+                                    }}>follow</button>}
                             </div>
                         </div>
                         <div className={style.userInfo}>

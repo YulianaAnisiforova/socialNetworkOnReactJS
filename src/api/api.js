@@ -16,13 +16,6 @@ export const usersAPI = {
             })
     },
 
-    getUsers2(pageNumber, pageSize = 10) {
-        return instance.get(`users?page=${pageNumber}&count=${pageSize}`)
-            .then(response => {
-                return response.data
-            })
-    },
-
     getAuthMe() {
         return instance.get('auth/me')
             .then(response => {
@@ -42,5 +35,6 @@ export const usersAPI = {
             .then(response => {
                 return response.data
             })
-    }
+    },
+
 }

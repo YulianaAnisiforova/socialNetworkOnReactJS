@@ -62,15 +62,19 @@ const usersReducer = (state = initialState, action) => {
 }
 
 
-export const follow = (id) => ({type: FOLLOW, userID: id})
-export const unfollow = (id) => ({type: UNFOLLOW, userID: id})
+export const followSuccess = (id) => ({type: FOLLOW, userID: id})
+export const unfollowSuccess = (id) => ({type: UNFOLLOW, userID: id})
 export const setUsers = (users) => ({type: SET_USERS, users: users})
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage})
 export const setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_COUNT, totalUsersCount: totalUsersCount})
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching})
-export const toggleIsFollowingInProgress = (isFetching, userID) => ({type: TOGGLE_IS_FOLLOWING_IN_PROGRESS, isFetching, userID})
+export const toggleIsFollowingInProgress = (isFetching, userID) => ({
+    type: TOGGLE_IS_FOLLOWING_IN_PROGRESS,
+    isFetching,
+    userID
+})
 
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true))
 
@@ -78,6 +82,32 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))
+        })
+    }
+}
+
+export const unfollow = (userID) => {
+    return (dispatch) => {
+        dispatch(toggleIsFollowingInProgress(true, userID))
+
+        usersAPI.deleteUnfollow(userID).then(data => {
+            dispatch(toggleIsFollowingInProgress(false, userID))
+            if (data.resultCode === 0) {
+                dispatch(unfollowSuccess(userID))
+            }
+        })
+    }
+}
+
+export const follow = (userID) => {
+    return (dispatch) => {
+        dispatch(toggleIsFollowingInProgress(true, userID))
+
+        usersAPI.postFollow(userID).then(data => {
+            dispatch(toggleIsFollowingInProgress(false, userID))
+            if (data.resultCode === 0) {
+                dispatch(followSuccess(userID))
+            }
         })
     }
 }
