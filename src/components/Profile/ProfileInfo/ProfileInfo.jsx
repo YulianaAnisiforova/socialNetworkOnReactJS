@@ -3,6 +3,7 @@ import style from './ProfileInfo.module.css'
 import userAvatar from '../../../img/avatar.jpg'
 import anonim from '../../../img/anonim.png'
 import Preloader from '../../Common/Preloader/Preloader'
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -20,6 +21,7 @@ const ProfileInfo = (props) => {
 
             <div className={style.infoBox}>
                 <div>Name: {props.profile.fullName}</div>
+                <ProfileStatus status={'status test'}/>
             </div>
         </div>
     )
