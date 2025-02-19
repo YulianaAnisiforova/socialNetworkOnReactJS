@@ -1,6 +1,9 @@
+.wrapper {
+}
+
 .item {
     display: flex;
-    margin: 20px;
+    width: 900px;
 }
 
 .avatarFollow {
@@ -43,7 +46,7 @@
 
 .followBtn:disabled {
     background-color: darkgray;
-    color: gray;
+    color: grey;
     cursor: auto;
 }
 

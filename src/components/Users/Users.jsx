@@ -11,7 +11,7 @@ const Users = (props) => {
         pages.push(i)
     }
     return (
-        <div>
+        <div className={style.wrapper}>
             {
                 props.users.map((user) => <div key={user.id} className={style.item}>
                         <div className={style.avatarFollow}>
@@ -33,6 +33,7 @@ const Users = (props) => {
                                     }}>follow</button>}
                             </div>
                         </div>
+
                         <div className={style.userInfo}>
                             <div>{user.name}</div>
                             <div className={style.status}>{user.status}</div>
