@@ -4,14 +4,14 @@
     margin-left: auto;
     margin-top: 150px;
     justify-content: center;
-    height: 250px;
+    height: 290px;
     width: 350px;
     border-radius: 15px;
     background-color: rgba(238, 186, 114, 0.15);
 }
 
 .header {
-    margin-top: 10px;
+    margin-top: 20px;
     color: #945701;
     font-size: 30px;
     text-align: center;
@@ -23,7 +23,6 @@
     background-color: rgba(218, 200, 164, 0.35);
     border: none;
     border-radius: 10px;
-    /*outline: none;*/
     outline-color: #945701;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-size: 15px;
@@ -45,11 +44,18 @@
     width: 60px;
     font-size: 15px;
     margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.loginBtn:not(.disable):hover {
+    background-color: #ffcd7e;
+    cursor: auto;
 }
 
 .loginBtn:hover {
     background-color: #eeba72;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .loginBtn:active {
@@ -64,10 +70,14 @@
 
 .checkbox {
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .errorMsg {
     color: tomato;
     font-size: 10px;
+}
+
+.inputWrapper {
+    height: 60px;
 }

@@ -21,22 +21,24 @@ const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
+            <div className={style.inputWrapper}>
                 <input className={style.loginInput} placeholder={'e-mail'} {...register('email', {
-                    required: 'This field is required.',})} />
+                    required: 'This field is required.',
+                })} />
+                <div className={style.errorMsg}>
+                    {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
+                </div>
             </div>
-            <div className={style.errorMsg}>
-                {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
-            </div>
-            <div>
+            <div className={style.inputWrapper}>
                 <input className={style.loginInput} placeholder={'password'} {...register('password', {
-                    required: 'This field is required.',})} />
-            </div>
-            <div className={style.errorMsg}>
-                {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
+                    required: 'This field is required.',
+                })} />
+                <div className={style.errorMsg}>
+                    {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
+                </div>
             </div>
             <div className={style.checkWrapper}>
-                <input className={style.checkbox} name={'remember'} type={'checkbox'}/>
+                <input className={style.checkbox} name={'remember'} type={'checkbox'} {...register('rememberMe')} />
                 <label for={'remember'}>remember me</label>
             </div>
             <div className={style.btnWrapper}>
