@@ -1,19 +1,39 @@
+.loginBox {
+    display: grid;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 150px;
+    justify-content: center;
+    height: 250px;
+    width: 350px;
+    border-radius: 15px;
+    background-color: rgba(238, 186, 114, 0.15);
+}
+
 .header {
+    margin-top: 10px;
     color: #945701;
     font-size: 30px;
+    text-align: center;
 }
 
 .loginInput {
     height: 25px;
     width: 230px;
-    background-color: rgba(218, 200, 164, 0.26);
+    background-color: rgba(218, 200, 164, 0.35);
     border: none;
     border-radius: 10px;
-    outline: none;
+    /*outline: none;*/
+    outline-color: #945701;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-size: 15px;
     padding-left: 10px;
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+.btnWrapper {
+    display: flex;
+    justify-content: center;
 }
 
 .loginBtn {
@@ -24,7 +44,7 @@
     height: 30px;
     width: 60px;
     font-size: 15px;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .loginBtn:hover {
@@ -36,7 +56,18 @@
     background-color: #e5b16a;
 }
 
+.checkWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .checkbox {
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 15px;
+}
+
+.errorMsg {
+    color: tomato;
+    font-size: 10px;
 }

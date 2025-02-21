@@ -1,31 +1,58 @@
 import React from 'react'
 import style from './Login.module.css'
+import {useForm} from 'react-hook-form'
 
 const LoginForm = () => {
+    const {
+        register,
+        formState: {
+            errors,
+            isValid,
+        },
+        handleSubmit,
+        reset,
+    } = useForm({
+        mode: "onBlur"
+    })
+
+    const onSubmit = (data) => {
+        reset()
+    }
+
     return (
-            <form>
-                <div>
-                    <input className={style.loginInput} placeholder={'e-mail'}/>
-                </div>
-                <div>
-                    <input className={style.loginInput} placeholder={'password'}/>
-                </div>
-                <div>
-                    <input className={style.checkbox} name={'remember'} type={'checkbox'}/>
-                    <label for={'remember'}>remember me</label>
-                </div>
-                <div>
-                    <button className={style.loginBtn}>login</button>
-                </div>
-            </form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+                <input className={style.loginInput} placeholder={'e-mail'} {...register('email', {
+                    required: 'This field is required.',})} />
+            </div>
+            <div className={style.errorMsg}>
+                {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
+            </div>
+            <div>
+                <input className={style.loginInput} placeholder={'password'} {...register('password', {
+                    required: 'This field is required.',})} />
+            </div>
+            <div className={style.errorMsg}>
+                {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
+            </div>
+            <div className={style.checkWrapper}>
+                <input className={style.checkbox} name={'remember'} type={'checkbox'}/>
+                <label for={'remember'}>remember me</label>
+            </div>
+            <div className={style.btnWrapper}>
+                <button className={style.loginBtn} disabled={!isValid}>login</button>
+            </div>
+        </form>
     )
 }
 
 const Login = () => {
     return (
-        <div>
-            <span className={style.header}>Login</span>
-            <LoginForm />
+        <div className={style.loginBox}>
+            <div className={style.header}>
+                <span>Login</span>
+            </div>
+            <LoginForm/>
         </div>
     )
 }
