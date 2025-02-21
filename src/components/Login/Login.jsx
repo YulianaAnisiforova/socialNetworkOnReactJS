@@ -1,10 +1,8 @@
 import React from 'react'
 import style from './Login.module.css'
 
-const Login = () => {
+const LoginForm = () => {
     return (
-        <div>
-            <span className={style.header}>Login</span>
             <form>
                 <div>
                     <input className={style.loginInput} placeholder={'e-mail'}/>
@@ -20,6 +18,14 @@ const Login = () => {
                     <button className={style.loginBtn}>login</button>
                 </div>
             </form>
+    )
+}
+
+const Login = () => {
+    return (
+        <div>
+            <span className={style.header}>Login</span>
+            <LoginForm />
         </div>
     )
 }
