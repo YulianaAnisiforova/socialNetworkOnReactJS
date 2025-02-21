@@ -1,0 +1,42 @@
+.header {
+    color: #945701;
+    font-size: 30px;
+}
+
+.loginInput {
+    height: 25px;
+    width: 230px;
+    background-color: rgba(218, 200, 164, 0.26);
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.loginBtn {
+    background-color: #ffcd7e;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 60px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.loginBtn:hover {
+    background-color: #eeba72;
+    transition: 0.5s;
+}
+
+.loginBtn:active {
+    background-color: #e5b16a;
+}
+
+.checkbox {
+    cursor: pointer;
+    margin-top: 10px;
+}

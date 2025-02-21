@@ -1,9 +1,25 @@
 import React from 'react'
+import style from './Login.module.css'
 
 const Login = () => {
     return (
         <div>
-            LOGIN
+            <span className={style.header}>Login</span>
+            <form>
+                <div>
+                    <input className={style.loginInput} placeholder={'e-mail'}/>
+                </div>
+                <div>
+                    <input className={style.loginInput} placeholder={'password'}/>
+                </div>
+                <div>
+                    <input className={style.checkbox} name={'remember'} type={'checkbox'}/>
+                    <label for={'remember'}>remember me</label>
+                </div>
+                <div>
+                    <button className={style.loginBtn}>login</button>
+                </div>
+            </form>
         </div>
     )
 }
