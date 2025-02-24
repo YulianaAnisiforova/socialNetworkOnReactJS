@@ -48,8 +48,10 @@ const LoginForm = () => {
                 </div>
             </div>
             <div className={style.checkWrapper}>
-                <input className={style.checkbox} name={'remember'} type={'checkbox'} {...register('rememberMe')} />
-                <label for={'remember'}>remember me</label>
+                <label htmlFor={'remember'}>
+                    <input className={style.checkbox} id={'remember'} type={'checkbox'} {...register('rememberMe')} />
+                    <span>remember me</span>
+                </label>
             </div>
             <div className={style.btnWrapper}>
                 <button type={'submit'} className={style.loginBtn} disabled={!isValid}>login</button>
