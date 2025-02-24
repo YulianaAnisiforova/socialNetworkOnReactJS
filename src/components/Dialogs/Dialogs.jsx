@@ -38,6 +38,9 @@ const SendMessageForm = (props) => {
         register,
         handleSubmit,
         reset,
+        formState: {
+            isValid,
+        },
     } = useForm()
 
     const onSubmit = (data) => {
@@ -49,8 +52,10 @@ const SendMessageForm = (props) => {
         <form onSubmit={handleSubmit(onSubmit)} className={style.newMessage}>
                     <textarea className={style.newMessageArea}
                               placeholder='New message'
-                              {...register('newMsg',)} />
-            <button type={'submit'}
+                              {...register('newMsg', {
+                                  required: true,
+                              })} />
+            <button type={'submit'} disabled={!isValid}
                     className={style.newMessageBtn}>Send</button>
         </form>
     )

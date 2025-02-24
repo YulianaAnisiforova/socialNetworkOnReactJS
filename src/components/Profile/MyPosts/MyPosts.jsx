@@ -30,6 +30,9 @@ const AddNewPostForm = (props) => {
         register,
         handleSubmit,
         reset,
+        formState: {
+            isValid,
+        },
     } = useForm()
 
     const onSubmit = (data) => {
@@ -40,8 +43,10 @@ const AddNewPostForm = (props) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={style.newPostBox}>
             <textarea className={style.newPostArea} placeholder="How are you?"
-                      {...register('newPost',)}/>
-            <button type={'submit'} className={style.newPostBtn}>Add post</button>
+                      {...register('newPost', {
+                          required: true,
+                      })}/>
+            <button type={'submit'} disabled={!isValid} className={style.newPostBtn}>Add post</button>
         </form>
     )
 }
