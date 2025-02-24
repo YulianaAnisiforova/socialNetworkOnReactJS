@@ -57,7 +57,8 @@ const LoginForm = (props) => {
                 </div>
             </div>
             <div className={style.inputWrapper}>
-                <input className={style.loginInput} placeholder={'password'} type={'password'} {...register('password', {
+                <input className={style.loginInput} placeholder={'password'}
+                       type={'password'} {...register('password', {
                     required: 'This field is required.',
                     minLength: {
                         value: 7,
@@ -67,6 +68,9 @@ const LoginForm = (props) => {
                 <div className={style.errorMsg}>
                     {errors?.password && <p>{errors?.password?.message || 'Error'}</p>}
                 </div>
+            </div>
+            <div className={style.errorMsg}>
+                {isValid ? null : 'Incorrect e-mail or password.'}
             </div>
             <div className={style.checkWrapper}>
                 <label htmlFor={'remember'}>
