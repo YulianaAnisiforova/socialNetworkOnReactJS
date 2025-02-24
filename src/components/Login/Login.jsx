@@ -1,8 +1,30 @@
 import React from 'react'
 import style from './Login.module.css'
 import {useForm} from 'react-hook-form'
+import {connect} from 'react-redux'
+import {login} from '../../redux/authReducer'
+import {Navigate} from 'react-router-dom'
 
-const LoginForm = () => {
+const Login = (props) => {
+    const loginToSite = (email, password, rememberMe) => {
+        props.login(email, password, rememberMe)
+    }
+
+    if (props.isAuth) {
+        return <Navigate to='/profile'/>
+    }
+
+    return (
+        <div className={style.loginBox}>
+            <div className={style.header}>
+                <span>Login</span>
+            </div>
+            <LoginForm onSubmitContainer={loginToSite}/>
+        </div>
+    )
+}
+
+const LoginForm = (props) => {
     const {
         register,
         formState: {
@@ -16,7 +38,7 @@ const LoginForm = () => {
     })
 
     const onSubmit = (data) => {
-        alert(JSON.stringify(data))
+        props.onSubmitContainer(data.email, data.password, data.rememberMe)
         reset()
     }
 
@@ -26,7 +48,6 @@ const LoginForm = () => {
                 <input className={style.loginInput} placeholder={'e-mail'} {...register('email', {
                     required: 'This field is required.',
                     pattern: {
-                        // value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z0]{2,4}&/i,
                         value: /\S+@\S+\.\S+/,
                         message: 'Invalid e-mail address.',
                     }
@@ -60,15 +81,8 @@ const LoginForm = () => {
     )
 }
 
-const Login = () => {
-    return (
-        <div className={style.loginBox}>
-            <div className={style.header}>
-                <span>Login</span>
-            </div>
-            <LoginForm/>
-        </div>
-    )
-}
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
 
-export default Login
+export default connect(mapStateToProps, {login})(Login)
