@@ -49,9 +49,9 @@
     margin-bottom: 20px;
 }
 
-.loginBtn:not(.disable):hover {
-    /*background-color: #ffcd7e;*/
-    /*cursor: auto;*/
+.loginBtn:disabled:hover {
+    background-color: #ffcd7e;
+    cursor: auto;
 }
 
 .loginBtn:hover {

@@ -58,6 +58,11 @@
     margin-left: 10px;
 }
 
+.newMessageBtn:disabled:hover {
+    background-color: #ffcd7e;
+    cursor: auto;
+}
+
 .newMessageBtn:hover {
     background-color: #eeba72;
     transition: 0.5s;

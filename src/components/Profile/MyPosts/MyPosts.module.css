@@ -49,6 +49,11 @@
     margin-left: 10px;
 }
 
+.newPostBtn:disabled:hover {
+    background-color: #ffcd7e;
+    cursor: auto;
+}
+
 .newPostBtn:hover {
     background-color: #eeba72;
     transition: 0.5s;

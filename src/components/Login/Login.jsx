@@ -40,7 +40,7 @@ const LoginForm = () => {
                     required: 'This field is required.',
                     minLength: {
                         value: 7,
-                        message: 'Password should be no al least 7 characters.',
+                        message: 'Password should be at least 7 characters.',
                     }
                 })} />
                 <div className={style.errorMsg}>
