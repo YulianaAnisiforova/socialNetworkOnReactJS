@@ -16,6 +16,7 @@ const LoginForm = () => {
     })
 
     const onSubmit = (data) => {
+        alert(JSON.stringify(data))
         reset()
     }
 
@@ -24,17 +25,26 @@ const LoginForm = () => {
             <div className={style.inputWrapper}>
                 <input className={style.loginInput} placeholder={'e-mail'} {...register('email', {
                     required: 'This field is required.',
+                    pattern: {
+                        // value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z0]{2,4}&/i,
+                        value: /\S+@\S+\.\S+/,
+                        message: 'Invalid e-mail address.',
+                    }
                 })} />
                 <div className={style.errorMsg}>
                     {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
                 </div>
             </div>
             <div className={style.inputWrapper}>
-                <input className={style.loginInput} placeholder={'password'} {...register('password', {
+                <input className={style.loginInput} placeholder={'password'} type={'password'} {...register('password', {
                     required: 'This field is required.',
+                    minLength: {
+                        value: 7,
+                        message: 'Password should be no al least 7 characters.',
+                    }
                 })} />
                 <div className={style.errorMsg}>
-                    {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
+                    {errors?.password && <p>{errors?.password?.message || 'Error'}</p>}
                 </div>
             </div>
             <div className={style.checkWrapper}>
@@ -42,7 +52,7 @@ const LoginForm = () => {
                 <label for={'remember'}>remember me</label>
             </div>
             <div className={style.btnWrapper}>
-                <button className={style.loginBtn} disabled={!isValid}>login</button>
+                <button type={'submit'} className={style.loginBtn} disabled={!isValid}>login</button>
             </div>
         </form>
     )

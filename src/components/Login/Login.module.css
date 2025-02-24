@@ -18,7 +18,7 @@
 }
 
 .loginInput {
-    height: 25px;
+    height: 30px;
     width: 230px;
     background-color: rgba(218, 200, 164, 0.35);
     border: none;
@@ -48,8 +48,8 @@
 }
 
 .loginBtn:not(.disable):hover {
-    background-color: #ffcd7e;
-    cursor: auto;
+    /*background-color: #ffcd7e;*/
+    /*cursor: auto;*/
 }
 
 .loginBtn:hover {
