@@ -17,7 +17,6 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true
             }
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
