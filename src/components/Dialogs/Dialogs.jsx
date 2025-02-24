@@ -2,6 +2,7 @@ import React from 'react'
 import style from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import MessageItem from './MessageItem/MessageItem'
+import {useForm} from 'react-hook-form'
 
 const Dialogs = (props) => {
     let dialogsElements = props.dialogs.map(
@@ -10,13 +11,8 @@ const Dialogs = (props) => {
     let messagesElements = props.messages.map(
         message => <MessageItem key={message.id} message={message.message}/>)
 
-    let onSendBtnClick = () => {
-        props.sendMessage()
-    }
-
-    let onMessageChange = (event) => {
-        let body = event.target.value
-        props.updateNewMessage(body)
+    let sendNewMessage = (newMsg) => {
+        props.sendMessage(newMsg)
     }
 
     return (
@@ -30,15 +26,33 @@ const Dialogs = (props) => {
                     {messagesElements}
                 </div>
 
-                <div className={style.newMessage}>
-                    <textarea className={style.newMessageArea}
-                        placeholder='New message'
-                        onChange={onMessageChange} value={props.newMessageText}/>
-                    <button onClick={onSendBtnClick} className={style.newMessageBtn}>Send</button>
-                </div>
+                <SendMessageForm onSubmitContainer={sendNewMessage} />
             </div>
 
         </div>
+    )
+}
+
+const SendMessageForm = (props) => {
+    const {
+        register,
+        handleSubmit,
+        reset,
+    } = useForm()
+
+    const onSubmit = (data) => {
+        props.onSubmitContainer(data.newMsg)
+        reset()
+    }
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)} className={style.newMessage}>
+                    <textarea className={style.newMessageArea}
+                              placeholder='New message'
+                              {...register('newMsg',)} />
+            <button type={'submit'}
+                    className={style.newMessageBtn}>Send</button>
+        </form>
     )
 }
 

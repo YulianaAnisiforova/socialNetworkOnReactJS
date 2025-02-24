@@ -6,7 +6,6 @@ import userAvatar5 from './../img/pacifica.jpg'
 import userAvatar6 from './../img/mermando.webp'
 import userAvatar7 from './../img/soos.webp'
 
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let initialState = {
@@ -25,21 +24,14 @@ let initialState = {
         {id: 1, message: 'How are you?',},
         {id: 2, message: 'I`m pretty good',},
     ],
-    newMessageText: '',
 }
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newMessage,
-            }
         case SEND_MESSAGE:
             return {
                 ...state,
-                messages: [...state.messages, {id: state.messages.length, message: state.newMessageText}],
-                newMessageText: '',
+                messages: [...state.messages, {id: state.messages.length, message: action.newMsg}],
             }
         default:
             return state
@@ -47,13 +39,6 @@ const dialogsReducer = (state = initialState, action) => {
 
 }
 
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE})
-
-export const updateNewMessageActionCreator = (body) => {
-    return {
-        type: UPDATE_NEW_MESSAGE_TEXT,
-        newMessage: body
-    }
-}
+export const sendMessageActionCreator = (newMsg) => ({type: SEND_MESSAGE, newMsg})
 
 export default dialogsReducer
