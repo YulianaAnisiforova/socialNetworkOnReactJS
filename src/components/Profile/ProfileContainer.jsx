@@ -16,7 +16,7 @@ export function withRouter(Children) {
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userID = this.props.match.params.userID
-        if (!userID) {
+        if (!userID && this.props.isAuth) {
             userID = this.props.authorizedUserID
         }
 
