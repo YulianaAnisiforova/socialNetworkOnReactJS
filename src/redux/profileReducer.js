@@ -54,7 +54,6 @@ export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile: pr
 export const setStatus = (status) => ({type: SET_STATUS, status: status})
 
 export const getUserProfile = (userID) => {
-    debugger
     return (dispatch) => {
         profileAPI.getProfile(userID).then(response => {
             dispatch(setUserProfile(response.data))
