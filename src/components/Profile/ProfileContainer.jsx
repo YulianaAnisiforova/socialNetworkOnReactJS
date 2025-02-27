@@ -12,7 +12,8 @@ const GetParams = (props) => {
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        let userID = this.props.param.userID
+        debugger
+        let userID = this.props.param.userId
         if (!userID) {
             userID = this.props.authorizedUserID
             // userID = 32162
