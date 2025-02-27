@@ -6,14 +6,6 @@ import {useParams} from 'react-router-dom'
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect'
 import {compose} from 'redux'
 
-// export function withRouter(Children) {
-//     return (props) => {
-//         const match = {params: useParams()};
-//         debugger
-//         return <Children {...props} match={match}/>
-//     }
-// }
-
 const GetParams = (props) => {
     return <ProfileContainer {...props} param={useParams()} />
 }
@@ -21,8 +13,9 @@ const GetParams = (props) => {
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let userID = this.props.param.userID
-        if (!userID && this.props.isAuth) {
+        if (!userID) {
             userID = this.props.authorizedUserID
+            // userID = 32162
         }
 
         this.props.getUserProfile(userID)
@@ -49,6 +42,5 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {getUserProfile, getUserStatus, updateUserStatus}),
-    // withRouter,
-    // WithAuthRedirect
+    WithAuthRedirect
 )(GetParams)
