@@ -3,34 +3,27 @@ import style from './MyPosts.module.css'
 import Post from './Post/Post'
 import {useForm} from 'react-hook-form'
 
-class MyPosts extends React.PureComponent {
+const MyPosts = React.memo(props => {
 
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     return nextProps !== this.props || nextState !== this.state
-    // }
+    let postsElements = props.posts.map(
+        post => <Post key={post.id} message={post.message} likes={post.likes}/>)
 
-    render() {
-
-        let postsElements = this.props.posts.map(
-            post => <Post key={post.id} message={post.message} likes={post.likes}/>)
-
-        let addNewPost = (newPost) => {
-            this.props.addPost(newPost)
-        }
-
-        return (
-            <div className={style.postsWrapper}>
-
-                <AddNewPostForm onSubmitContainer={addNewPost}/>
-
-                <div className={style.posts}>
-                    {postsElements}
-                </div>
-
-            </div>
-        )
+    let addNewPost = (newPost) => {
+        props.addPost(newPost)
     }
-}
+
+    return (
+        <div className={style.postsWrapper}>
+
+            <AddNewPostForm onSubmitContainer={addNewPost}/>
+
+            <div className={style.posts}>
+                {postsElements}
+            </div>
+
+        </div>
+    )
+})
 
 const AddNewPostForm = (props) => {
     const {
