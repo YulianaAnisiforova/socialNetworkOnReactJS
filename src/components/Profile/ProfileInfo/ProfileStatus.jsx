@@ -44,7 +44,7 @@ class ProfileStatus extends React.Component {
                                value={this.state.status} className={style.infoInput}/>
                     </div>
                     : <div>
-                        <span onDoubleClick={this.activateEditMode}>Status: {this.props.status}</span>
+                        <span className={style.status} onDoubleClick={this.activateEditMode}>{this.props.status}</span>
                     </div>
                 }
             </div>

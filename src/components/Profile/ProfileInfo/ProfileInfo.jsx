@@ -4,6 +4,7 @@ import userAvatar from '../../../img/avatar.jpg'
 import anonim from '../../../img/anonim.png'
 import Preloader from '../../Common/Preloader/Preloader'
 import ProfileStatus from './ProfileStatus'
+import ProfileStatusHooks from "./ProfileStatusHooks";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -20,8 +21,8 @@ const ProfileInfo = (props) => {
             </div>
 
             <div className={style.infoBox}>
-                <div>Name: {props.profile.fullName}</div>
-                <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
+                <div className={style.name}>{props.profile.fullName}</div>
+                <ProfileStatusHooks status={props.status} updateUserStatus={props.updateUserStatus}/>
             </div>
         </div>
     )
