@@ -24,7 +24,7 @@ const Login = (props) => {
     )
 }
 
-const LoginForm = (props) => {
+const LoginForm = ({onSubmitContainer, }) => {
 
     const loginError = useSelector((state) => state.auth.loginError)
 
@@ -42,7 +42,7 @@ const LoginForm = (props) => {
 
 
     const onSubmit = (data) => {
-        props.onSubmitContainer(data.email, data.password, data.rememberMe)
+        onSubmitContainer(data.email, data.password, data.rememberMe)
     }
 
     return (
