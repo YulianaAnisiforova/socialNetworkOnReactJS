@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './Login.module.css'
 import {useForm} from 'react-hook-form'
-import {connect} from 'react-redux'
+import {connect, useSelector} from 'react-redux'
 import {login} from '../../redux/authReducer'
 import {Navigate} from 'react-router-dom'
 
@@ -25,6 +25,9 @@ const Login = (props) => {
 }
 
 const LoginForm = (props) => {
+
+    const loginError = useSelector((state) => state.auth.loginError)
+
     const {
         register,
         formState: {
@@ -37,9 +40,9 @@ const LoginForm = (props) => {
         mode: "onBlur"
     })
 
+
     const onSubmit = (data) => {
         props.onSubmitContainer(data.email, data.password, data.rememberMe)
-        reset()
     }
 
     return (
@@ -70,7 +73,7 @@ const LoginForm = (props) => {
                 </div>
             </div>
             <div className={style.errorMsg}>
-                {isValid ? null : 'Incorrect e-mail or password.'}
+                {loginError}
             </div>
             <div className={style.checkWrapper}>
                 <label htmlFor={'remember'}>

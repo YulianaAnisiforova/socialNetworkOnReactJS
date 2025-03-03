@@ -2,6 +2,7 @@ import {authAPI} from '../api/api'
 
 const SET_USER_DATA = 'SET-USER-DATA'
 const TOGGLE_IS_FETCHING = 'TOGGLE-IS-FETCHING'
+const LOGIN_ERROR = 'LOGIN_ERROR'
 
 let initialState = {
     userID: null,
@@ -9,6 +10,7 @@ let initialState = {
     login: null,
     isFetching: false,
     isAuth: false,
+    loginError: '',
 }
 
 const authReducer = (state = initialState, action) => {
@@ -20,6 +22,8 @@ const authReducer = (state = initialState, action) => {
             }
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case LOGIN_ERROR:
+            return {...state, loginError: action.loginError}
         default:
             return state
     }
@@ -31,6 +35,7 @@ export const setAuthUserData = (userID, email, login, isAuth) => ({
     payload: {userID, email, login, isAuth}
 })
 export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching: isFetching})
+export const loginErrorAC = (loginError) => ({type: LOGIN_ERROR, loginError: loginError})
 
 export const authMe = () => {
     return (dispatch) => {
@@ -54,6 +59,9 @@ export const login = (email, password, rememberMe) => {
             dispatch(toggleIsFetching(false))
             if (response.data.resultCode === 0) {
                 dispatch(authMe())
+                dispatch(loginErrorAC(''))
+            } else {
+                dispatch(loginErrorAC(response.data.messages))
             }
         })
     }

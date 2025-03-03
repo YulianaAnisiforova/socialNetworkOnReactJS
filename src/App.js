@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import NavBar from './components/NavBar/NavBar'
-import {Route, Routes} from 'react-router-dom'
+import {Navigate, Route, Routes} from 'react-router-dom'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
@@ -15,6 +15,7 @@ const App = () => {
             <NavBar/>
             <div className='appWrapperContent'>
                 <Routes>
+                    <Route path='/' element={<Navigate to='/login'/>} />
                     <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
                     <Route path='/users' element={<UsersContainer/>}/>
                     <Route path='/dialogs/*' element={<DialogsContainer/>}/>
