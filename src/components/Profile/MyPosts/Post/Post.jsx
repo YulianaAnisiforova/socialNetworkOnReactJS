@@ -18,7 +18,7 @@ const Post = (props) => {
             </div>
 
             <div>
-                <span className={style.likes}> {props.likes} likes</span>
+                <span className={style.likes}> {props.likes || 0} likes</span>
             </div>
         </div>)
 }
