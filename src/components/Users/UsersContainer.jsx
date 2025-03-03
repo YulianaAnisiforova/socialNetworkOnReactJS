@@ -5,7 +5,6 @@ import {
 } from '../../redux/usersReducer'
 import Users from './Users'
 import Preloader from '../Common/Preloader/Preloader'
-import {WithAuthRedirect} from '../../hoc/WithAuthRedirect'
 import {compose} from 'redux'
 import {
     getCurrentPage,
@@ -13,7 +12,7 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsersState
-} from "../../redux/usersSelectors";
+} from '../../redux/usersSelectors'
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -56,5 +55,4 @@ export default compose(
     connect(mapStateToProps, {
         setCurrentPage, toggleIsFollowingInProgress, getUsers, getUsers2, unfollow, follow
     }),
-    // WithAuthRedirect
 )(UsersContainer)

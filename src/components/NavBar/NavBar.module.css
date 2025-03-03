@@ -1,11 +1,8 @@
 .nav {
     grid-area: n;
-    /*background-color: #ffcd7e;*/
     background-color: rgba(255, 205, 126, 0);
-    /*background-color: #ffecbe;*/
     padding-top: 200px;
     padding-bottom: 200px;
-    /*border-right: 1px solid #ce7800;*/
 }
 
 .item {
@@ -32,7 +29,6 @@
 }
 
 .item:hover {
-    /*background-color: #eeba72;*/
     background-color: rgba(255, 205, 126, 0.68);
     transition: 0.5s;
 }

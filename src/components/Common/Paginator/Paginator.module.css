@@ -1,0 +1,29 @@
+.pagesBtn, .selectedPage {
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+    border-radius: 5px;
+    height: 23px;
+    margin-top: 20px;
+    margin-left: 5px;
+    padding: 0;
+    color: black;
+}
+
+.pagesBtn:hover {
+    cursor: pointer;
+    background-color: #ffcd7e;
+    transition: 0.5s;
+}
+
+.pagesBtn:active {
+    background-color: #eeba72;
+}
+
+.selectedPage {
+    color: #945701;
+}
+
+.pagesBtnArea {
+
+}
