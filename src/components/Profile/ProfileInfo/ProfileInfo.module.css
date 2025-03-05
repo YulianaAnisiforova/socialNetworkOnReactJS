@@ -35,28 +35,28 @@
     font-weight: bold;
 }
 
-.status {
-
+.infoItem {
+    line-height: 25px;
 }
 
 input[type='file'] {
     display: none;
 }
 
-.changeAvatar {
+.editBtn {
     display: inline-block;
     background-color: rgba(255, 205, 126, 0.4);
     color: #ce7800;
-    border-radius: 5px;
+    border-radius: 7px;
     border: none;
     cursor: pointer;
     height: 17px;
-    width: 90px;
+    width: 100px;
     font-size: 12px;
     text-align: center;
 }
 
-.changeAvatar:hover {
+.editBtn:hover {
     background-color: rgba(255, 205, 126, 0.5);
     color: #945701;
     transition: 0.5s;

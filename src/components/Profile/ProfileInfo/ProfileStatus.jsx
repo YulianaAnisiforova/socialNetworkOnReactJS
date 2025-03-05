@@ -25,16 +25,25 @@ const ProfileStatus = (props) => {
 
     return (
         <div>
-            {!editMode &&
-            <div>
-                <span className={style.status} onDoubleClick={activateEditMode}>{props.status || 'no status'}</span>
-            </div>
-            }
-            {editMode &&
-            <div>
-                <input autoFocus={true} onChange={onStatusChange} onBlur={deactivateEditMode}
-                        value={status} className={style.infoInput}/>
-            </div>
+            {props.isOwner
+                ? <div>
+                    {!editMode &&
+                        <div>
+                            <span className={style.infoItem}
+                                  onDoubleClick={activateEditMode}>{props.status}</span>
+                        </div>
+                    }
+                    {editMode &&
+                        <div>
+                            <input autoFocus={true} onChange={onStatusChange} onBlur={deactivateEditMode}
+                                   value={status} className={style.infoInput}/>
+                        </div>
+                    }
+                </div>
+
+                : <div>
+                    <span className={style.status} onDoubleClick={activateEditMode}>{props.status}</span>
+                </div>
             }
         </div>
     )
