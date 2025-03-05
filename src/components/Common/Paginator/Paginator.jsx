@@ -21,20 +21,23 @@ const Paginator = ({totalItemsCount, pageSize, onPageChanged, currentPage, porti
     return (
         <div className={style.pagesBtnArea}>
 
-            {portionNumber > 1 &&
-                <button className={style.backBtn} onClick={() => setPortionNumber((portionNumber - 1))}>back</button>}
+            {portionNumber > 1
+                ? <button className={style.backBtn} onClick={() => setPortionNumber((portionNumber - 1))}>back</button>
+                : <button disabled className={style.backBtn} onClick={() => setPortionNumber((portionNumber - 1))}>back</button>
+            }
 
             {pages
                 .filter(page => page >= leftPortionPageNumber && page <= rightPortionPageNumber)
                 .map((page) => {
-                return <button key={page} onClick={(event) => onPageChanged(page)}
-                               className={currentPage === page ?
-                                   style.selectedPage : style.pagesBtn}>{page}</button>
-            })}
+                    return <button key={page} onClick={(event) => onPageChanged(page)}
+                                   className={currentPage === page ? style.selectedPage : style.pagesBtn}>{page}</button>
+                })}
 
 
-            {portionCount > portionNumber &&
-                <button className={style.forwardBtn} onClick={() => setPortionNumber((portionNumber + 1))}>forward</button>}
+            {portionCount > portionNumber
+                ? <button className={style.forwardBtn} onClick={() => setPortionNumber((portionNumber + 1))}>forward</button>
+                : <button disabled className={style.forwardBtn} onClick={() => setPortionNumber((portionNumber + 1))}>forward</button>
+            }
 
         </div>
     )

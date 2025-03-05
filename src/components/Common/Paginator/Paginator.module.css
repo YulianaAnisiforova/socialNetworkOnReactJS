@@ -25,12 +25,11 @@
 }
 
 .pagesBtnArea {
-
+    width: 700px;
 }
 
 .backBtn {
     background-color: #ffcd7e;
-    /*border-radius: 5px;*/
     border-radius: 0 50px 0 50px;
     border: none;
     cursor: pointer;
@@ -38,6 +37,11 @@
     width: 80px;
     font-size: 15px;
     margin-left: 10px;
+}
+
+.backBtn:disabled:hover, .forwardBtn:disabled:hover {
+    background-color: #ffcd7e;
+    cursor: auto;
 }
 
 .backBtn:hover, .forwardBtn:hover {
