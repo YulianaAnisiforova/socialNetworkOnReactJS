@@ -1,26 +1,30 @@
 import React from 'react'
 import style from './ProfileInfo.module.css'
-import anonim from '../../../img/anonim.png'
+import anonimAvatar from '../../../img/anonim.png'
 import Preloader from '../../Common/Preloader/Preloader'
-import ProfileStatusHooks from "./ProfileStatusHooks";
+import ProfileStatus from './ProfileStatus'
 
-const ProfileInfo = ({profile, status, updateUserStatus}) => {
+const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar}) => {
     if (!profile) {
         return <Preloader />
+    }
+
+    const onAvatarChanged = (event) => {
+        if (event.target.files.length) {
+            saveAvatar(event.target.files[0])
+        }
     }
 
     return (
         <div className={style.profileBox}>
             <div className={style.avatarContainer}>
-                {profile.photos.large
-                ? <img className={style.avatar} src={profile.photos.large} alt="avatar"/>
-                    : <img className={style.avatar} src={anonim} alt="avatar"/>
-            }
+                <img className={style.avatar} src={profile.photos.large || anonimAvatar} alt={'avatar'} />
+                {isOwner && <input type='file' onChange={onAvatarChanged} />}
             </div>
 
             <div className={style.infoBox}>
                 <div className={style.name}>{profile.fullName}</div>
-                <ProfileStatusHooks status={status} updateUserStatus={updateUserStatus}/>
+                <ProfileStatus status={status} updateUserStatus={updateUserStatus}/>
             </div>
         </div>
     )

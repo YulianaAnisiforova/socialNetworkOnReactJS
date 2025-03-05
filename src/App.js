@@ -4,10 +4,6 @@ import {Navigate, Route, Routes} from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
 import HeaderComponent from './components/Header/HeaderContainer'
 import Preloader from './components/Common/Preloader/Preloader'
-// import DialogsContainer from './components/Dialogs/DialogsContainer'
-// import ProfileContainer from './components/Profile/ProfileContainer'
-// import UsersContainer from './components/Users/UsersContainer'
-// import Login from './components/Login/Login'
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
