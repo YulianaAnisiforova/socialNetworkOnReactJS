@@ -18,8 +18,15 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar}) =
     return (
         <div className={style.profileBox}>
             <div className={style.avatarContainer}>
-                <img className={style.avatar} src={profile.photos.large || anonimAvatar} alt={'avatar'} />
-                {isOwner && <input type='file' onChange={onAvatarChanged} />}
+                <div>
+                    <img className={style.avatar} src={profile.photos.large || anonimAvatar} alt={'avatar'} />
+                </div>
+                <div>
+                    <label htmlFor='chooseFile' className={style.changeAvatar} >
+                        {isOwner && <input type='file' onChange={onAvatarChanged} id='chooseFile' />}
+                        Change avatar
+                    </label>
+                </div>
             </div>
 
             <div className={style.infoBox}>

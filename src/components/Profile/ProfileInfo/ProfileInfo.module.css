@@ -38,3 +38,26 @@
 .status {
 
 }
+
+input[type='file'] {
+    display: none;
+}
+
+.changeAvatar {
+    display: inline-block;
+    background-color: rgba(255, 205, 126, 0.4);
+    color: #ce7800;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    height: 17px;
+    width: 90px;
+    font-size: 12px;
+    text-align: center;
+}
+
+.changeAvatar:hover {
+    background-color: rgba(255, 205, 126, 0.5);
+    color: #945701;
+    transition: 0.5s;
+}
