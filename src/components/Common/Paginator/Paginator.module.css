@@ -27,3 +27,35 @@
 .pagesBtnArea {
 
 }
+
+.backBtn {
+    background-color: #ffcd7e;
+    /*border-radius: 5px;*/
+    border-radius: 0 50px 0 50px;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.backBtn:hover, .forwardBtn:hover {
+    background-color: #eeba72;
+    transition: 0.5s;
+}
+
+.backBtn:active, .forwardBtn:active {
+    background-color: #e5b16a;
+}
+
+.forwardBtn {
+    background-color: #ffcd7e;
+    border-radius: 50px 0 50px 0;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 80px;
+    font-size: 15px;
+    margin-left: 10px;
+}
