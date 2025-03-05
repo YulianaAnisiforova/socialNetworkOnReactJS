@@ -40,8 +40,6 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar}) =
                 {editMode
                     ? <ProfileDataForm profile={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)} />}
-                {/*<ProfileDataForm profile={profile} />*/}
-                {/*<ProfileData profile={profile} isOwner={isOwner} />*/}
             </div>
         </div>
     )
