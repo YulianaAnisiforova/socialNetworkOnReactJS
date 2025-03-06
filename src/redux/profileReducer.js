@@ -1,10 +1,12 @@
 import {profileAPI} from '../api/api'
+import {loginErrorAC} from "./authReducer";
 
 const ADD_POST = 'ADD_POST'
 const DELETE_POST = 'DELETE_POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const SAVE_AVATAR_SUCCESS = 'SAVE_AVATAR_SUCCESS'
+const CONTACTS_ERROR = 'CONTACTS_ERROR'
 
 let initialState = {
     posts: [
@@ -28,6 +30,7 @@ let initialState = {
     ],
     profile: null,
     status: '',
+    contactsError: '',
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -53,6 +56,8 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state, profile: {...state.profile, photos: action.photos}
             }
+        case CONTACTS_ERROR:
+            return {...state, contactsError: action.contactsError}
         default:
             return state
     }
@@ -63,6 +68,7 @@ export const deletePostActionCreator = (postID) => ({type: DELETE_POST, postID})
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile: profile})
 export const setStatus = (status) => ({type: SET_STATUS, status: status})
 export const saveAvatarSuccess = (photos) => ({type: SAVE_AVATAR_SUCCESS, photos})
+export const contactsErrorAC = (contactsError) => ({type: CONTACTS_ERROR, contactsError: contactsError})
 
 export const getUserProfile = (userID) => async (dispatch) => {
     let response = await profileAPI.getProfile(userID)
@@ -92,6 +98,9 @@ export const saveProfile = (profile) => async (dispatch, getState) => {
     let data = await profileAPI.saveProfile(profile)
     if (data.resultCode === 0) {
         dispatch(getUserProfile(userID))
+        dispatch(contactsErrorAC(''))
+    } else {
+        dispatch(contactsErrorAC(data.messages))
     }
 }
 

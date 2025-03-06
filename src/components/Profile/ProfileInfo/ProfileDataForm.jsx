@@ -2,8 +2,7 @@ import React from 'react'
 import style from './ProfileInfo.module.css'
 import {useForm} from 'react-hook-form'
 
-const ProfileDataForm = ({profile, onSubmitContainer}) => {
-
+const ProfileDataForm = ({profile, onSubmitContainer, contactsError}) => {
     const {
         register,
         handleSubmit,
@@ -63,7 +62,9 @@ const ProfileDataForm = ({profile, onSubmitContainer}) => {
                     )
                 })}
             </div>
-
+            <div className={style.errorMsg}>
+                {contactsError}
+            </div>
             <button type={'submit'} className={style.editBtn} >Save</button>
 
         </form>

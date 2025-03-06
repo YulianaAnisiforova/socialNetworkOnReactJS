@@ -1,11 +1,15 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import style from './ProfileInfo.module.css'
 import anonimAvatar from '../../../img/anonim.png'
 import Preloader from '../../Common/Preloader/Preloader'
 import ProfileStatus from './ProfileStatus'
 import ProfileDataForm from './ProfileDataForm'
+import {useSelector} from "react-redux";
 
 const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, saveProfile}) => {
+
+    const contactsError = useSelector((state) => state.profilePage.contactsError)
+
     let [editMode, setEditMode] = useState(false)
 
     if (!profile) {
@@ -18,10 +22,13 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, sa
         }
     }
 
-    let onSubmitContainer = (data) => {
-        saveProfile(data).then(() => {
-            setEditMode(false)
-        })
+    let onSubmitContainer = async (data) => {
+        await saveProfile(data)
+            if (!contactsError) {
+                setEditMode(false)
+            } else {
+                setEditMode(true)
+            }
     }
 
     return (
@@ -45,7 +52,7 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, sa
                 <ProfileStatus isOwner={isOwner} status={status} updateUserStatus={updateUserStatus}/>
 
                 {editMode
-                    ? <ProfileDataForm profile={profile} onSubmitContainer={onSubmitContainer}/>
+                    ? <ProfileDataForm profile={profile} contactsError={contactsError} onSubmitContainer={onSubmitContainer}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
             </div>
         </div>
