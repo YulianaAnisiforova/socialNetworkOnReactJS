@@ -6,10 +6,6 @@ import {login} from '../../redux/authReducer'
 import {Navigate} from 'react-router-dom'
 
 const Login = (props) => {
-    const loginToSite = (email, password, rememberMe) => {
-        props.login(email, password, rememberMe)
-    }
-
     if (props.isAuth) {
         return <Navigate to='/profile'/>
     }
@@ -19,7 +15,7 @@ const Login = (props) => {
             <div className={style.header}>
                 <span>Login</span>
             </div>
-            <LoginForm onSubmitContainer={loginToSite}/>
+            <LoginForm onSubmitContainer={props.login}/>
         </div>
     )
 }
@@ -35,7 +31,6 @@ const LoginForm = ({onSubmitContainer, }) => {
             isValid,
         },
         handleSubmit,
-        reset,
     } = useForm({
         mode: "onBlur"
     })
