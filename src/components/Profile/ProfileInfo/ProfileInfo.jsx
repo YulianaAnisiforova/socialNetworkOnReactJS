@@ -18,6 +18,12 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, sa
         }
     }
 
+    let onSubmitContainer = (data) => {
+        saveProfile(data).then(() => {
+            setEditMode(false)
+        })
+    }
+
     return (
         <div className={style.profileBox}>
             <div className={style.avatarContainer}>
@@ -39,14 +45,15 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, sa
                 <ProfileStatus isOwner={isOwner} status={status} updateUserStatus={updateUserStatus}/>
 
                 {editMode
-                    ? <ProfileDataForm onSubmitContainer={saveProfile} />
-                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)} />}
+                    ? <ProfileDataForm profile={profile} onSubmitContainer={onSubmitContainer}/>
+                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
             </div>
         </div>
     )
 }
 
 const ProfileData = ({profile, isOwner, goToEditMode}) => {
+
     return (
         <div>
             <br/>
@@ -55,25 +62,25 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
                 Looking for a job: {profile.lookingForAJob ? 'yes' : 'no'}
             </div>
             {profile.lookingForAJobDescription &&
-            <div>
-                My professional skills: {profile.lookingForAJobDescription}
-            </div>
+                <div>
+                    My professional skills: {profile.lookingForAJobDescription}
+                </div>
             }
             {profile.aboutMe &&
-            <div>
-                About me: {profile.aboutMe}
-            </div>
+                <div>
+                    About me: {profile.aboutMe}
+                </div>
             }
 
             <br/>
 
             <div>
-                Contacts {Object.keys(profile.contacts).map(key => {
+                {Object.keys(profile.contacts).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
                 })}
             </div>
 
-            {isOwner && <button className={style.editBtn} onClick={goToEditMode} >Edit profile info</button>}
+            {isOwner && <button className={style.editBtn} onClick={goToEditMode}>Edit profile info</button>}
         </div>
     )
 }

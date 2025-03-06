@@ -2,12 +2,27 @@ import React from 'react'
 import style from './ProfileInfo.module.css'
 import {useForm} from 'react-hook-form'
 
-const ProfileDataForm = ({onSubmitContainer}) => {
+const ProfileDataForm = ({profile, onSubmitContainer}) => {
 
     const {
         register,
         handleSubmit,
-    } = useForm()
+    } = useForm({
+        defaultValues: {
+            fullName: profile.fullName,
+            lookingForAJob: profile.lookingForAJob,
+            lookingForAJobDescription: profile.lookingForAJobDescription,
+            aboutMe: profile.aboutMe,
+            'contacts.facebook': profile.contacts.facebook,
+            'contacts.website': profile.contacts.website,
+            'contacts.vk': profile.contacts.vk,
+            'contacts.twitter': profile.contacts.twitter,
+            'contacts.instagram': profile.contacts.instagram,
+            'contacts.youtube': profile.contacts.youtube,
+            'contacts.github': profile.contacts.github,
+            'contacts.mainLink': profile.contacts.mainLink,
+        }
+    })
 
     const onSubmit = (data) => {
         onSubmitContainer(data)
@@ -40,9 +55,13 @@ const ProfileDataForm = ({onSubmitContainer}) => {
             </div>
 
             <div>
-                {/*Contacts {Object.keys(profile.contacts).map(key => {*/}
-                {/*    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]} />*/}
-                {/*})}*/}
+                {Object.keys(profile.contacts).map(key => {
+                    return (
+                        <div key={key}>
+                            {key}: <input type='text' className={style.infoInput} {...register(`contacts.${key}`)} />
+                        </div>
+                    )
+                })}
             </div>
 
             <button type={'submit'} className={style.editBtn} >Save</button>
