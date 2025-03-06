@@ -2,7 +2,7 @@ import React from 'react'
 import style from './ProfileInfo.module.css'
 import {useForm} from 'react-hook-form'
 
-const ProfileDataForm = ({profile, onSubmitContainer}) => {
+const ProfileDataForm = ({onSubmitContainer}) => {
 
     const {
         register,
