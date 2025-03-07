@@ -1,5 +1,4 @@
 import {profileAPI} from '../api/api'
-import {loginErrorAC} from "./authReducer";
 
 const ADD_POST = 'ADD_POST'
 const DELETE_POST = 'DELETE_POST'
@@ -96,6 +95,7 @@ export const saveAvatar = (file) => async (dispatch) => {
 export const saveProfile = (profile) => async (dispatch, getState) => {
     let userID = getState().auth.userID
     let data = await profileAPI.saveProfile(profile)
+
     if (data.resultCode === 0) {
         dispatch(getUserProfile(userID))
         dispatch(contactsErrorAC(''))

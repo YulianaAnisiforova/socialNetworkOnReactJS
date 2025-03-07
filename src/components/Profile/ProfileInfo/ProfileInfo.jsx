@@ -1,16 +1,16 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import style from './ProfileInfo.module.css'
 import anonimAvatar from '../../../img/anonim.png'
 import Preloader from '../../Common/Preloader/Preloader'
 import ProfileStatus from './ProfileStatus'
 import ProfileDataForm from './ProfileDataForm'
-import {useSelector} from "react-redux";
+import {useSelector} from 'react-redux'
 
 const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, saveProfile}) => {
 
     const contactsError = useSelector((state) => state.profilePage.contactsError)
 
-    let [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState(false)
 
     if (!profile) {
         return <Preloader/>
@@ -26,7 +26,8 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, sa
         await saveProfile(data)
             if (!contactsError) {
                 setEditMode(false)
-            } else {
+            }
+                else {
                 setEditMode(true)
             }
     }

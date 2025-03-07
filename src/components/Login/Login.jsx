@@ -15,12 +15,12 @@ const Login = (props) => {
             <div className={style.header}>
                 <span>Login</span>
             </div>
-            <LoginForm onSubmitContainer={props.login}/>
+            <LoginForm captchaURL={props.captchaURL} onSubmitContainer={props.login}/>
         </div>
     )
 }
 
-const LoginForm = ({onSubmitContainer, }) => {
+const LoginForm = ({onSubmitContainer, captchaURL}) => {
 
     const loginError = useSelector((state) => state.auth.loginError)
 
@@ -37,7 +37,7 @@ const LoginForm = ({onSubmitContainer, }) => {
 
 
     const onSubmit = (data) => {
-        onSubmitContainer(data.email, data.password, data.rememberMe)
+        onSubmitContainer(data.email, data.password, data.rememberMe, data.captcha)
     }
 
     return (
@@ -76,6 +76,15 @@ const LoginForm = ({onSubmitContainer, }) => {
                     <span>remember me</span>
                 </label>
             </div>
+
+            <div className={style.captchaWrapper}>
+                {captchaURL && <img src={captchaURL} alt='captcha'/> }
+            </div>
+            <div>
+                {captchaURL && <input className={style.loginInput} placeholder={'captcha'}
+                                  type={'text'} {...register('captcha', {required: true})} /> }
+            </div>
+
             <div className={style.btnWrapper}>
                 <button type={'submit'} className={style.loginBtn} disabled={!isValid}>login</button>
             </div>
@@ -84,7 +93,8 @@ const LoginForm = ({onSubmitContainer, }) => {
 }
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaURL: state.auth.captchaURL,
 })
 
 export default connect(mapStateToProps, {login})(Login)
