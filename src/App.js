@@ -23,6 +23,7 @@ const App = () => {
                         <Route path='/users' element={<UsersContainer/>}/>
                         <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                         <Route path='/login' element={<Login/>}/>
+                        <Route path='*' element={<div>404 not found</div>}/>
                     </Routes>
                 </Suspense>
             </div>
