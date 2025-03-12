@@ -20,7 +20,7 @@ const App = () => {
                     <Routes>
                         <Route path='/' element={<Navigate to='/login'/>}/>
                         <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
-                        <Route path='/users' element={<UsersContainer/>}/>
+                        <Route path='/users' element={<UsersContainer pageTitle={'Users'}/>}/>
                         <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                         <Route path='/login' element={<Login/>}/>
                         <Route path='*' element={<div>404 not found</div>}/>

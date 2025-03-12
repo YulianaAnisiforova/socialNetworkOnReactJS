@@ -1,7 +1,13 @@
 import style from './ProfileInfo.module.css'
-import React, {useEffect, useState} from 'react'
+import React, {ChangeEvent, useEffect, useState} from 'react'
 
-const ProfileStatus = (props) => {
+type PropsType = {
+    status: string,
+    updateUserStatus: (status: string) => void,
+    isOwner: boolean,
+}
+
+const ProfileStatus: React.FC<PropsType> = (props) => {
 
     let [editMode, setEditMode] = useState(false)
     let [status, setStatus] = useState(props.status)
@@ -19,7 +25,7 @@ const ProfileStatus = (props) => {
         props.updateUserStatus(status)
     }
 
-    const onStatusChange = (event) => {
+    const onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
         setStatus(event.currentTarget.value)
     }
 
@@ -42,7 +48,7 @@ const ProfileStatus = (props) => {
                 </div>
 
                 : <div>
-                    <span className={style.status} onDoubleClick={activateEditMode}>{props.status}</span>
+                    <span onDoubleClick={activateEditMode}>{props.status}</span>
                 </div>
             }
         </div>
