@@ -1,4 +1,4 @@
-import {authAPI, securityAPI} from '../api/api'
+import {authAPI, ResultCodesEnum, securityAPI} from '../api/api'
 
 const SET_USER_DATA = 'network/auth/SET-USER-DATA'
 const LOGIN_ERROR = 'network/auth/LOGIN_ERROR'
@@ -50,7 +50,7 @@ type GetCaptchaSuccessActionType = {
 
 type LoginErrorActionType = {
     type: typeof LOGIN_ERROR,
-    loginError: string,
+    loginError: Array<string> | null,
 }
 
 export const setAuthUserData = (userID: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataActionType => ({
@@ -58,32 +58,32 @@ export const setAuthUserData = (userID: number | null, email: string | null, log
     payload: {userID, email, login, isAuth}
 })
 export const getCaptchaSuccess = (captchaURL: string): GetCaptchaSuccessActionType => ({type: GET_CAPTCHA_SUCCESS, payload: {captchaURL}})
-export const loginErrorAC = (loginError: string): LoginErrorActionType => ({type: LOGIN_ERROR, loginError: loginError})
+export const loginErrorAC = (loginError: Array<string> | null): LoginErrorActionType => ({type: LOGIN_ERROR, loginError: loginError})
 
 export const authMe = () => async (dispatch: any) => {
-    let response = await authAPI.getAuthMe()
-    if (response.data.resultCode === 0) {
-        dispatch(setAuthUserData(response.data.data.id,
-            response.data.data.email, response.data.data.login, true))
+    let data = await authAPI.getAuthMe()
+    if (data.resultCode === ResultCodesEnum.Success) {
+        dispatch(setAuthUserData(data.data.id,
+            data.data.email, data.data.login, true))
     }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
-    let response = await authAPI.login(email, password, rememberMe, captcha)
-    if (response.data.resultCode === 0) {
+    let data = await authAPI.login(email, password, rememberMe, captcha)
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(authMe())
-        dispatch(loginErrorAC(''))
+        dispatch(loginErrorAC(null))
     } else {
-        if (response.data.resultCode === 10) {
+        if (data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
             dispatch(getCaptchaURL())
         }
-        dispatch(loginErrorAC(response.data.messages))
+        dispatch(loginErrorAC(data.messages))
     }
 }
 
 export const logout = () => async (dispatch: any) => {
     let response = await authAPI.logout()
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(setAuthUserData(null, null, null, false))
     }
 }
