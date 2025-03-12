@@ -2,9 +2,20 @@ import React from 'react'
 import style from './Users.module.css'
 import Paginator from '../Common/Paginator/Paginator'
 import UserItem from './UserItem'
+import {UserType} from '../../types/types'
 
-const Users = (props) => {
+type PropsType = {
+    users: Array<UserType>,
+    isFollowingInProgress: Array<number>,
+    unfollow: (userID: number) => void,
+    follow: (userID: number) => void,
+    totalUsersCount: number,
+    pageSize: number,
+    onPageChanged: (page: number) => void,
+    currentPage: number,
+}
 
+const Users: React.FC<PropsType> = (props) => {
     return (
         <div className={style.wrapper}>
             {
