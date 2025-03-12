@@ -1,3 +1,6 @@
+import {AppStateType} from "../redux/store";
+import {Dispatch} from "redux";
+
 export type PhotosType = {
     small: string | null,
     large: string | null,
@@ -37,3 +40,5 @@ export type UserType = {
     followed: boolean,
 }
 
+// export type GetStateType = () => AppStateType
+// export type DispatchType = Dispatch<ActionType>

@@ -4,15 +4,6 @@ const SET_USER_DATA = 'network/auth/SET-USER-DATA'
 const LOGIN_ERROR = 'network/auth/LOGIN_ERROR'
 const GET_CAPTCHA_SUCCESS = 'network/auth/GET_CAPTCHA_SUCCESS'
 
-// export type InitialStateType = {
-//     userID: number | null,
-//     email: string | null,
-//     login: string | null,
-//     isAuth: boolean,
-//     loginError: string | null,
-//     captchaURL: string | null,
-// }
-
 let initialState = {
     userID: null as number | null,
     email: null as string | null,
