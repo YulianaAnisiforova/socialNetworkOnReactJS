@@ -54,7 +54,7 @@ type SetAuthUserDataActionType = {
 
 type GetCaptchaSuccessActionType = {
     type: typeof GET_CAPTCHA_SUCCESS,
-    captchaURL: string,
+    payload: {captchaURL: string},
 }
 
 type LoginErrorActionType = {
@@ -66,7 +66,7 @@ export const setAuthUserData = (userID: number | null, email: string | null, log
     type: SET_USER_DATA,
     payload: {userID, email, login, isAuth}
 })
-export const getCaptchaSuccess = (captchaURL: string): GetCaptchaSuccessActionType => ({type: GET_CAPTCHA_SUCCESS, captchaURL: captchaURL})
+export const getCaptchaSuccess = (captchaURL: string): GetCaptchaSuccessActionType => ({type: GET_CAPTCHA_SUCCESS, payload: {captchaURL}})
 export const loginErrorAC = (loginError: string): LoginErrorActionType => ({type: LOGIN_ERROR, loginError: loginError})
 
 export const authMe = () => async (dispatch: any) => {
@@ -77,8 +77,8 @@ export const authMe = () => async (dispatch: any) => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captchaURL: string) => async (dispatch: any) => {
-    let response = await authAPI.login(email, password, rememberMe, captchaURL)
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
+    let response = await authAPI.login(email, password, rememberMe, captcha)
     if (response.data.resultCode === 0) {
         dispatch(authMe())
         dispatch(loginErrorAC(''))
