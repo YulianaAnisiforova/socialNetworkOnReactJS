@@ -1,6 +1,3 @@
-import {AppStateType} from "../redux/store";
-import {Dispatch} from "redux";
-
 export type PhotosType = {
     small: string | null,
     large: string | null,
