@@ -1,20 +1,24 @@
 import React from 'react'
 import style from './Login.module.css'
 import {useForm} from 'react-hook-form'
-import {connect, useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {Navigate} from 'react-router-dom'
+import {AppStateType} from '../../redux/store'
 import {login} from '../../redux/authReducer'
-import {Navigate, useNavigate} from 'react-router-dom'
 
-// type PropsType = {
-//     isAuth: boolean,
-//     captchaURL: string,
-//     login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
-// }
+type PropsType = {}
 
-const Login = (props) => {
-    if (props.isAuth) {
-        // const navigate = useNavigate()
-        // navigate('/profile/')
+const Login: React.FC<PropsType> = () => {
+
+    const isAuth = useSelector((state: AppStateType) =>state.auth.isAuth)
+    const captchaURL = useSelector((state: AppStateType) => state.auth.captchaURL)
+    const dispatch = useDispatch()
+
+    const onSubmitContainer = (data: any) => {
+        dispatch(login(data.email, data.password, data.rememberMe, data.captcha))
+    }
+
+    if (isAuth) {
         return <Navigate to='/profile'/>
     }
 
@@ -23,14 +27,19 @@ const Login = (props) => {
             <div className={style.header}>
                 <span>Login</span>
             </div>
-            <LoginForm captchaURL={props.captchaURL} onSubmitContainer={props.login}/>
+            <LoginForm captchaURL={captchaURL} onSubmitContainer={onSubmitContainer}/>
         </div>
     )
 }
 
-const LoginForm = ({onSubmitContainer, captchaURL}) => {
+type LoginFormType = {
+    onSubmitContainer: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void,
+    captchaURL: string | null,
+}
 
-    const loginError = useSelector((state) => state.auth.loginError)
+const LoginForm: React.FC<LoginFormType> = ({onSubmitContainer, captchaURL}) => {
+
+    const loginError = useSelector((state: AppStateType) => state.auth.loginError)
 
     const {
         register,
@@ -44,7 +53,7 @@ const LoginForm = ({onSubmitContainer, captchaURL}) => {
     })
 
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: any) => {
         onSubmitContainer(data.email, data.password, data.rememberMe, data.captcha)
     }
 
@@ -59,7 +68,7 @@ const LoginForm = ({onSubmitContainer, captchaURL}) => {
                     }
                 })} />
                 <div className={style.errorMsg}>
-                    {errors?.email && <p>{errors?.email?.message || 'Error'}</p>}
+                    {/*{errors?.email && <p>{errors?.email?.message || 'Error'}</p>}*/}
                 </div>
             </div>
             <div className={style.inputWrapper}>
@@ -72,7 +81,7 @@ const LoginForm = ({onSubmitContainer, captchaURL}) => {
                     }
                 })} />
                 <div className={style.errorMsg}>
-                    {errors?.password && <p>{errors?.password?.message || 'Error'}</p>}
+                    {/*{errors?.password && <p>{errors?.password?.message || 'Error'}</p>}*/}
                 </div>
             </div>
             <div className={style.errorMsg}>
@@ -100,9 +109,11 @@ const LoginForm = ({onSubmitContainer, captchaURL}) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth,
-    captchaURL: state.auth.captchaURL,
-})
+export default Login
 
-export default connect(mapStateToProps, {login})(Login)
+// const mapStateToProps = (state: AppStateType) => ({
+//     isAuth: state.auth.isAuth,
+//     captchaURL: state.auth.captchaURL,
+// })
+//
+// export default connect(mapStateToProps, {login})(Login)
