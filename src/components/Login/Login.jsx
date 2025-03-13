@@ -3,10 +3,18 @@ import style from './Login.module.css'
 import {useForm} from 'react-hook-form'
 import {connect, useSelector} from 'react-redux'
 import {login} from '../../redux/authReducer'
-import {Navigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
+
+// type PropsType = {
+//     isAuth: boolean,
+//     captchaURL: string,
+//     login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
+// }
 
 const Login = (props) => {
     if (props.isAuth) {
+        // const navigate = useNavigate()
+        // navigate('/profile/')
         return <Navigate to='/profile'/>
     }
 

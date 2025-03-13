@@ -3,7 +3,23 @@ import Header from './Header'
 import {authMe, logout} from '../../redux/authReducer'
 import {connect} from 'react-redux'
 
-class HeaderComponent extends React.Component {
+type MapStateToPropsType = {
+    userID: number,
+    email: string,
+    login: string,
+    isAuth: boolean,
+}
+
+type MapDispatchToPropsType = {
+    authMe: () => void,
+    logout: () => void,
+}
+
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+type StateType = {}
+
+class HeaderComponent extends React.Component<PropsType, StateType> {
     componentDidMount() {
         this.props.authMe()
     }

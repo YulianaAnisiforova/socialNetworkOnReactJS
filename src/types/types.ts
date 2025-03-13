@@ -40,5 +40,13 @@ export type UserType = {
     followed: boolean,
 }
 
-// export type GetStateType = () => AppStateType
-// export type DispatchType = Dispatch<ActionType>
+export type DialogType = {
+    id: number,
+    name: string,
+    avatar: any,
+}
+
+export type MessageType = {
+    id: number,
+    message: string,
+}

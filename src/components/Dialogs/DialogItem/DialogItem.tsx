@@ -2,7 +2,13 @@ import React from 'react'
 import style from './DialogItem.module.css'
 import {NavLink} from 'react-router-dom'
 
-const DialogItem = (props) => {
+type PropsType = {
+    avatar: string,
+    id: number,
+    user: string,
+}
+
+const DialogItem: React.FC<PropsType> = (props) => {
     return (
         <div className={style.dialog}>
             <div>

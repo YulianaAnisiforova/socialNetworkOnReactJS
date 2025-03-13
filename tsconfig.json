@@ -23,9 +23,4 @@
   "include": [
     "src"
   ],
-  "baseUrl": "./",
-  "paths": {
-    "@Avatars/*": ["src/img/*"]
-  },
-//  "references": [{"path": "./tsconfig.node.json"}]
 }

@@ -3,15 +3,22 @@ import style from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import MessageItem from './MessageItem/MessageItem'
 import {useForm} from 'react-hook-form'
+import {DialogType, MessageType} from '../../types/types'
 
-const Dialogs = (props) => {
+type PropsType = {
+    dialogs: Array<DialogType>,
+    messages: Array<MessageType>,
+    sendMessage: (newMsg: string) => void,
+}
+
+const Dialogs: React.FC<PropsType> = (props) => {
     let dialogsElements = props.dialogs.map(
         dialog => <DialogItem key={dialog.id} user={dialog.name} id={dialog.id} avatar={dialog.avatar}/>)
 
     let messagesElements = props.messages.map(
         message => <MessageItem key={message.id} message={message.message}/>)
 
-    let sendNewMessage = (newMsg) => {
+    let sendNewMessage = (newMsg: string) => {
         props.sendMessage(newMsg)
     }
 
@@ -33,7 +40,12 @@ const Dialogs = (props) => {
     )
 }
 
-const SendMessageForm = (props) => {
+type SendMessageFormType = {
+    onSubmitContainer: (newMsg: string) => void,
+
+}
+
+const SendMessageForm: React.FC<SendMessageFormType> = (props) => {
     const {
         register,
         handleSubmit,
@@ -43,7 +55,7 @@ const SendMessageForm = (props) => {
         },
     } = useForm()
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: any) => {
         props.onSubmitContainer(data.newMsg)
         reset()
     }
