@@ -1,12 +1,6 @@
 import {PhotosType, PostType, ProfileType} from '../types/types'
 import {profileAPI} from '../api/profileAPI'
-
-const ADD_POST = 'ADD_POST'
-const DELETE_POST = 'DELETE_POST'
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
-const SET_STATUS = 'SET_STATUS'
-const SAVE_AVATAR_SUCCESS = 'SAVE_AVATAR_SUCCESS'
-const CONTACTS_ERROR = 'CONTACTS_ERROR'
+import {BaseThunkType, InferActionType} from './store'
 
 let initialState = {
     posts: [
@@ -34,101 +28,85 @@ let initialState = {
 }
 
 export type InitialStateType = typeof initialState
+type ActionType = InferActionType<typeof actions>
+type ThunkType = BaseThunkType<ActionType>
 
-const profileReducer = (state = initialState, action: any): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
-        case ADD_POST:
+        case 'ADD_POST':
             return {
                 ...state,
                 posts: [{id: state.posts.length, message: action.newPost, likes: 0,}, ...state.posts],
             }
-        case SET_USER_PROFILE:
+        case 'SET_USER_PROFILE':
             return {
                 ...state, profile: action.profile
             }
-        case SET_STATUS:
+        case 'SET_STATUS':
             return {
                 ...state, status: action.status
             }
-        case DELETE_POST:
+        case 'DELETE_POST':
             return {
                 ...state, posts: state.posts.filter(post => post.id !== action.postID)
             }
-        case SAVE_AVATAR_SUCCESS:
+        case 'SAVE_AVATAR_SUCCESS':
             return {
                 ...state, profile: {...state.profile, photos: action.photos} as ProfileType
             }
-        case CONTACTS_ERROR:
+        case 'CONTACTS_ERROR':
             return {...state, contactsError: action.contactsError}
         default:
             return state
     }
 }
 
-type AddPostActionType = {
-    type: typeof ADD_POST,
-    newPost: string,
-}
-type DeletePostActionType = {
-    type: typeof DELETE_POST,
-    postID: number,
-}
-type SetUserProfileType = {
-    type: typeof SET_USER_PROFILE,
-    profile: ProfileType,
-}
-type SetStatusType = {
-    type: typeof SET_STATUS,
-    status: string,
-}
-type SaveAvatarSuccessType = {
-    type: typeof SAVE_AVATAR_SUCCESS,
-    photos: PhotosType,
-}
-type ContactsErrorACType = {
-    type: typeof CONTACTS_ERROR,
-    contactsError: Array<string> | null,
+export const actions = {
+    addPostActionCreator: (newPost: string) => ({type: 'ADD_POST', newPost} as const),
+    deletePostActionCreator: (postID: number) => ({type: 'DELETE_POST', postID} as const),
+    setUserProfile: (profile: ProfileType) => ({type: 'SET_USER_PROFILE', profile: profile} as const),
+    setStatus: (status: string) => ({type: 'SET_STATUS', status: status} as const),
+    saveAvatarSuccess: (photos: PhotosType) => ({type: 'SAVE_AVATAR_SUCCESS', photos} as const),
+    contactsErrorAC: (contactsError: Array<string> | null) => ({type: 'CONTACTS_ERROR', contactsError: contactsError} as const),
 }
 
-export const addPostActionCreator = (newPost: string): AddPostActionType => ({type: ADD_POST, newPost})
-export const deletePostActionCreator = (postID: number): DeletePostActionType => ({type: DELETE_POST, postID})
-export const setUserProfile = (profile: ProfileType): SetUserProfileType => ({type: SET_USER_PROFILE, profile: profile})
-export const setStatus = (status: string): SetStatusType => ({type: SET_STATUS, status: status})
-export const saveAvatarSuccess = (photos: PhotosType): SaveAvatarSuccessType => ({type: SAVE_AVATAR_SUCCESS, photos})
-export const contactsErrorAC = (contactsError: Array<string> | null): ContactsErrorACType => ({type: CONTACTS_ERROR, contactsError: contactsError})
-
-export const getUserProfile = (userID: number) => async (dispatch: any) => {
+export const getUserProfile = (userID: number | null): ThunkType =>
+    async (dispatch) => {
     let data = await profileAPI.getProfile(userID)
-    dispatch(setUserProfile(data))
+    dispatch(actions.setUserProfile(data))
 }
-export const getUserStatus = (userID: number) => async (dispatch: any) => {
+export const getUserStatus = (userID: number): ThunkType =>
+    async (dispatch) => {
     let data = await profileAPI.getStatus(userID)
-    dispatch(setStatus(data))
+    dispatch(actions.setStatus(data))
 }
 
-export const updateUserStatus = (status: string) => async (dispatch: any) => {
+export const updateUserStatus = (status: string): ThunkType =>
+    async (dispatch) => {
     let data = await profileAPI.updateStatus(status)
     if (data.resultCode === 0) {
-        dispatch(setStatus(status))
+        dispatch(actions.setStatus(status))
     }
 }
 
-export const saveAvatar = (file: PhotosType) => async (dispatch: any) => {
+export const saveAvatar = (file: PhotosType): ThunkType =>
+    async (dispatch) => {
     let data = await profileAPI.saveAvatar(file)
     if (data.resultCode === 0) {
-        dispatch(saveAvatarSuccess(data.data.photos))
+        dispatch(actions.saveAvatarSuccess(data.data.photos))
     }
 }
 
-export const saveProfile = (profile: ProfileType) => async (dispatch: any, getState: any) => {
+export const saveProfile = (profile: ProfileType): ThunkType =>
+    async (dispatch, getState) => {
     let userID = getState().auth.userID
     let data = await profileAPI.saveProfile(profile)
 
     if (data.resultCode === 0) {
         dispatch(getUserProfile(userID))
-        dispatch(contactsErrorAC(null))
+        dispatch(actions.contactsErrorAC(null))
     } else {
-        dispatch(contactsErrorAC(data.messages))
+        dispatch(actions.contactsErrorAC(data.messages))
     }
 }
 

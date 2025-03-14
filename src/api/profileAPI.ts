@@ -6,7 +6,7 @@ type SaveAvatarDataType = {
 }
 
 export const profileAPI = {
-    getProfile(userID: number) {
+    getProfile(userID: number | null) {
         return instance.get<ProfileType>(`profile/${userID}`)
             .then(response => response.data)
     },

@@ -14,6 +14,10 @@ let initialState = {
 }
 
 type InitialStateType = typeof initialState
+type ActionType = InferActionType<typeof actions>
+type GetStateType = () => AppStateType
+type DispatchType = Dispatch<ActionType>
+type ThunkType = BaseThunkType<ActionType>
 
 const usersReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
@@ -49,8 +53,6 @@ const usersReducer = (state = initialState, action: ActionType): InitialStateTyp
     }
 }
 
-type ActionType = InferActionType<typeof actions>
-
 export const actions = {
     followSuccess: (id: number) => ({type: 'FOLLOW', userID: id} as const),
     unfollowSuccess: (id: number) => ({type: 'UNFOLLOW', userID: id} as const),
@@ -60,10 +62,6 @@ export const actions = {
     toggleIsFetching: (isFetching: boolean) => ({type: 'TOGGLE_IS_FETCHING', isFetching: isFetching} as const),
     toggleIsFollowingInProgress: (isFetching: boolean, userID: number) => ({type: 'TOGGLE_IS_FOLLOWING_IN_PROGRESS', isFetching, userID} as const),
 }
-
-type GetStateType = () => AppStateType
-type DispatchType = Dispatch<ActionType>
-type ThunkType = BaseThunkType<ActionType>
 
 export const getUsers = (currentPage: number, pageSize: number): ThunkType =>
     async (dispatch: any) => {

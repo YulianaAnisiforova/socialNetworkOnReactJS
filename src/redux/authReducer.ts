@@ -13,6 +13,8 @@ let initialState = {
 }
 
 export type InitialStateType = typeof initialState
+type ActionType = InferActionType<typeof actions>
+type ThunkType = BaseThunkType<ActionType>
 
 const authReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
@@ -30,8 +32,6 @@ const authReducer = (state = initialState, action: ActionType): InitialStateType
     }
 }
 
-type ActionType = InferActionType<typeof actions>
-
 export const actions = {
     setAuthUserData: (userID: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
         type: 'SET_USER_DATA',
@@ -40,8 +40,6 @@ export const actions = {
     getCaptchaSuccess: (captchaURL: string) => ({type: 'GET_CAPTCHA_SUCCESS', payload: {captchaURL}} as const),
     loginErrorAC: (loginError: Array<string> | null) => ({type: 'LOGIN_ERROR', loginError: loginError} as const),
 }
-
-type ThunkType = BaseThunkType<ActionType>
 
 export const authMe = (): ThunkType =>
     async (dispatch) => {

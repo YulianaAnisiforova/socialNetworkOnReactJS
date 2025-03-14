@@ -6,8 +6,7 @@ import userAvatar5 from './../img/pacifica.jpg'
 import userAvatar6 from './../img/mermando.webp'
 import userAvatar7 from './../img/soos.webp'
 import {DialogType, MessageType} from '../types/types'
-
-const SEND_MESSAGE = 'SEND_MESSAGE'
+import {InferActionType} from "./store";
 
 let initialState = {
     dialogs: [
@@ -30,10 +29,11 @@ let initialState = {
 }
 
 export type InitialStateType = typeof initialState
+type ActionType = InferActionType<typeof actions>
 
-const dialogsReducer = (state = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
-        case SEND_MESSAGE:
+        case 'SEND_MESSAGE':
             return {
                 ...state,
                 messages: [...state.messages, {id: state.messages.length, message: action.newMsg}],
@@ -44,15 +44,12 @@ const dialogsReducer = (state = initialState, action: any): InitialStateType => 
 
 }
 
-type SendMessageActionType = {
-    type: typeof SEND_MESSAGE,
-    newMsg: string,
+const actions = {
+    sendMessageActionCreator: (newMsg: string) => ({type: 'SEND_MESSAGE', newMsg} as const),
 }
 
-export const sendMessageActionCreator = (newMsg: string): SendMessageActionType => ({type: SEND_MESSAGE, newMsg})
-
 export const sendMessage = (newMsg: string) => (dispatch: any) => {
-    dispatch(sendMessageActionCreator(newMsg))
+    dispatch(actions.sendMessageActionCreator(newMsg))
 }
 
 export default dialogsReducer
