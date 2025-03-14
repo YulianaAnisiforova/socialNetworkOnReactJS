@@ -15,8 +15,6 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 type ActionType = InferActionType<typeof actions>
-type GetStateType = () => AppStateType
-type DispatchType = Dispatch<ActionType>
 type ThunkType = BaseThunkType<ActionType>
 
 const usersReducer = (state = initialState, action: ActionType): InitialStateType => {
@@ -83,7 +81,7 @@ export const getUsers2 = (pageNumber: number, pageSize: number): ThunkType =>
     dispatch(actions.setUsers(data.items))
 }
 
-const _followUnfollowFlow = async (dispatch: DispatchType, userID: number,
+const _followUnfollowFlow = async (dispatch: Dispatch<ActionType>, userID: number,
                                    apiMethod: any,
                                    actionCreator: (userID: number) => ActionType) =>
 {
