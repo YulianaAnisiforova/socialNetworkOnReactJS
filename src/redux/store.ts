@@ -21,7 +21,9 @@ export type InferActionType<T extends {[key: string]:(...args: any[]) => any}> =
 export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
 //@ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)))
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)))
+
+let store = createStore(rootReducers, applyMiddleware(thunk))
 
 export default store

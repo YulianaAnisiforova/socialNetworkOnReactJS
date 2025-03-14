@@ -6,10 +6,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppStateType} from '../../redux/store'
 import {logoutThunk, authMe} from '../../redux/authReducer'
 
-// type PropsType = {}
-
 const Header = () => {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
     const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
     const login = useSelector((state: AppStateType) => state.auth.login)
 

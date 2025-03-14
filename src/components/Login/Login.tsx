@@ -12,7 +12,7 @@ const Login: React.FC<PropsType> = () => {
 
     const isAuth = useSelector((state: AppStateType) =>state.auth.isAuth)
     const captchaURL = useSelector((state: AppStateType) => state.auth.captchaURL)
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
 
     const onSubmit = (data: any) => {
         dispatch(login(data.email, data.password, data.rememberMe, data.captcha))
@@ -53,11 +53,6 @@ const LoginForm: React.FC<LoginFormType> = ({onSubmit, captchaURL}) => {
         mode: "onBlur"
     })
 
-
-    // const onSubmit = (data: any) => {
-    //     onSubmitContainer(data.email, data.password, data.rememberMe, data.captcha)
-    // }
-
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.inputWrapper}>
@@ -69,7 +64,7 @@ const LoginForm: React.FC<LoginFormType> = ({onSubmit, captchaURL}) => {
                     }
                 })} />
                 <div className={style.errorMsg}>
-                    {/*{errors?.email && <p>{errors?.email?.message || 'Error'}</p>}*/}
+                    {errors?.email && (<p>{(errors.email.message || 'Error') as string}</p>)}
                 </div>
             </div>
             <div className={style.inputWrapper}>
@@ -82,7 +77,7 @@ const LoginForm: React.FC<LoginFormType> = ({onSubmit, captchaURL}) => {
                     }
                 })} />
                 <div className={style.errorMsg}>
-                    {/*{errors?.password && <p>{errors?.password?.message || 'Error'}</p>}*/}
+                    {errors?.password && (<p>{(errors.password.message || 'Error') as string}</p>)}
                 </div>
             </div>
             <div className={style.errorMsg}>
