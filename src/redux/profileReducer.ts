@@ -98,12 +98,12 @@ export const saveAvatarSuccess = (photos: PhotosType): SaveAvatarSuccessType => 
 export const contactsErrorAC = (contactsError: Array<string> | null): ContactsErrorACType => ({type: CONTACTS_ERROR, contactsError: contactsError})
 
 export const getUserProfile = (userID: number) => async (dispatch: any) => {
-    let response = await profileAPI.getProfile(userID)
-    dispatch(setUserProfile(response.data))
+    let data = await profileAPI.getProfile(userID)
+    dispatch(setUserProfile(data))
 }
 export const getUserStatus = (userID: number) => async (dispatch: any) => {
-    let response = await profileAPI.getStatus(userID)
-    dispatch(setStatus(response.data))
+    let data = await profileAPI.getStatus(userID)
+    dispatch(setStatus(data))
 }
 
 export const updateUserStatus = (status: string) => async (dispatch: any) => {

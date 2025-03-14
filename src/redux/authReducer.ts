@@ -95,8 +95,8 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 
 export const logoutThunk = (): ThunkType =>
     async (dispatch) => {
-    let response = await authAPI.logout()
-    if (response.data.resultCode === ResultCodesEnum.Success) {
+    let data = await authAPI.logout()
+    if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(setAuthUserData(null, null, null, false))
     }
 }

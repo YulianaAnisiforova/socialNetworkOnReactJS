@@ -1,34 +1,28 @@
-import {instance, ResultCodesEnum} from './api'
+import {instance, ResponseType} from './api'
 
-type GetAuthType = {
-    data: {id: number, email: string, login: string},
-    resultCode: ResultCodesEnum,
-    messages: Array<string>,
+type GetAuthDataType = {
+    id: number,
+    email: string,
+    login: string,
 }
 
-type LoginType = {
-    data: {userId: number},
-    messages: Array<string>,
-    resultCode: ResultCodesEnum,
-}
-type LogoutType = {
-    data: {},
-    messages:Array<string>,
-    resultCode: ResultCodesEnum,
+type LoginDataType = {
+    userId: number,
 }
 
 export const authAPI = {
     getAuthMe() {
-        return instance.get<GetAuthType>('auth/me')
+        return instance.get<ResponseType<GetAuthDataType>>('auth/me')
             .then(response => response.data)
     },
 
     login(email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) {
-        return instance.post<LoginType>('auth/login', {email, password, rememberMe, captcha})
+        return instance.post<ResponseType<LoginDataType>>('auth/login', {email, password, rememberMe, captcha})
             .then(response => response.data)
     },
 
     logout() {
-        return instance.delete<LogoutType>('auth/login')
+        return instance.delete<ResponseType>('auth/login')
+            .then(response => response.data)
     },
 }

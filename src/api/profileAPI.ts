@@ -10,9 +10,11 @@ type UpdateProfileType = {
 export const profileAPI = {
     getProfile(userID: number) {
         return instance.get<ProfileType>(`profile/${userID}`)
+            .then(response => response.data)
     },
     getStatus(userID: number) {
         return instance.get<string>(`profile/status/${userID}`)
+            .then(response => response.data)
     },
 
     updateStatus(status: string) {

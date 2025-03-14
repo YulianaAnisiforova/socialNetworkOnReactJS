@@ -1,8 +1,11 @@
 import {UserType} from '../types/types'
-import {instance, ResultCodesEnum} from './api'
+import {instance, ResponseType} from './api'
 
-type GetUsersType = {items: Array<UserType>, totalCount: number, error: string}
-type FollowUnfollowType = {resultCode: ResultCodesEnum, messages: string[], data:{}}
+type GetUsersType = {
+    items: Array<UserType>,
+    totalCount: number,
+    error: string | null,
+}
 
 export const usersAPI = {
     getUsers(currentPage: number = 1, pageSize: number = 10) {
@@ -20,14 +23,14 @@ export const usersAPI = {
     },
 
     deleteUnfollow(userID: number) {
-        return instance.delete<FollowUnfollowType>(`follow/${userID}`)
+        return instance.delete<ResponseType>(`follow/${userID}`)
             .then(response => {
                 return response.data
             })
     },
 
     postFollow(userID: number) {
-        return instance.post<FollowUnfollowType>(`follow/${userID}`)
+        return instance.post<ResponseType>(`follow/${userID}`)
             .then(response => {
                 return response.data
             })
