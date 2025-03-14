@@ -1,10 +1,8 @@
-import {ProfileType} from '../types/types'
-import {instance, ResultCodesEnum} from './api'
+import {PhotosType, ProfileType} from '../types/types'
+import {instance, APIResponseType} from './api'
 
-type UpdateProfileType = {
-    data: any,
-    resultCode: ResultCodesEnum,
-    messages: Array<string>,
+type SaveAvatarDataType = {
+    photos: PhotosType
 }
 
 export const profileAPI = {
@@ -18,18 +16,19 @@ export const profileAPI = {
     },
 
     updateStatus(status: string) {
-        return instance.put<UpdateProfileType>(`profile/status`, {status: status})
+        return instance.put<APIResponseType>(`profile/status`, {status: status})
+            .then(response => response.data)
     },
 
     saveAvatar(file: any) {
         let formData = new FormData()
         formData.append('image', file)
-        return instance.put<UpdateProfileType>('profile/photo', formData)
+        return instance.put<APIResponseType<SaveAvatarDataType>>('profile/photo', formData)
             .then(response => response.data)
     },
 
     saveProfile(profile: ProfileType) {
-        return instance.put<UpdateProfileType>(`profile`, profile)
+        return instance.put<APIResponseType>(`profile`, profile)
             .then(response => response.data)
     },
 }
