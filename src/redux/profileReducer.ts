@@ -30,7 +30,7 @@ let initialState = {
     ] as Array<PostType>,
     profile: null as ProfileType | null,
     status: '' as string | null,
-    contactsError: ''as string | null,
+    contactsError: null as Array<string> | null,
 }
 
 export type InitialStateType = typeof initialState
@@ -87,7 +87,7 @@ type SaveAvatarSuccessType = {
 }
 type ContactsErrorACType = {
     type: typeof CONTACTS_ERROR,
-    contactsError: string,
+    contactsError: Array<string> | null,
 }
 
 export const addPostActionCreator = (newPost: string): AddPostActionType => ({type: ADD_POST, newPost})
@@ -95,7 +95,7 @@ export const deletePostActionCreator = (postID: number): DeletePostActionType =>
 export const setUserProfile = (profile: ProfileType): SetUserProfileType => ({type: SET_USER_PROFILE, profile: profile})
 export const setStatus = (status: string): SetStatusType => ({type: SET_STATUS, status: status})
 export const saveAvatarSuccess = (photos: PhotosType): SaveAvatarSuccessType => ({type: SAVE_AVATAR_SUCCESS, photos})
-export const contactsErrorAC = (contactsError: string): ContactsErrorACType => ({type: CONTACTS_ERROR, contactsError: contactsError})
+export const contactsErrorAC = (contactsError: Array<string> | null): ContactsErrorACType => ({type: CONTACTS_ERROR, contactsError: contactsError})
 
 export const getUserProfile = (userID: number) => async (dispatch: any) => {
     let response = await profileAPI.getProfile(userID)
@@ -126,7 +126,7 @@ export const saveProfile = (profile: ProfileType) => async (dispatch: any, getSt
 
     if (data.resultCode === 0) {
         dispatch(getUserProfile(userID))
-        dispatch(contactsErrorAC(''))
+        dispatch(contactsErrorAC(null))
     } else {
         dispatch(contactsErrorAC(data.messages))
     }

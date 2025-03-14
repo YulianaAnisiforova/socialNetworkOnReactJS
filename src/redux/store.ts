@@ -12,9 +12,14 @@ let rootReducers = combineReducers({
     auth: authReducer,
 })
 
-type RootReducerType = typeof rootReducers
-export type AppStateType = ReturnType<RootReducerType>
+type RootReducersType = typeof rootReducers
+export type AppStateType = ReturnType<RootReducersType>
 
-let store = createStore(rootReducers, applyMiddleware(thunk))
+type PropertiesTypes<T> = T extends {[key: string]:infer U} ? U : never
+export type InferActionType<T extends {[key: string]:(...args: any[]) => any}> = ReturnType<PropertiesTypes<T>>
+
+//@ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)))
 
 export default store

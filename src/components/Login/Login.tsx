@@ -14,7 +14,7 @@ const Login: React.FC<PropsType> = () => {
     const captchaURL = useSelector((state: AppStateType) => state.auth.captchaURL)
     const dispatch = useDispatch()
 
-    const onSubmitContainer = (data: any) => {
+    const onSubmit = (data: any) => {
         dispatch(login(data.email, data.password, data.rememberMe, data.captcha))
     }
 
@@ -27,17 +27,18 @@ const Login: React.FC<PropsType> = () => {
             <div className={style.header}>
                 <span>Login</span>
             </div>
-            <LoginForm captchaURL={captchaURL} onSubmitContainer={onSubmitContainer}/>
+            <LoginForm captchaURL={captchaURL} onSubmit={onSubmit}/>
         </div>
     )
 }
 
 type LoginFormType = {
-    onSubmitContainer: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void,
+    // onSubmit: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void,
+    onSubmit: (data: any) => any,
     captchaURL: string | null,
 }
 
-const LoginForm: React.FC<LoginFormType> = ({onSubmitContainer, captchaURL}) => {
+const LoginForm: React.FC<LoginFormType> = ({onSubmit, captchaURL}) => {
 
     const loginError = useSelector((state: AppStateType) => state.auth.loginError)
 
@@ -53,9 +54,9 @@ const LoginForm: React.FC<LoginFormType> = ({onSubmitContainer, captchaURL}) => 
     })
 
 
-    const onSubmit = (data: any) => {
-        onSubmitContainer(data.email, data.password, data.rememberMe, data.captcha)
-    }
+    // const onSubmit = (data: any) => {
+    //     onSubmitContainer(data.email, data.password, data.rememberMe, data.captcha)
+    // }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -110,10 +111,3 @@ const LoginForm: React.FC<LoginFormType> = ({onSubmitContainer, captchaURL}) => 
 }
 
 export default Login
-
-// const mapStateToProps = (state: AppStateType) => ({
-//     isAuth: state.auth.isAuth,
-//     captchaURL: state.auth.captchaURL,
-// })
-//
-// export default connect(mapStateToProps, {login})(Login)

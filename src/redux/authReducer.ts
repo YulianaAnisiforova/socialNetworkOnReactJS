@@ -1,6 +1,7 @@
 import {authAPI, ResultCodesEnum, securityAPI} from '../api/api'
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "./store";
+import {ThunkAction} from 'redux-thunk'
+import {AppStateType} from'./store'
+import {Dispatch} from 'redux'
 
 const SET_USER_DATA = 'network/auth/SET-USER-DATA'
 const LOGIN_ERROR = 'network/auth/LOGIN_ERROR'
@@ -90,7 +91,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     }
 }
 
-export const logout = (): ThunkType =>
+export const logoutThunk = (): ThunkType =>
     async (dispatch) => {
     let response = await authAPI.logout()
     if (response.data.resultCode === ResultCodesEnum.Success) {
