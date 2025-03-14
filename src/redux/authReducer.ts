@@ -1,7 +1,9 @@
-import {authAPI, ResultCodesEnum, securityAPI} from '../api/api'
+import {ResultCodesEnum} from '../api/api'
 import {ThunkAction} from 'redux-thunk'
 import {AppStateType} from'./store'
 import {Dispatch} from 'redux'
+import {authAPI} from '../api/authAPI'
+import {securityAPI} from '../api/captchaAPI'
 
 const SET_USER_DATA = 'network/auth/SET-USER-DATA'
 const LOGIN_ERROR = 'network/auth/LOGIN_ERROR'

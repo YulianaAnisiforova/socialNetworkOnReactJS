@@ -6,7 +6,7 @@ import userAvatar5 from './../img/pacifica.jpg'
 import userAvatar6 from './../img/mermando.webp'
 import userAvatar7 from './../img/soos.webp'
 import {DialogType, MessageType} from '../types/types'
-import {authAPI, ResultCodesEnum} from "../api/api";
+import {ResultCodesEnum} from "../api/api";
 import {setAuthUserData} from "./authReducer";
 
 const SEND_MESSAGE = 'SEND_MESSAGE'
