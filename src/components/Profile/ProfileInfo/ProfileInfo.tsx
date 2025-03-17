@@ -5,10 +5,21 @@ import Preloader from '../../Common/Preloader/Preloader'
 import ProfileStatus from './ProfileStatus'
 import ProfileDataForm from './ProfileDataForm'
 import {useSelector} from 'react-redux'
+import {ContactsType, PhotosType, ProfileType} from '../../../types/types'
+import {AppStateType} from '../../../redux/store'
 
-const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, saveProfile}) => {
+type ProfileInfoPropsType = {
+    isOwner: boolean,
+    profile: ProfileType,
+    status: string,
+    saveAvatar: (file: PhotosType) => void,
+    saveProfile: (profile: ProfileType) => void,
+    updateUserStatus: (status: string) => void,
+}
 
-    const contactsError = useSelector((state) => state.profilePage.contactsError)
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({isOwner, profile, status, updateUserStatus, saveAvatar, saveProfile}) => {
+
+    const contactsError = useSelector((state: AppStateType) => state.profilePage.contactsError)
 
     const [editMode, setEditMode] = useState(false)
 
@@ -16,13 +27,13 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, sa
         return <Preloader/>
     }
 
-    const onAvatarChanged = (event) => {
+    const onAvatarChanged = (event: any) => {
         if (event.target.files.length) {
             saveAvatar(event.target.files[0])
         }
     }
 
-    let onSubmitContainer = async (data) => {
+    let onSubmitContainer = async (data: ProfileType) => {
         await saveProfile(data)
             if (!contactsError) {
                 setEditMode(false)
@@ -53,15 +64,20 @@ const ProfileInfo = ({isOwner, profile, status, updateUserStatus, saveAvatar, sa
                 <ProfileStatus isOwner={isOwner} status={status} updateUserStatus={updateUserStatus}/>
 
                 {editMode
-                    ? <ProfileDataForm profile={profile} contactsError={contactsError} onSubmitContainer={onSubmitContainer}/>
+                    ? <ProfileDataForm profile={profile} contactsError={contactsError} onSubmitContainer={onSubmitContainer} />
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
             </div>
         </div>
     )
 }
 
-const ProfileData = ({profile, isOwner, goToEditMode}) => {
+type ProfileDataPropsType = {
+    isOwner: boolean,
+    profile: ProfileType,
+    goToEditMode: () => void,
+}
 
+const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEditMode}) => {
     return (
         <div>
             <br/>
@@ -83,7 +99,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
             <br/>
 
             <div>
-                {Object.keys(profile.contacts).map(key => {
+                {(Object.keys(profile.contacts) as Array<keyof ContactsType>).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
                 })}
             </div>
@@ -93,7 +109,12 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
     )
 }
 
-const Contact = ({contactTitle, contactValue}) => {
+type ContactPropsType = {
+    contactTitle: string,
+    contactValue: string,
+}
+
+const Contact: React.FC<ContactPropsType> = ({contactTitle, contactValue}) => {
     return (
         <div>
             {contactValue &&

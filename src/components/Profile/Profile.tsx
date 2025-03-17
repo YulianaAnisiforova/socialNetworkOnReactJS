@@ -1,15 +1,15 @@
 import React from 'react'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-import {ProfileType} from "../../types/types";
+import {PhotosType, ProfileType} from "../../types/types";
 import MyPosts from './MyPosts/MyPosts'
 
 type PropsType = {
     isOwner: boolean,
     profile: ProfileType,
     status: string,
-    saveAvatar: () => void,
-    saveProfile: () => void,
-    updateUserStatus: () => void,
+    saveAvatar: (file: PhotosType) => void,
+    saveProfile: (profile: ProfileType) => void,
+    updateUserStatus: (status: string) => void,
 }
 
 const Profile: React.FC<PropsType> = (props) => {

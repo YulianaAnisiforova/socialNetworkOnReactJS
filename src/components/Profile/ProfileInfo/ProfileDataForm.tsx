@@ -1,8 +1,15 @@
 import React from 'react'
 import style from './ProfileInfo.module.css'
 import {useForm} from 'react-hook-form'
+import {ContactsType, ProfileType} from '../../../types/types'
 
-const ProfileDataForm = ({profile, onSubmitContainer, contactsError}) => {
+type PropsType = {
+    profile: ProfileType,
+    contactsError: Array<string> | null,
+    onSubmitContainer: (data: ProfileType) => void,
+}
+
+const ProfileDataForm: React.FC<PropsType> = ({profile, contactsError, onSubmitContainer}) => {
     const {
         register,
         handleSubmit,
@@ -23,7 +30,7 @@ const ProfileDataForm = ({profile, onSubmitContainer, contactsError}) => {
         }
     })
 
-    const onSubmit = (data) => {
+    let onSubmit = async (data: any) => {
         onSubmitContainer(data)
     }
 
@@ -54,7 +61,7 @@ const ProfileDataForm = ({profile, onSubmitContainer, contactsError}) => {
             </div>
 
             <div>
-                {Object.keys(profile.contacts).map(key => {
+                {(Object.keys(profile.contacts) as Array<keyof ContactsType>).map(key => {
                     return (
                         <div key={key}>
                             {key}: <input type='text' className={style.infoInput} {...register(`contacts.${key}`)} />
