@@ -2,20 +2,21 @@ import React from 'react'
 import style from './MyPosts.module.css'
 import Post from './Post/Post'
 import {useForm} from 'react-hook-form'
+import {PostType} from '../../../types/types'
+import {useDispatch, useSelector} from 'react-redux'
+import {AppStateType} from '../../../redux/store'
+import {actions} from '../../../redux/profileReducer'
 
-const MyPosts = React.memo(props => {
+const MyPosts = React.memo(() => {
+    const posts: Array<PostType> = useSelector((state: AppStateType) => state.profilePage.posts)
 
-    let postsElements = props.posts.map(
+    let postsElements = posts.map(
         post => <Post key={post.id} message={post.message} likes={post.likes}/>)
-
-    let addNewPost = (newPost) => {
-        props.addPost(newPost)
-    }
 
     return (
         <div className={style.postsWrapper}>
 
-            <AddNewPostForm onSubmitContainer={addNewPost}/>
+            <AddNewPostForm />
 
             <div className={style.posts}>
                 {postsElements}
@@ -25,7 +26,9 @@ const MyPosts = React.memo(props => {
     )
 })
 
-const AddNewPostForm = (props) => {
+const AddNewPostForm = () => {
+    const dispatch = useDispatch()
+
     const {
         register,
         handleSubmit,
@@ -35,8 +38,8 @@ const AddNewPostForm = (props) => {
         },
     } = useForm()
 
-    const onSubmit = (data) => {
-        props.onSubmitContainer(data.newPost)
+    const onSubmit = (data: any) => {
+        dispatch(actions.addPostActionCreator(data.newPost))
         reset()
     }
 

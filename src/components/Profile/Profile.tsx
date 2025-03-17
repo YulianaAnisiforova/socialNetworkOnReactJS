@@ -1,7 +1,7 @@
 import React from 'react'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-import MyPostsContainer from './MyPosts/MyPostsContainer'
 import {ProfileType} from "../../types/types";
+import MyPosts from './MyPosts/MyPosts'
 
 type PropsType = {
     isOwner: boolean,
@@ -19,7 +19,7 @@ const Profile: React.FC<PropsType> = (props) => {
                          saveAvatar={props.saveAvatar}
                          saveProfile={props.saveProfile}
                          updateUserStatus={props.updateUserStatus} />
-            <MyPostsContainer/>
+            <MyPosts />
         </div>)
 }
 
