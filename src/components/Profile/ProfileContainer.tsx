@@ -9,7 +9,8 @@ import {PhotosType, ProfileType} from '../../types/types'
 import {AppStateType} from '../../redux/store'
 
 const GetParams = (props: any) => {
-    return <ProfileContainer {...props} param={useParams()}/>
+    const param = useParams()
+    return <ProfileContainer {...props} param={param}/>
 }
 
 type MapStateToPropsType = {
