@@ -9,7 +9,7 @@ let initialState = {
         {id: 3, message: 'test3', likes: 3},
     ] as Array<PostType>,
     profile: null as ProfileType | null,
-    status: '' as string | null,
+    status: '' as string,
     contactsError: null as Array<string> | null,
 }
 

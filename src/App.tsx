@@ -19,7 +19,7 @@ const App = () => {
                 <Suspense fallback={<Preloader/>}>
                     <Routes>
                         <Route path='/' element={<Navigate to='/login'/>}/>
-                        <Route path='/profile/:userId?' element={<ProfileContainer/>}/>
+                        <Route path='/profile/:userId?' element={<ProfileContainer />}/>
                         <Route path='/users' element={<UsersContainer pageTitle={'Users'}/>}/>
                         <Route path='/dialogs/*' element={<Dialogs/>}/>
                         <Route path='/login' element={<Login/>}/>

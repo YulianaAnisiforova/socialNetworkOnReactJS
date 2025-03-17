@@ -23,7 +23,7 @@ let initialState = {
         {id: 0, message: 'Hello everyone it`s my first post here haha', likes: 7},
     ] as Array<PostType>,
     profile: null as ProfileType | null,
-    status: '' as string | null,
+    status: '' as string,
     contactsError: null as Array<string> | null,
 }
 

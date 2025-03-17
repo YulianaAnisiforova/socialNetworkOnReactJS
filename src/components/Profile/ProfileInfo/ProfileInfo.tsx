@@ -11,7 +11,7 @@ import ProfileData from './ProfileData'
 
 type ProfileInfoPropsType = {
     isOwner: boolean,
-    profile: ProfileType,
+    profile: ProfileType | null,
     status: string,
     saveAvatar: (file: PhotosType) => void,
     saveProfile: (profile: ProfileType) => void,

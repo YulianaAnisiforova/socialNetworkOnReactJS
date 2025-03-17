@@ -1,11 +1,11 @@
 import React from 'react'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-import {PhotosType, ProfileType} from "../../types/types";
+import {PhotosType, ProfileType} from '../../types/types'
 import MyPosts from './MyPosts/MyPosts'
 
 type PropsType = {
     isOwner: boolean,
-    profile: ProfileType,
+    profile: ProfileType | null,
     status: string,
     saveAvatar: (file: PhotosType) => void,
     saveProfile: (profile: ProfileType) => void,
