@@ -3,24 +3,19 @@ import style from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import MessageItem from './MessageItem/MessageItem'
 import {useForm} from 'react-hook-form'
-import {DialogType, MessageType} from '../../types/types'
+import {useDispatch, useSelector} from 'react-redux'
+import {AppStateType} from '../../redux/store'
+import {actions} from '../../redux/dialogsReducer'
 
-type PropsType = {
-    dialogs: Array<DialogType>,
-    messages: Array<MessageType>,
-    sendMessage: (newMsg: string) => void,
-}
+const Dialogs = () => {
+    const dialogs = useSelector((state: AppStateType) => state.dialogsPage.dialogs)
+    const messages = useSelector((state: AppStateType) => state.dialogsPage.messages)
 
-const Dialogs: React.FC<PropsType> = (props) => {
-    let dialogsElements = props.dialogs.map(
+    let dialogsElements = dialogs.map(
         dialog => <DialogItem key={dialog.id} user={dialog.name} id={dialog.id} avatar={dialog.avatar}/>)
 
-    let messagesElements = props.messages.map(
+    let messagesElements = messages.map(
         message => <MessageItem key={message.id} message={message.message}/>)
-
-    let sendNewMessage = (newMsg: string) => {
-        props.sendMessage(newMsg)
-    }
 
     return (
         <div className={style.dialogs}>
@@ -33,19 +28,15 @@ const Dialogs: React.FC<PropsType> = (props) => {
                     {messagesElements}
                 </div>
 
-                <SendMessageForm onSubmitContainer={sendNewMessage} />
+                <SendMessageForm />
             </div>
 
         </div>
     )
 }
 
-type SendMessageFormType = {
-    onSubmitContainer: (newMsg: string) => void,
-
-}
-
-const SendMessageForm: React.FC<SendMessageFormType> = (props) => {
+const SendMessageForm = () => {
+    const dispatch = useDispatch()
     const {
         register,
         handleSubmit,
@@ -56,7 +47,7 @@ const SendMessageForm: React.FC<SendMessageFormType> = (props) => {
     } = useForm()
 
     const onSubmit = (data: any) => {
-        props.onSubmitContainer(data.newMsg)
+        dispatch(actions.sendMessageActionCreator(data.newMsg))
         reset()
     }
 

@@ -33,7 +33,6 @@ const Login: React.FC<PropsType> = () => {
 }
 
 type LoginFormType = {
-    // onSubmit: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void,
     onSubmit: (data: any) => any,
     captchaURL: string | null,
 }

@@ -2,9 +2,16 @@ import React from 'react'
 import style from './Users.module.css'
 import anonymousAvatar from './../../img/anonim.png'
 import {NavLink} from 'react-router-dom'
+import {UserType} from '../../types/types'
 
-const UserItem = ({user, isFollowingInProgress, unfollow, follow}) => {
+type PropsType = {
+    user: UserType,
+    isFollowingInProgress: Array<number>,
+    unfollow:(userID: number) => void,
+    follow: (userID: number) => void,
+}
 
+const UserItem: React.FC<PropsType> = ({user, isFollowingInProgress, unfollow, follow}) => {
     return (
         <div key={user.id} className={style.item}>
             <div className={style.avatarFollow}>
@@ -17,12 +24,10 @@ const UserItem = ({user, isFollowingInProgress, unfollow, follow}) => {
                 <div>
                     {user.followed ?
                         <button disabled={isFollowingInProgress.some(id => id === user.id)}
-                                className={style.followBtn} onClick={() => {
-                            unfollow(user.id)
+                                className={style.followBtn} onClick={() => {unfollow(user.id)
                         }}>Unfollow</button>
                         : <button disabled={isFollowingInProgress.some(id => id === user.id)}
-                                  className={style.followBtn} onClick={() => {
-                            follow(user.id)
+                                  className={style.followBtn} onClick={() => {follow(user.id)
                         }}>Follow</button>}
                 </div>
             </div>
