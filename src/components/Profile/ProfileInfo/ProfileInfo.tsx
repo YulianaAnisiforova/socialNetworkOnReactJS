@@ -5,8 +5,9 @@ import Preloader from '../../Common/Preloader/Preloader'
 import ProfileStatus from './ProfileStatus'
 import ProfileDataForm from './ProfileDataForm'
 import {useSelector} from 'react-redux'
-import {ContactsType, PhotosType, ProfileType} from '../../../types/types'
+import {PhotosType, ProfileType} from '../../../types/types'
 import {AppStateType} from '../../../redux/store'
+import ProfileData from './ProfileData'
 
 type ProfileInfoPropsType = {
     isOwner: boolean,
@@ -67,61 +68,6 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({isOwner, profile, status, 
                     ? <ProfileDataForm profile={profile} contactsError={contactsError} onSubmitContainer={onSubmitContainer} />
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>}
             </div>
-        </div>
-    )
-}
-
-type ProfileDataPropsType = {
-    isOwner: boolean,
-    profile: ProfileType,
-    goToEditMode: () => void,
-}
-
-const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEditMode}) => {
-    return (
-        <div>
-            <br/>
-
-            <div>
-                Looking for a job: {profile.lookingForAJob ? 'yes' : 'no'}
-            </div>
-            {profile.lookingForAJobDescription &&
-                <div>
-                    My professional skills: {profile.lookingForAJobDescription}
-                </div>
-            }
-            {profile.aboutMe &&
-                <div>
-                    About me: {profile.aboutMe}
-                </div>
-            }
-
-            <br/>
-
-            <div>
-                {(Object.keys(profile.contacts) as Array<keyof ContactsType>).map(key => {
-                    return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
-                })}
-            </div>
-
-            {isOwner && <button className={style.editBtn} onClick={goToEditMode}>Edit profile info</button>}
-        </div>
-    )
-}
-
-type ContactPropsType = {
-    contactTitle: string,
-    contactValue: string,
-}
-
-const Contact: React.FC<ContactPropsType> = ({contactTitle, contactValue}) => {
-    return (
-        <div>
-            {contactValue &&
-                <div>
-                    {contactTitle}: {contactValue}
-                </div>
-            }
         </div>
     )
 }

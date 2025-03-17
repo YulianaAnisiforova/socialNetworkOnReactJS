@@ -2,10 +2,9 @@ import React from 'react'
 import style from './Dialogs.module.css'
 import DialogItem from './DialogItem/DialogItem'
 import MessageItem from './MessageItem/MessageItem'
-import {useForm} from 'react-hook-form'
-import {useDispatch, useSelector} from 'react-redux'
+import {useSelector} from 'react-redux'
 import {AppStateType} from '../../redux/store'
-import {actions} from '../../redux/dialogsReducer'
+import SendMessageForm from './SendMessageForm'
 
 const Dialogs = () => {
     const dialogs = useSelector((state: AppStateType) => state.dialogsPage.dialogs)
@@ -32,35 +31,6 @@ const Dialogs = () => {
             </div>
 
         </div>
-    )
-}
-
-const SendMessageForm = () => {
-    const dispatch = useDispatch()
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: {
-            isValid,
-        },
-    } = useForm()
-
-    const onSubmit = (data: any) => {
-        dispatch(actions.sendMessageActionCreator(data.newMsg))
-        reset()
-    }
-
-    return (
-        <form onSubmit={handleSubmit(onSubmit)} className={style.newMessage}>
-                    <textarea className={style.newMessageArea}
-                              placeholder='New message'
-                              {...register('newMsg', {
-                                  required: true,
-                              })} />
-            <button type={'submit'} disabled={!isValid}
-                    className={style.newMessageBtn}>Send</button>
-        </form>
     )
 }
 
