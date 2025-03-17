@@ -5,12 +5,21 @@ import {getUserProfile, getUserStatus, saveAvatar, saveProfile, updateUserStatus
 import {useParams} from 'react-router-dom'
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect'
 import {compose} from 'redux'
+import {ProfileType} from '../../types/types'
 
 const GetParams = (props) => {
     return <ProfileContainer {...props} param={useParams()}/>
 }
 
-class ProfileContainer extends React.Component {
+type MapStateToPropsType = {
+    profile: ProfileType,
+    status: string,
+    authorizedUserID: number,
+    isAuth: boolean,
+}
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
+
+class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
         let userID = this.props.param.userId
