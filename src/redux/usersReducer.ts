@@ -1,6 +1,6 @@
 import {updateObjectInArray} from './objectHelpers'
 import {UserType} from '../types/types'
-import {AppStateType, BaseThunkType, InferActionType} from './store'
+import {BaseThunkType, InferActionType} from './store'
 import {Dispatch} from 'redux'
 import {usersAPI} from '../api/usersAPI'
 
@@ -96,12 +96,12 @@ const _followUnfollowFlow = async (dispatch: Dispatch<ActionType>, userID: numbe
 
 export const unfollow = (userID: number): ThunkType =>
     async (dispatch: any) => {
-        _followUnfollowFlow(dispatch, userID, usersAPI.deleteUnfollow.bind(usersAPI), actions.unfollowSuccess)
+        await _followUnfollowFlow(dispatch, userID, usersAPI.deleteUnfollow.bind(usersAPI), actions.unfollowSuccess)
 }
 
 export const follow = (userID: number): ThunkType =>
     async (dispatch: any) => {
-        _followUnfollowFlow(dispatch, userID, usersAPI.postFollow.bind(usersAPI), actions.followSuccess)
+        await _followUnfollowFlow(dispatch, userID, usersAPI.postFollow.bind(usersAPI), actions.followSuccess)
 }
 
 export default usersReducer

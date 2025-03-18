@@ -1,31 +1,45 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import style from './Users.module.css'
 import Paginator from '../Common/Paginator/Paginator'
 import UserItem from './UserItem'
-import {UserType} from '../../types/types'
+import {useDispatch, useSelector} from 'react-redux'
+import {AppStateType} from '../../redux/store'
+import {follow, getUsers, getUsers2, unfollow} from '../../redux/usersReducer'
 
-type PropsType = {
-    users: Array<UserType>,
-    isFollowingInProgress: Array<number>,
-    unfollow: (userID: number) => void,
-    follow: (userID: number) => void,
-    totalUsersCount: number,
-    pageSize: number,
-    onPageChanged: (page: number) => void,
-    currentPage: number,
-}
+const Users = () => {
+    const users = useSelector((state: AppStateType) => state.usersPage.users)
+    const currentPage = useSelector((state: AppStateType) => state.usersPage.currentPage)
+    const isFollowingInProgress = useSelector((state: AppStateType) => state.usersPage.isFollowingInProgress)
+    const totalUsersCount = useSelector((state: AppStateType) => state.usersPage.totalUsersCount)
+    const pageSize = useSelector((state: AppStateType) => state.usersPage.pageSize)
+    const dispatch = useDispatch<any>()
 
-const Users: React.FC<PropsType> = (props) => {
+    const onFollow = (userID: number) => {
+        dispatch(follow(userID))
+    }
+
+    const onUnfollow = (userID: number) => {
+        dispatch(unfollow(userID))
+    }
+
+    const onPageChanged = (pageNumber: number) => {
+        dispatch(getUsers2(pageNumber, pageSize))
+    }
+
+    useEffect(() => {
+        dispatch(getUsers(currentPage, pageSize))
+    }, [])
+
     return (
         <div className={style.wrapper}>
             {
-                props.users.map((user) => <UserItem key={user.id} user={user}
-                                                    isFollowingInProgress={props.isFollowingInProgress}
-                                                    unfollow={props.unfollow} follow={props.follow} />
+                users.map((user) => <UserItem key={user.id} user={user}
+                                                    isFollowingInProgress={isFollowingInProgress}
+                                                    unfollow={onUnfollow} follow={onFollow} />
                 )
             }
-            <Paginator totalItemsCount={props.totalUsersCount} pageSize={props.pageSize}
-                       onPageChanged={props.onPageChanged} currentPage={props.currentPage}/>
+            <Paginator totalItemsCount={totalUsersCount} pageSize={pageSize}
+                       onPageChanged={onPageChanged} currentPage={currentPage}/>
         </div>
     )
 }
