@@ -13,13 +13,13 @@ let initialState = {
     isFollowingInProgress: [] as Array<number>,
     filter: {
         term: '',
-        selectFilter: null as null | boolean,
+        selectFilter: null as null | boolean | string,
     },
 }
 
 type InitialStateType = typeof initialState
-type ActionType = InferActionType<typeof actions>
 export type FilterType = typeof initialState.filter
+type ActionType = InferActionType<typeof actions>
 type ThunkType = BaseThunkType<ActionType>
 
 const usersReducer = (state = initialState, action: ActionType): InitialStateType => {
@@ -69,14 +69,14 @@ export const actions = {
     setFilter: (filter: FilterType) => ({type: 'SET_FILTER', filter} as const),
 }
 
-export const getUsers = (currentPage: number, countUsersOfPage: number, filter: FilterType): ThunkType =>
+export const getUsers = (currentPage: number, pageSize: number, filter: FilterType): ThunkType =>
     async (dispatch) => {
         dispatch(actions.toggleIsFetching(true))
 
         dispatch(actions.setCurrentPage(currentPage))
         dispatch(actions.setFilter(filter))
 
-        const data = await usersAPI.getUsers(currentPage, countUsersOfPage, filter.term, filter.selectFilter)
+        const data = await usersAPI.getUsers(currentPage, pageSize, filter.term, filter.selectFilter)
         dispatch(actions.toggleIsFetching(false))
         dispatch(actions.setUsers(data.items))
         dispatch(actions.setTotalUsersCount(data.totalCount))

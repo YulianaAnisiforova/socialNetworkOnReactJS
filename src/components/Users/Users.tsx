@@ -21,6 +21,41 @@ const Users = () => {
     const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
 
+    useEffect(() => {
+        const stringTerm = searchParams.get('term') || ''
+        const stringFriend = searchParams.get('user') || ''
+        const stringPage = searchParams.get('page') || 1
+
+        let actualPage = currentPage
+        let actualFilter = term
+        actualFilter = {...actualFilter, term: stringTerm,
+            selectFilter: stringFriend
+        }
+
+        if(stringPage) actualPage = Number(stringPage)
+
+        switch (stringFriend) {
+            case 'null':
+                actualFilter = {...actualFilter, selectFilter: null}
+                break
+            case 'true':
+                actualFilter = {...actualFilter, selectFilter: true}
+                break
+            case 'false':
+                actualFilter = {...actualFilter, selectFilter: false}
+                break
+        }
+
+        dispatch(getUsers(actualPage, pageSize, actualFilter))
+    },[location.search])
+
+    useEffect(() => {
+        navigate({
+            pathname: '/users',
+            search: `?term=${term.term}&user=${term.selectFilter}&page=${currentPage}`
+        })
+    },[term, currentPage])
+
     const onFollow = (userID: number) => {
         dispatch(follow(userID))
     }
@@ -37,9 +72,9 @@ const Users = () => {
         dispatch(getUsers(1, pageSize, filter))
     }
 
-    useEffect(() => {
-        dispatch(getUsers(currentPage, pageSize, term))
-    }, [])
+    // useEffect(() => {
+    //     dispatch(getUsers(currentPage, pageSize, term))
+    // }, [])
 
     return (
         <div className={style.wrapper}>
