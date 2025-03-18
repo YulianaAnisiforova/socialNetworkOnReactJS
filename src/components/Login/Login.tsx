@@ -6,9 +6,7 @@ import {AppStateType} from '../../redux/store'
 import {login} from '../../redux/authReducer'
 import LoginForm from './LoginForm'
 
-type PropsType = {}
-
-const Login: React.FC<PropsType> = () => {
+const Login = () => {
     const isAuth = useSelector((state: AppStateType) =>state.auth.isAuth)
     const captchaURL = useSelector((state: AppStateType) => state.auth.captchaURL)
     const dispatch = useDispatch<any>()
