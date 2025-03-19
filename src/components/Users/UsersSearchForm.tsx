@@ -24,12 +24,10 @@ export const UsersSearchForm: React.FC<PropsType> = ({onFilterChanged}) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <input placeholder={'search'} {...register('search',
-                    // {required: 'empty field',}
-                )} />
+                <input placeholder={'search'} {...register('term')} />
             </div>
             <div>
-                <select {...register('select')} >
+                <select {...register('selectFilter')} >
                     <option value="null">all</option>
                     <option value="true">followed</option>
                     <option value="false">not followed</option>

@@ -16,7 +16,7 @@ const Users = () => {
     const pageSize = useSelector((state: AppStateType) => state.usersPage.pageSize)
     const dispatch = useDispatch<any>()
 
-    const term = useSelector((state: AppStateType) => state.usersPage.filter)
+    const filter = useSelector((state: AppStateType) => state.usersPage.filter)
     const navigate = useNavigate()
     const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
@@ -27,7 +27,7 @@ const Users = () => {
         const stringPage = searchParams.get('page') || 1
 
         let actualPage = currentPage
-        let actualFilter = term
+        let actualFilter = filter
         actualFilter = {...actualFilter, term: stringTerm,
             selectFilter: stringFriend
         }
@@ -52,9 +52,9 @@ const Users = () => {
     useEffect(() => {
         navigate({
             pathname: '/users',
-            search: `?term=${term.term}&user=${term.selectFilter}&page=${currentPage}`
+            search: `?term=${filter.term}&user=${filter.selectFilter}&page=${currentPage}`
         })
-    },[term, currentPage])
+    },[filter, currentPage])
 
     const onFollow = (userID: number) => {
         dispatch(follow(userID))
@@ -65,16 +65,12 @@ const Users = () => {
     }
 
     const onPageChanged = (pageNumber: number) => {
-        dispatch(getUsers(pageNumber, pageSize, term))
+        dispatch(getUsers(pageNumber, pageSize, filter))
     }
 
     const onFilterChanged = (filter: FilterType) => {
         dispatch(getUsers(1, pageSize, filter))
     }
-
-    // useEffect(() => {
-    //     dispatch(getUsers(currentPage, pageSize, term))
-    // }, [])
 
     return (
         <div className={style.wrapper}>
