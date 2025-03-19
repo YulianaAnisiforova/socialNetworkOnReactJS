@@ -1,13 +1,10 @@
 import React from 'react'
 import {FilterType} from '../../redux/usersReducer'
 import {useForm} from 'react-hook-form'
+import style from './Users.module.css'
 
 type PropsType = {
     onFilterChanged: (filter: FilterType) => void,
-}
-
-type form = {
-    term: string,
 }
 
 export const UsersSearchForm: React.FC<PropsType> = ({onFilterChanged}) => {
@@ -17,24 +14,24 @@ export const UsersSearchForm: React.FC<PropsType> = ({onFilterChanged}) => {
     } = useForm()
 
     const onSubmit = (data: any) => {
-        alert(JSON.stringify(data))
+        // alert(JSON.stringify(data))
         onFilterChanged(data)
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className={style.searchForm} onSubmit={handleSubmit(onSubmit)}>
             <div>
-                <input placeholder={'search'} {...register('term')} />
+                <input className={style.termFilter} placeholder={'search'} {...register('term')} />
             </div>
             <div>
-                <select {...register('selectFilter')} >
+                <select className={style.selectFilter} {...register('selectFilter')} >
                     <option value="null">all</option>
                     <option value="true">followed</option>
                     <option value="false">not followed</option>
                 </select>
             </div>
             <div>
-                <button type={'submit'}>Search</button>
+                <button className={style.btn} type={'submit'}>Search</button>
             </div>
         </form>
     )
