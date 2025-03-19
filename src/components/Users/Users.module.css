@@ -93,6 +93,7 @@
     font-size: 15px;
     margin-left: 20px;
     margin-bottom: 20px;
+    outline: none;
 }
 
 .btn:hover {

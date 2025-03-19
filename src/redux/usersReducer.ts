@@ -13,7 +13,7 @@ let initialState = {
     isFollowingInProgress: [] as Array<number>,
     filter: {
         term: '',
-        selectFilter: null as null | boolean | string,
+        selectFilter: null as null | boolean,
     },
 }
 
