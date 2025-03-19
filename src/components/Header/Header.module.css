@@ -1,6 +1,7 @@
 .header {
     grid-area: h;
     background-color: rgba(255, 205, 126, 0);
+    width: 1000px;
 }
 
 .logoContainer {
