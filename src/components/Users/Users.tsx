@@ -19,7 +19,7 @@ const Users = () => {
     const filter = useSelector((state: AppStateType) => state.usersPage.filter)
     const navigate = useNavigate()
     const location = useLocation()
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchParams] = useSearchParams()
 
     useEffect(() => {
         const stringTerm = searchParams.get('term') || ''
