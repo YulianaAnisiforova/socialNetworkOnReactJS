@@ -28,7 +28,7 @@ const Users = () => {
 
         let actualPage = currentPage
         let actualFilter = filter
-        actualFilter = {...actualFilter, term: stringTerm, selectFilter: stringFriend}
+        actualFilter = {...actualFilter, term: stringTerm}
 
         if(stringPage) actualPage = Number(stringPage)
 
