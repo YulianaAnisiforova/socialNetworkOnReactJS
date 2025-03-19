@@ -23,12 +23,12 @@ const Users = () => {
 
     useEffect(() => {
         const stringTerm = searchParams.get('term') || ''
-        const stringFriend = searchParams.get('user') || ''
+        const stringFriend = searchParams.get('friend') || ''
         const stringPage = searchParams.get('page') || 1
 
         let actualPage = currentPage
         let actualFilter = filter
-        actualFilter = {...actualFilter, term: stringTerm}
+        actualFilter = {...actualFilter, term: stringTerm, selectFilter: stringFriend}
 
         if(stringPage) actualPage = Number(stringPage)
 
@@ -50,7 +50,7 @@ const Users = () => {
     useEffect(() => {
         navigate({
             pathname: '/users',
-            search: `?term=${filter.term}&user=${filter.selectFilter}&page=${currentPage}`
+            search: `?term=${filter.term}&friend=${filter.selectFilter}&page=${currentPage}`
         })
     },[filter, currentPage])
 
