@@ -28,19 +28,17 @@ const Users = () => {
 
         let actualPage = currentPage
         let actualFilter = filter
-        actualFilter = {...actualFilter, term: stringTerm}
-
         if(stringPage) actualPage = Number(stringPage)
 
         switch (stringFriend) {
             case 'null':
-                actualFilter = {...actualFilter, selectFilter: null}
+                actualFilter = {...actualFilter, term: stringTerm, selectFilter: null}
                 break
             case 'true':
-                actualFilter = {...actualFilter, selectFilter: true}
+                actualFilter = {...actualFilter, term: stringTerm, selectFilter: true}
                 break
             case 'false':
-                actualFilter = {...actualFilter, selectFilter: false}
+                actualFilter = {...actualFilter, term: stringTerm, selectFilter: false}
                 break
         }
 
