@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './Post.module.css'
 import userAvatar from '../../../../img/avatar.jpg'
+import {LikeOutlined} from '@ant-design/icons'
 
 type PropsType = {
     message: string,
@@ -22,8 +23,8 @@ const Post: React.FC<PropsType> = (props) => {
                 </div>
             </div>
 
-            <div>
-                <span className={style.likes}> {props.likes || 0} likes</span>
+            <div className={style.likesBox}>
+                <span className={style.likes}> {props.likes || 0} <LikeOutlined /></span>
             </div>
         </div>)
 }

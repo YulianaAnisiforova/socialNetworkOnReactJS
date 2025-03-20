@@ -25,4 +25,9 @@
 
 .likes {
     color: #ff7f00;
+    font-size: 13px;
+}
+
+.likesBox {
+    text-align: center;
 }

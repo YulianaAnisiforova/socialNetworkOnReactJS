@@ -2,6 +2,7 @@ import React from 'react'
 import {FilterType} from '../../redux/usersReducer'
 import {useForm} from 'react-hook-form'
 import style from './Users.module.css'
+import {SearchOutlined} from '@ant-design/icons'
 
 type PropsType = {
     onFilterChanged: (filter: FilterType) => void,
@@ -30,7 +31,7 @@ export const UsersSearchForm: React.FC<PropsType> = ({onFilterChanged}) => {
                 </select>
             </div>
             <div>
-                <button className={style.btn} type={'submit'}>Search</button>
+                <button className={style.btn} type={'submit'}><SearchOutlined /></button>
             </div>
         </form>
     )

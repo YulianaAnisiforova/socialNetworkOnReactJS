@@ -1,33 +1,43 @@
 import React from 'react'
 import style from './NavBar.module.css'
 import {NavLink} from 'react-router-dom'
+import {
+    CustomerServiceOutlined,
+    GlobalOutlined,
+    MessageOutlined, NotificationOutlined,
+    SlidersOutlined, TeamOutlined, UserOutlined
+} from '@ant-design/icons'
 
 const NavBar = () => {
     return (
         <nav className={style.nav}>
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.link}
-                         to='/profile'> Profile </NavLink>
+                         to='/profile'><UserOutlined /> Profile </NavLink>
             </div>
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.link}
-                         to='/users'> Friends </NavLink>
+                         to='/users'><TeamOutlined /> Friends </NavLink>
             </div>
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.link}
-                         to='/dialogs'> Messages </NavLink>
+                         to='/dialogs'><MessageOutlined /> Messages </NavLink>
             </div>
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.link}
-                         to='/news'> News </NavLink>
+                         to='/news'><NotificationOutlined /> News </NavLink>
             </div>
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.link}
-                         to='/music'> Music </NavLink>
+                         to='/music'><CustomerServiceOutlined /> Music </NavLink>
             </div>
             <div className={style.item}>
                 <NavLink className={navData => navData.isActive ? style.active : style.link}
-                         to='/settings'> Settings </NavLink>
+                         to='/settings'><SlidersOutlined /> Settings </NavLink>
+            </div>
+            <div className={style.item}>
+                <NavLink className={navData => navData.isActive ? style.active : style.link}
+                         to='/chat'><GlobalOutlined /> Global chat</NavLink>
             </div>
         </nav>
     )

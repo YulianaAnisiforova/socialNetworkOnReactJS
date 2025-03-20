@@ -3,6 +3,7 @@ import style from './MyPosts.module.css'
 import {useForm} from 'react-hook-form'
 import {useDispatch} from 'react-redux'
 import {actions} from '../../../redux/profileReducer'
+import {SendOutlined} from '@ant-design/icons'
 
 const AddNewPostForm = () => {
     const dispatch = useDispatch()
@@ -27,7 +28,7 @@ const AddNewPostForm = () => {
                       {...register('newPost', {
                           required: true,
                       })}/>
-            <button type={'submit'} disabled={!isValid} className={style.newPostBtn}>Add post</button>
+            <button type={'submit'} disabled={!isValid} className={style.newPostBtn}><SendOutlined /></button>
         </form>
     )
 }

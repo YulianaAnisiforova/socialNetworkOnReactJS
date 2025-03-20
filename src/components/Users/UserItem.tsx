@@ -16,7 +16,7 @@ const UserItem: React.FC<PropsType> = ({user, isFollowingInProgress, unfollow, f
         <div key={user.id} className={style.item}>
             <div className={style.avatarFollow}>
                 <div>
-                    <NavLink to={'/profile' + '/' + user.id}>
+                    <NavLink to={'/profile/' + user.id}>
                         <img className={style.userAvatar} src={user.photos.small != null
                             ? user.photos.small : anonymousAvatar} alt="avatar"/>
                     </NavLink>

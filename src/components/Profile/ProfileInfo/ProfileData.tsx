@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './ProfileInfo.module.css'
 import {ContactsType, ProfileType} from '../../../types/types'
+import {IdcardOutlined} from '@ant-design/icons'
 
 type ProfileDataPropsType = {
     isOwner: boolean,
@@ -35,7 +36,8 @@ const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEdit
                 })}
             </div>
 
-            {isOwner && <button className={style.editBtn} onClick={goToEditMode}>Edit profile info</button>}
+            {isOwner && <button className={style.editBtn} onClick={goToEditMode}>
+                <IdcardOutlined /> Edit profile info</button>}
         </div>
     )
 }

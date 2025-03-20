@@ -8,6 +8,7 @@ import {useSelector} from 'react-redux'
 import {PhotosType, ProfileType} from '../../../types/types'
 import {AppStateType} from '../../../redux/store'
 import ProfileData from './ProfileData'
+import {LinkOutlined} from '@ant-design/icons'
 
 type ProfileInfoPropsType = {
     isOwner: boolean,
@@ -54,7 +55,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({isOwner, profile, status, 
                     {isOwner &&
                         <label htmlFor='chooseFile' className={style.editBtn}>
                             {isOwner && <input type='file' onChange={onAvatarChanged} id='chooseFile'/>}
-                            Change avatar
+                            <LinkOutlined /> Change avatar
                         </label>
                     }
                 </div>

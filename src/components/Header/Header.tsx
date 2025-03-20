@@ -5,6 +5,7 @@ import {NavLink} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppStateType} from '../../redux/store'
 import {logoutThunk, authMe} from '../../redux/authReducer'
+import {LoginOutlined, LogoutOutlined} from '@ant-design/icons'
 
 const Header = () => {
     const dispatch = useDispatch<any>()
@@ -25,12 +26,12 @@ const Header = () => {
             <div className={style.loginBlock}>
                 {isAuth ?
                     <div className={style.authInfo}>
-                        <div>{login}</div>
+                        <div className={style.authUserName}>{login}</div>
                         <div>
-                            <button className={style.link} onClick={logout}>Log out</button>
+                            <button className={style.link} onClick={logout}>Log out <LogoutOutlined /></button>
                         </div>
                     </div>
-                    : <NavLink className={style.link} to={'/login'}>Log in</NavLink>}
+                    : <NavLink className={style.link} to={'/login'}>Log in <LoginOutlined /></NavLink>}
             </div>
 
             <div className={style.logoContainer}>

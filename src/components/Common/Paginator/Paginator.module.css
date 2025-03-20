@@ -31,11 +31,11 @@
 
 .backBtn {
     background-color: #ffcd7e;
-    border-radius: 0 50px 0 50px;
+    border-radius: 50px;
+    height: 40px;
+    width: 40px;
     border: none;
     cursor: pointer;
-    height: 30px;
-    width: 80px;
     font-size: 15px;
     margin-left: 10px;
 }
@@ -56,11 +56,11 @@
 
 .forwardBtn {
     background-color: #ffcd7e;
-    border-radius: 50px 0 50px 0;
+    border-radius: 50px;
+    height: 40px;
+    width: 40px;
     border: none;
     cursor: pointer;
-    height: 30px;
-    width: 80px;
     font-size: 15px;
     margin-left: 10px;
 }

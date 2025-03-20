@@ -3,6 +3,7 @@ import style from './Dialogs.module.css'
 import {useForm} from 'react-hook-form'
 import {useDispatch} from 'react-redux'
 import {actions} from '../../redux/dialogsReducer'
+import {SendOutlined} from '@ant-design/icons'
 
 const SendMessageForm = () => {
     const dispatch = useDispatch()
@@ -28,7 +29,7 @@ const SendMessageForm = () => {
                                   required: true,
                               })} />
             <button type={'submit'} disabled={!isValid}
-                    className={style.newMessageBtn}>Send</button>
+                    className={style.newMessageBtn}><SendOutlined /></button>
         </form>
     )
 }
