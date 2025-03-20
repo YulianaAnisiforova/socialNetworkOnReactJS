@@ -12,7 +12,7 @@ export const UsersSearchForm: React.FC<PropsType> = ({onFilterChanged}) => {
     const {
         register,
         handleSubmit,
-    } = useForm()
+    } = useForm<any>()
 
     const onSubmit = (data: any) => {
         onFilterChanged(data)
@@ -26,8 +26,8 @@ export const UsersSearchForm: React.FC<PropsType> = ({onFilterChanged}) => {
             <div>
                 <select className={style.selectFilter} {...register('selectFilter')} >
                     <option value='null'>all</option>
-                    <option value='true'>followed</option>
-                    <option value='false'>not followed</option>
+                    <option value='true'>following</option>
+                    <option value='false'>not following</option>
                 </select>
             </div>
             <div>

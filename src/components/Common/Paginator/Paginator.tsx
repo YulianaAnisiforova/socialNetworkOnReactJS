@@ -15,6 +15,7 @@ type PropsType = {
 
 const Paginator: React.FC<PropsType> = ({totalItemsCount, pageSize, onPageChanged,
                                             currentPage, portionSize = 10}) => {
+
     return (
         <div>
             <Pagination

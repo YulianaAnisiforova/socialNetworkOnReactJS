@@ -73,6 +73,7 @@
 .termFilter:-webkit-autofill {transition: background-color 5000s ease-in-out 0s;}
 
 .selectFilter {
+    width: 130px;
     margin-bottom: 20px;
     font-size: 15px;
     background-color: rgba(218, 200, 164, 0.35);
