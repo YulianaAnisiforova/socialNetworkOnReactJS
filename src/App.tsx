@@ -8,12 +8,12 @@ import {Footer} from 'antd/lib/layout/layout'
 import {News} from './components/News/News'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
-import {Chat} from './components/Chat/Chat'
 
 const Dialogs = React.lazy(() => import('./components/Dialogs/Dialogs'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
 const Login = React.lazy(() => import('./components/Login/Login'))
+const Chat = React.lazy(() => import('./components/Chat/Chat'))
 
 const App: React.FC = () => {
     return (
