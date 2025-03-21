@@ -4,12 +4,14 @@ import dialogsReducer from './dialogsReducer'
 import usersReducer from './usersReducer'
 import authReducer from './authReducer'
 import {thunk, ThunkAction} from 'redux-thunk'
+import chatReducer from './chatReducer'
 
 let rootReducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    chatPage: chatReducer,
 })
 
 type RootReducersType = typeof rootReducers
