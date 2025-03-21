@@ -72,18 +72,18 @@ export const actions = {
 
 export const getUserProfile = (userID: number | null): ThunkType =>
     async (dispatch) => {
-    let data = await profileAPI.getProfile(userID)
+    let data = await profileAPI.getProfileAPI(userID)
     dispatch(actions.setUserProfile(data))
 }
 export const getUserStatus = (userID: number): ThunkType =>
     async (dispatch) => {
-    let data = await profileAPI.getStatus(userID)
+    let data = await profileAPI.getStatusAPI(userID)
     dispatch(actions.setStatus(data))
 }
 
 export const updateUserStatus = (status: string): ThunkType =>
     async (dispatch) => {
-    let data = await profileAPI.updateStatus(status)
+    let data = await profileAPI.updateStatusAPI(status)
     if (data.resultCode === 0) {
         dispatch(actions.setStatus(status))
     }
@@ -91,7 +91,7 @@ export const updateUserStatus = (status: string): ThunkType =>
 
 export const saveAvatar = (file: PhotosType): ThunkType =>
     async (dispatch) => {
-    let data = await profileAPI.saveAvatar(file)
+    let data = await profileAPI.saveAvatarAPI(file)
     if (data.resultCode === 0) {
         dispatch(actions.saveAvatarSuccess(data.data.photos))
     }
@@ -100,7 +100,7 @@ export const saveAvatar = (file: PhotosType): ThunkType =>
 export const saveProfile = (profile: ProfileType): ThunkType =>
     async (dispatch, getState) => {
     let userID = getState().auth.userID
-    let data = await profileAPI.saveProfile(profile)
+    let data = await profileAPI.saveProfileInfoAPI(profile)
 
     if (data.resultCode === 0) {
         dispatch(getUserProfile(userID))

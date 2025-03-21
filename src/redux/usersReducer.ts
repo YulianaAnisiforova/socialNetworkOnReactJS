@@ -76,7 +76,7 @@ export const getUsers = (currentPage: number, pageSize: number, filter: FilterTy
         dispatch(actions.setCurrentPage(currentPage))
         dispatch(actions.setFilter(filter))
 
-        const data = await usersAPI.getUsers(currentPage, pageSize, filter.term, filter.selectFilter)
+        const data = await usersAPI.getUsersAPI(currentPage, pageSize, filter.term, filter.selectFilter)
         dispatch(actions.toggleIsFetching(false))
         dispatch(actions.setUsers(data.items))
         dispatch(actions.setTotalUsersCount(data.totalCount))
@@ -97,12 +97,12 @@ const _followUnfollowFlow = async (dispatch: Dispatch<ActionType>, userID: numbe
 
 export const unfollow = (userID: number): ThunkType =>
     async (dispatch: any) => {
-        await _followUnfollowFlow(dispatch, userID, usersAPI.deleteUnfollow.bind(usersAPI), actions.unfollowSuccess)
+        await _followUnfollowFlow(dispatch, userID, usersAPI.unfollowAPI.bind(usersAPI), actions.unfollowSuccess)
 }
 
 export const follow = (userID: number): ThunkType =>
     async (dispatch: any) => {
-        await _followUnfollowFlow(dispatch, userID, usersAPI.postFollow.bind(usersAPI), actions.followSuccess)
+        await _followUnfollowFlow(dispatch, userID, usersAPI.followAPI.bind(usersAPI), actions.followSuccess)
 }
 
 export default usersReducer

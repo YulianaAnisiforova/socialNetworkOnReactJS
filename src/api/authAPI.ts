@@ -11,17 +11,17 @@ type LoginDataType = {
 }
 
 export const authAPI = {
-    getAuthMe() {
+    authorizeMeAPI() {
         return instance.get<APIResponseType<GetAuthDataType>>('auth/me')
             .then(response => response.data)
     },
 
-    login(email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) {
+    loginAPI(email: string, password: string, rememberMe: boolean = false, captcha: null | string = null) {
         return instance.post<APIResponseType<LoginDataType>>('auth/login', {email, password, rememberMe, captcha})
             .then(response => response.data)
     },
 
-    logout() {
+    logoutAPI() {
         return instance.delete<APIResponseType>('auth/login')
             .then(response => response.data)
     },

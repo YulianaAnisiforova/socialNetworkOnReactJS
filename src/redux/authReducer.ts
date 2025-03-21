@@ -43,7 +43,7 @@ export const actions = {
 
 export const authMe = (): ThunkType =>
     async (dispatch) => {
-    let data = await authAPI.getAuthMe()
+    let data = await authAPI.authorizeMeAPI()
     if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(actions.setAuthUserData(data.data.id,
             data.data.email, data.data.login, true))
@@ -52,7 +52,7 @@ export const authMe = (): ThunkType =>
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null): ThunkType =>
     async (dispatch) => {
-    let data = await authAPI.login(email, password, rememberMe, captcha)
+    let data = await authAPI.loginAPI(email, password, rememberMe, captcha)
     if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(authMe())
         dispatch(actions.loginErrorAC(null))
@@ -66,7 +66,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
 
 export const logoutThunk = (): ThunkType =>
     async (dispatch) => {
-    let data = await authAPI.logout()
+    let data = await authAPI.logoutAPI()
     if (data.resultCode === ResultCodesEnum.Success) {
         dispatch(actions.setAuthUserData(null, null, null, false))
     }
@@ -74,7 +74,7 @@ export const logoutThunk = (): ThunkType =>
 
 export const getCaptchaURL = (): ThunkType =>
     async (dispatch) => {
-    const data = await securityAPI.getCaptchaURL()
+    const data = await securityAPI.getCaptchaAPI()
     const captchaURL = data.url
 
     dispatch(actions.getCaptchaSuccess(captchaURL))
