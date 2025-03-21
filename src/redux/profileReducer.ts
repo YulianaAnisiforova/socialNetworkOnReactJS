@@ -50,7 +50,7 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
             return {
                 ...state, posts: state.posts.filter(post => post.id !== action.postID)
             }
-        case 'SAVE_AVATAR_SUCCESS':
+        case 'SAVE_AVATAR':
             return {
                 ...state, profile: {...state.profile, photos: action.photos} as ProfileType
             }
@@ -62,30 +62,30 @@ const profileReducer = (state = initialState, action: ActionType): InitialStateT
 }
 
 export const actions = {
-    addPostActionCreator: (newPost: string) => ({type: 'ADD_POST', newPost} as const),
-    deletePostActionCreator: (postID: number) => ({type: 'DELETE_POST', postID} as const),
-    setUserProfile: (profile: ProfileType) => ({type: 'SET_USER_PROFILE', profile: profile} as const),
-    setStatus: (status: string) => ({type: 'SET_STATUS', status: status} as const),
-    saveAvatarSuccess: (photos: PhotosType) => ({type: 'SAVE_AVATAR_SUCCESS', photos} as const),
+    addPostAC: (newPost: string) => ({type: 'ADD_POST', newPost} as const),
+    deletePostAC: (postID: number) => ({type: 'DELETE_POST', postID} as const),
+    setProfileAC: (profile: ProfileType) => ({type: 'SET_USER_PROFILE', profile: profile} as const),
+    setStatusAC: (status: string) => ({type: 'SET_STATUS', status: status} as const),
+    saveAvatarAC: (photos: PhotosType) => ({type: 'SAVE_AVATAR', photos} as const),
     contactsErrorAC: (contactsError: Array<string> | null) => ({type: 'CONTACTS_ERROR', contactsError: contactsError} as const),
 }
 
 export const getUserProfile = (userID: number | null): ThunkType =>
     async (dispatch) => {
     let data = await profileAPI.getProfileAPI(userID)
-    dispatch(actions.setUserProfile(data))
+    dispatch(actions.setProfileAC(data))
 }
 export const getUserStatus = (userID: number): ThunkType =>
     async (dispatch) => {
     let data = await profileAPI.getStatusAPI(userID)
-    dispatch(actions.setStatus(data))
+    dispatch(actions.setStatusAC(data))
 }
 
 export const updateUserStatus = (status: string): ThunkType =>
     async (dispatch) => {
     let data = await profileAPI.updateStatusAPI(status)
     if (data.resultCode === 0) {
-        dispatch(actions.setStatus(status))
+        dispatch(actions.setStatusAC(status))
     }
 }
 
@@ -93,7 +93,7 @@ export const saveAvatar = (file: PhotosType): ThunkType =>
     async (dispatch) => {
     let data = await profileAPI.saveAvatarAPI(file)
     if (data.resultCode === 0) {
-        dispatch(actions.saveAvatarSuccess(data.data.photos))
+        dispatch(actions.saveAvatarAC(data.data.photos))
     }
 }
 

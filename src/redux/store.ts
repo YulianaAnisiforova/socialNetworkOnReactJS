@@ -24,6 +24,4 @@ export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<R, 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducers, composeEnhancers(applyMiddleware(thunk)))
 
-// let store = createStore(rootReducers, applyMiddleware(thunk))
-
 export default store

@@ -18,7 +18,7 @@ const AddNewPostForm = () => {
     } = useForm()
 
     const onSubmit = (data: any) => {
-        dispatch(actions.addPostActionCreator(data.newPost))
+        dispatch(actions.addPostAC(data.newPost))
         reset()
     }
 

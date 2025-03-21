@@ -25,7 +25,7 @@ const authReducer = (state = initialState, action: ActionType): InitialStateType
             }
         case 'LOGIN_ERROR':
             return {...state, loginError: action.loginError}
-        case 'GET_CAPTCHA_SUCCESS':
+        case 'GET_CAPTCHA':
             return {...state, captchaURL: action.payload.captchaURL}
         default:
             return state
@@ -33,11 +33,11 @@ const authReducer = (state = initialState, action: ActionType): InitialStateType
 }
 
 export const actions = {
-    setAuthUserData: (userID: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
+    setAuthUserDataAC: (userID: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
         type: 'SET_USER_DATA',
         payload: {userID, email, login, isAuth}
     } as const),
-    getCaptchaSuccess: (captchaURL: string) => ({type: 'GET_CAPTCHA_SUCCESS', payload: {captchaURL}} as const),
+    getCaptchaAC: (captchaURL: string) => ({type: 'GET_CAPTCHA', payload: {captchaURL}} as const),
     loginErrorAC: (loginError: Array<string> | null) => ({type: 'LOGIN_ERROR', loginError: loginError} as const),
 }
 
@@ -45,7 +45,7 @@ export const authMe = (): ThunkType =>
     async (dispatch) => {
     let data = await authAPI.authorizeMeAPI()
     if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(actions.setAuthUserData(data.data.id,
+        dispatch(actions.setAuthUserDataAC(data.data.id,
             data.data.email, data.data.login, true))
     }
 }
@@ -68,7 +68,7 @@ export const logoutThunk = (): ThunkType =>
     async (dispatch) => {
     let data = await authAPI.logoutAPI()
     if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(actions.setAuthUserData(null, null, null, false))
+        dispatch(actions.setAuthUserDataAC(null, null, null, false))
     }
 }
 
@@ -77,7 +77,7 @@ export const getCaptchaURL = (): ThunkType =>
     const data = await securityAPI.getCaptchaAPI()
     const captchaURL = data.url
 
-    dispatch(actions.getCaptchaSuccess(captchaURL))
+    dispatch(actions.getCaptchaAC(captchaURL))
 }
 
 export default authReducer

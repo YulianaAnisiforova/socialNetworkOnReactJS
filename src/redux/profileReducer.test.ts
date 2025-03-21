@@ -14,28 +14,28 @@ let initialState = {
 }
 
 test('posts length should be incremented after adding', () => {
-    let action = actions.addPostActionCreator('test4')
+    let action = actions.addPostAC('test4')
     let newState = profileReducer(initialState, action)
 
     expect(newState.posts.length).toBe(5)
 })
 
 test('new post text check', () => {
-    let action = actions.addPostActionCreator('test4')
+    let action = actions.addPostAC('test4')
     let newState = profileReducer(initialState, action)
 
     expect(newState.posts[0].message).toBe('test4')
 })
 
 test('posts length should be decremented after deleting', () => {
-    let action = actions.deletePostActionCreator(1)
+    let action = actions.deletePostAC(1)
     let newState = profileReducer(initialState, action)
 
     expect(newState.posts.length).toBe(3)
 })
 
 test('posts length should not be changed after deleting id id is incorrect', () => {
-    let action = actions.deletePostActionCreator(100)
+    let action = actions.deletePostAC(100)
     let newState = profileReducer(initialState, action)
 
     expect(newState.posts.length).toBe(4)

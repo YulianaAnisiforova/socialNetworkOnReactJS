@@ -17,7 +17,7 @@ const SendMessageForm = () => {
     } = useForm()
 
     const onSubmit = (data: any) => {
-        dispatch(actions.sendMessageActionCreator(data.newMsg))
+        dispatch(actions.sendMessageAC(data.newMsg))
         reset()
     }
 
