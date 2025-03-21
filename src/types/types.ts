@@ -48,3 +48,10 @@ export type MessageType = {
     id: number,
     message: string,
 }
+
+export type ChatMessageType = {
+    userId: number,
+    userName: string,
+    message: string,
+    photo: string,
+}

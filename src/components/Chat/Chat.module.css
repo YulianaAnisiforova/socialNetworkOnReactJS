@@ -35,3 +35,20 @@
 .sendBtn:active {
     background-color: #eeba72;
 }
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.messagesBox {
+    height: 700px;
+    overflow-y: auto;
+}
+
+.msgItemBox {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
