@@ -67,9 +67,7 @@ const SendMessageToChatForm: React.FC = () => {
                            setMessage(event.currentTarget.value)}/>
             </span>
             <span>
-                <button
-                    // disabled={wsChannel !== null && readyStatus !== 'ready'}
-                        className={style.sendBtn} onClick={onSendBtn}>
+                <button className={style.sendBtn} onClick={onSendBtn}>
                     <ArrowUpOutlined/>
                 </button>
             </span>
