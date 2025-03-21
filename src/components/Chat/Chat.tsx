@@ -3,38 +3,72 @@ import {ChatMessageType} from "../../types/types";
 import style from "./Chat.module.css";
 import {ArrowUpOutlined} from "@ant-design/icons";
 
-const ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
-
 const Chat: React.FC = () => {
+    const [wsChannel, setWS] = useState<WebSocket | null>(null)
+
+    useEffect(() => {
+        let ws: WebSocket
+
+        let closeHandler = () => {
+            setTimeout(createChannel, 3000)
+        }
+
+        function createChannel() {
+            ws?.removeEventListener('close', closeHandler)
+            ws?.close()
+
+            ws = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+            ws?.addEventListener('close', closeHandler)
+            setWS(ws)
+        }
+
+        createChannel()
+
+        return () => {
+            ws.removeEventListener('close', closeHandler)
+            ws.close()
+        }
+    }, []);
+
+    useEffect(() => {
+
+    }, [wsChannel]);
+
     return (
         <div>
-            <Messages/>
-            <SendMessageToChatForm/>
+            <Messages wsChannel={wsChannel}/>
+            <SendMessageToChatForm wsChannel={wsChannel}/>
         </div>
     )
 }
 
-export const Messages: React.FC = () => {
+const Messages: React.FC<{ wsChannel: WebSocket | null }> = ({wsChannel}) => {
     const [messages, setMessages] = useState<ChatMessageType[]>([])
 
     useEffect(() => {
-        ws.addEventListener('message', (event) => {
+        let messageHandler = (event: MessageEvent) => {
             let newMsg = JSON.parse(event.data)
             setMessages((prevMessages) => [...prevMessages, ...newMsg])
-        })
-    }, [])
+        }
+
+        wsChannel?.addEventListener('message', messageHandler)
+
+        return () => {
+            wsChannel?.removeEventListener('message', messageHandler)
+        }
+    }, [wsChannel])
 
     return (
         <div className={style.messagesBox}>
-            {messages.map((message: ChatMessageType) => {
-                return <MsgItem key={message.userId}
+            {messages.map((message: ChatMessageType, index) => {
+                return <MsgItem key={index}
                                 message={message}/>
             })}
         </div>
     )
 }
 
-export const MsgItem: React.FC<{ message: ChatMessageType }> = ({message}) => {
+const MsgItem: React.FC<{ message: ChatMessageType }> = ({message}) => {
     return (
         <div className={style.msgItemBox}>
             <img className={style.avatar} src={message.photo} alt="avatar"/> <b> {message.userName} </b>
@@ -43,11 +77,26 @@ export const MsgItem: React.FC<{ message: ChatMessageType }> = ({message}) => {
     )
 }
 
-export const SendMessageToChatForm: React.FC = () => {
+const SendMessageToChatForm: React.FC<{ wsChannel: WebSocket | null }> = ({wsChannel}) => {
     const [message, setMessage] = useState('')
+    const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
+
+    useEffect(() => {
+
+        let openHandler = () => {
+            setReadyStatus('ready')
+        }
+
+        wsChannel?.addEventListener('open', openHandler)
+
+        return () => {
+            wsChannel?.removeEventListener('open', openHandler)
+        }
+    }, [wsChannel]);
+
     const onSendBtn = () => {
         if (!message) return
-        ws.send(message)
+        wsChannel?.send(message)
         setMessage('')
     }
 
@@ -56,10 +105,14 @@ export const SendMessageToChatForm: React.FC = () => {
             <span>
                 <input type='text' className={style.newMessageInput}
                        value={message}
-                       onChange={(event) => setMessage(event.currentTarget.value)}/>
+                       onChange={(event) =>
+                           setMessage(event.currentTarget.value)}/>
             </span>
             <span>
-                <button className={style.sendBtn} onClick={onSendBtn}><ArrowUpOutlined/></button>
+                <button disabled={wsChannel !== null && readyStatus !== 'ready'}
+                        className={style.sendBtn} onClick={onSendBtn}>
+                    <ArrowUpOutlined/>
+                </button>
             </span>
         </div>
     )
