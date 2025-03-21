@@ -14,12 +14,14 @@ type ProfileInfoPropsType = {
     isOwner: boolean,
     profile: ProfileType | null,
     status: string,
-    saveAvatar: (file: PhotosType) => void,
-    saveProfile: (profile: ProfileType) => void,
-    updateUserStatus: (status: string) => void,
+    saveAvatarThunk: (file: PhotosType) => void,
+    saveProfileInfoThunk: (profile: ProfileType) => void,
+    updateStatusThunk: (status: string) => void,
 }
 
-const ProfileInfo: React.FC<ProfileInfoPropsType> = ({isOwner, profile, status, updateUserStatus, saveAvatar, saveProfile}) => {
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({isOwner, profile,
+                                                         status, updateStatusThunk,
+                                                         saveAvatarThunk, saveProfileInfoThunk}) => {
 
     const contactsError = useSelector((state: AppStateType) => state.profilePage.contactsError)
 
@@ -31,12 +33,12 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({isOwner, profile, status, 
 
     const onAvatarChanged = (event: any) => {
         if (event.target.files.length) {
-            saveAvatar(event.target.files[0])
+            saveAvatarThunk(event.target.files[0])
         }
     }
 
     let onSubmitContainer = async (data: ProfileType) => {
-        await saveProfile(data)
+        await saveProfileInfoThunk(data)
             if (!contactsError) {
                 setEditMode(false)
             }
@@ -63,7 +65,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = ({isOwner, profile, status, 
 
             <div className={style.infoBox}>
                 <div className={style.name}>{profile.fullName}</div>
-                <ProfileStatus isOwner={isOwner} status={status} updateUserStatus={updateUserStatus}/>
+                <ProfileStatus isOwner={isOwner} status={status} updateStatusThunk={updateStatusThunk}/>
 
                 {editMode
                     ? <ProfileDataForm profile={profile} contactsError={contactsError} onSubmitContainer={onSubmitContainer} />

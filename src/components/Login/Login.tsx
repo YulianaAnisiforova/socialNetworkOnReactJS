@@ -3,7 +3,7 @@ import style from './Login.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {Navigate} from 'react-router-dom'
 import {AppStateType} from '../../redux/store'
-import {login} from '../../redux/authReducer'
+import {loginThunk} from '../../redux/authReducer'
 import LoginForm from './LoginForm'
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
     const dispatch = useDispatch<any>()
 
     const onSubmit = (data: any) => {
-        dispatch(login(data.email, data.password, data.rememberMe, data.captcha))
+        dispatch(loginThunk(data.email, data.password, data.rememberMe, data.captcha))
     }
 
     if (isAuth) {

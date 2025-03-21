@@ -7,18 +7,18 @@ type PropsType = {
     isOwner: boolean,
     profile: ProfileType | null,
     status: string,
-    saveAvatar: (file: PhotosType) => void,
-    saveProfile: (profile: ProfileType) => void,
-    updateUserStatus: (status: string) => void,
+    saveAvatarThunk: (file: PhotosType) => void,
+    saveProfileInfoThunk: (profile: ProfileType) => void,
+    updateStatusThunk: (status: string) => void,
 }
 
 const Profile: React.FC<PropsType> = (props) => {
     return (
         <div>
             <ProfileInfo isOwner={props.isOwner} profile={props.profile} status={props.status}
-                         saveAvatar={props.saveAvatar}
-                         saveProfile={props.saveProfile}
-                         updateUserStatus={props.updateUserStatus} />
+                         saveAvatarThunk={props.saveAvatarThunk}
+                         saveProfileInfoThunk={props.saveProfileInfoThunk}
+                         updateStatusThunk={props.updateStatusThunk} />
             <MyPosts />
         </div>)
 }

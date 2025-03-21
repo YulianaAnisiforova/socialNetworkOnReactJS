@@ -4,7 +4,7 @@ import Paginator from '../Common/Paginator/Paginator'
 import UserItem from './UserItem'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppStateType} from '../../redux/store'
-import {FilterType, follow, getUsers, unfollow} from '../../redux/usersReducer'
+import {FilterType, followThunk, getUsersThunk, unfollowThunk} from '../../redux/usersReducer'
 import {useLocation, useNavigate, useSearchParams} from 'react-router-dom'
 import {UsersSearchForm} from './UsersSearchForm'
 
@@ -42,7 +42,7 @@ const Users = () => {
                 break
         }
 
-        dispatch(getUsers(actualPage, pageSize, actualFilter))
+        dispatch(getUsersThunk(actualPage, pageSize, actualFilter))
     },[location.search])
 
     useEffect(() => {
@@ -53,19 +53,19 @@ const Users = () => {
     },[filter, currentPage])
 
     const onFollow = (userID: number) => {
-        dispatch(follow(userID))
+        dispatch(followThunk(userID))
     }
 
     const onUnfollow = (userID: number) => {
-        dispatch(unfollow(userID))
+        dispatch(unfollowThunk(userID))
     }
 
     const onPageChanged = (pageNumber: number) => {
-        dispatch(getUsers(pageNumber, pageSize, filter))
+        dispatch(getUsersThunk(pageNumber, pageSize, filter))
     }
 
     const onFilterChanged = (filter: FilterType) => {
-        dispatch(getUsers(1, pageSize, filter))
+        dispatch(getUsersThunk(1, pageSize, filter))
     }
 
     return (

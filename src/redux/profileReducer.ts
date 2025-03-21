@@ -70,18 +70,18 @@ export const actions = {
     contactsErrorAC: (contactsError: Array<string> | null) => ({type: 'CONTACTS_ERROR', contactsError: contactsError} as const),
 }
 
-export const getUserProfile = (userID: number | null): ThunkType =>
+export const getProfileThunk = (userID: number | null): ThunkType =>
     async (dispatch) => {
     let data = await profileAPI.getProfileAPI(userID)
     dispatch(actions.setProfileAC(data))
 }
-export const getUserStatus = (userID: number): ThunkType =>
+export const getStatusThunk = (userID: number): ThunkType =>
     async (dispatch) => {
     let data = await profileAPI.getStatusAPI(userID)
     dispatch(actions.setStatusAC(data))
 }
 
-export const updateUserStatus = (status: string): ThunkType =>
+export const updateStatusThunk = (status: string): ThunkType =>
     async (dispatch) => {
     let data = await profileAPI.updateStatusAPI(status)
     if (data.resultCode === 0) {
@@ -89,7 +89,7 @@ export const updateUserStatus = (status: string): ThunkType =>
     }
 }
 
-export const saveAvatar = (file: PhotosType): ThunkType =>
+export const saveAvatarThunk = (file: PhotosType): ThunkType =>
     async (dispatch) => {
     let data = await profileAPI.saveAvatarAPI(file)
     if (data.resultCode === 0) {
@@ -97,13 +97,13 @@ export const saveAvatar = (file: PhotosType): ThunkType =>
     }
 }
 
-export const saveProfile = (profile: ProfileType): ThunkType =>
+export const saveProfileInfoThunk = (profile: ProfileType): ThunkType =>
     async (dispatch, getState) => {
     let userID = getState().auth.userID
     let data = await profileAPI.saveProfileInfoAPI(profile)
 
     if (data.resultCode === 0) {
-        dispatch(getUserProfile(userID))
+        dispatch(getProfileThunk(userID))
         dispatch(actions.contactsErrorAC(null))
     } else {
         dispatch(actions.contactsErrorAC(data.messages))

@@ -1,7 +1,7 @@
 import React from 'react'
 import Profile from './Profile'
 import {connect} from 'react-redux'
-import {getUserProfile, getUserStatus, saveAvatar, saveProfile, updateUserStatus} from '../../redux/profileReducer'
+import {getProfileThunk, getStatusThunk, saveAvatarThunk, saveProfileInfoThunk, updateStatusThunk} from '../../redux/profileReducer'
 import {useParams} from 'react-router-dom'
 import {WithAuthRedirect} from '../../hoc/WithAuthRedirect'
 import {compose} from 'redux'
@@ -20,11 +20,11 @@ type MapStateToPropsType = {
     isAuth: boolean,
 }
 type MapDispatchToPropsType = {
-    getUserProfile: (userID: number) => void,
-    getUserStatus: (userID: number) => void,
-    saveAvatar: (file: PhotosType) => void,
-    saveProfile: (profile: ProfileType) => void,
-    updateUserStatus: (status: string) => void,
+    getProfileThunk: (userID: number) => void,
+    getStatusThunk: (userID: number) => void,
+    saveAvatarThunk: (file: PhotosType) => void,
+    saveProfileInfoThunk: (profile: ProfileType) => void,
+    updateStatusThunk: (status: string) => void,
 }
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 type StateType = {}
@@ -39,8 +39,8 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
             // userID = 32162
         }
 
-        this.props.getUserProfile(userID)
-        this.props.getUserStatus(userID)
+        this.props.getProfileThunk(userID)
+        this.props.getStatusThunk(userID)
     }
 
     componentDidMount() {
@@ -60,9 +60,9 @@ class ProfileContainer extends React.Component<PropsType, StateType> {
             <Profile isOwner={!this.props.param.userId}
                      {...this.props} profile={this.props.profile}
                      status={this.props.status}
-                     saveAvatar={this.props.saveAvatar}
-                     saveProfile={this.props.saveProfile}
-                     updateUserStatus={this.props.updateUserStatus}/>
+                     saveAvatarThunk={this.props.saveAvatarThunk}
+                     saveProfileInfoThunk={this.props.saveProfileInfoThunk}
+                     updateStatusThunk={this.props.updateStatusThunk}/>
         )
     }
 }
@@ -78,6 +78,6 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 export default compose(
     connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppStateType>(mapStateToProps,
-        {getUserProfile, getUserStatus, updateUserStatus, saveAvatar, saveProfile}),
+        {getProfileThunk, getStatusThunk, updateStatusThunk, saveAvatarThunk, saveProfileInfoThunk}),
     WithAuthRedirect
 )(GetParams)

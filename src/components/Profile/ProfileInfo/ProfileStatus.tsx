@@ -1,9 +1,10 @@
 import style from './ProfileInfo.module.css'
 import React, {ChangeEvent, useEffect, useState} from 'react'
+import {updateStatusThunk} from "../../../redux/profileReducer";
 
 type PropsType = {
     status: string,
-    updateUserStatus: (status: string) => void,
+    updateStatusThunk: (status: string) => void,
     isOwner: boolean,
 }
 
@@ -22,7 +23,7 @@ const ProfileStatus: React.FC<PropsType> = (props) => {
 
     const deactivateEditMode = () => {
         setEditMode(false)
-        props.updateUserStatus(status)
+        props.updateStatusThunk(status)
     }
 
     const onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {

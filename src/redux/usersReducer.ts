@@ -42,9 +42,9 @@ const usersReducer = (state = initialState, action: ActionType): InitialStateTyp
             return {...state, currentPage: action.currentPage}
         case 'SET_TOTAL_COUNT':
             return {...state, totalUsersCount: action.totalUsersCount}
-        case 'TOGGLE_IS_FETCHING':
+        case 'IS_FETCHING':
             return {...state, isFetching: action.isFetching}
-        case 'TOGGLE_IS_FOLLOWING_IN_PROGRESS':
+        case 'IS_FOLLOWING_IN_PROGRESS':
             return {
                 ...state,
                 isFollowingInProgress: action.isFetching
@@ -64,12 +64,12 @@ export const actions = {
     setUsersAC: (users: Array<UserType>) => ({type: 'SET_USERS', users: users} as const),
     setCurrentPageAC: (currentPage: number) => ({type: 'SET_CURRENT_PAGE', currentPage: currentPage} as const),
     setTotalUsersCountAC: (totalUsersCount: number) => ({type: 'SET_TOTAL_COUNT', totalUsersCount: totalUsersCount} as const),
-    isFetchingAC: (isFetching: boolean) => ({type: 'TOGGLE_IS_FETCHING', isFetching: isFetching} as const),
-    isFollowingInProgressAC: (isFetching: boolean, userID: number) => ({type: 'TOGGLE_IS_FOLLOWING_IN_PROGRESS', isFetching, userID} as const),
+    isFetchingAC: (isFetching: boolean) => ({type: 'IS_FETCHING', isFetching: isFetching} as const),
+    isFollowingInProgressAC: (isFetching: boolean, userID: number) => ({type: 'IS_FOLLOWING_IN_PROGRESS', isFetching, userID} as const),
     setFilterAC: (filter: FilterType) => ({type: 'SET_FILTER', filter} as const),
 }
 
-export const getUsers = (currentPage: number, pageSize: number, filter: FilterType): ThunkType =>
+export const getUsersThunk = (currentPage: number, pageSize: number, filter: FilterType): ThunkType =>
     async (dispatch) => {
         dispatch(actions.isFetchingAC(true))
 
@@ -82,7 +82,7 @@ export const getUsers = (currentPage: number, pageSize: number, filter: FilterTy
         dispatch(actions.setTotalUsersCountAC(data.totalCount))
 }
 
-const _followUnfollowFlow = async (dispatch: Dispatch<ActionType>, userID: number,
+const _followUnfollow = async (dispatch: Dispatch<ActionType>, userID: number,
                                    apiMethod: any,
                                    actionCreator: (userID: number) => ActionType) =>
 {
@@ -95,14 +95,14 @@ const _followUnfollowFlow = async (dispatch: Dispatch<ActionType>, userID: numbe
     }
 }
 
-export const unfollow = (userID: number): ThunkType =>
+export const unfollowThunk = (userID: number): ThunkType =>
     async (dispatch: any) => {
-        await _followUnfollowFlow(dispatch, userID, usersAPI.unfollowAPI.bind(usersAPI), actions.unfollowAC)
+        await _followUnfollow(dispatch, userID, usersAPI.unfollowAPI.bind(usersAPI), actions.unfollowAC)
 }
 
-export const follow = (userID: number): ThunkType =>
+export const followThunk = (userID: number): ThunkType =>
     async (dispatch: any) => {
-        await _followUnfollowFlow(dispatch, userID, usersAPI.followAPI.bind(usersAPI), actions.followAC)
+        await _followUnfollow(dispatch, userID, usersAPI.followAPI.bind(usersAPI), actions.followAC)
 }
 
 export default usersReducer

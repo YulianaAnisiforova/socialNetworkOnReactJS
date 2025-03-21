@@ -41,7 +41,7 @@ export const actions = {
     loginErrorAC: (loginError: Array<string> | null) => ({type: 'LOGIN_ERROR', loginError: loginError} as const),
 }
 
-export const authMe = (): ThunkType =>
+export const authorizeMeThunk = (): ThunkType =>
     async (dispatch) => {
     let data = await authAPI.authorizeMeAPI()
     if (data.resultCode === ResultCodesEnum.Success) {
@@ -50,15 +50,15 @@ export const authMe = (): ThunkType =>
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null): ThunkType =>
+export const loginThunk = (email: string, password: string, rememberMe: boolean, captcha: string | null): ThunkType =>
     async (dispatch) => {
     let data = await authAPI.loginAPI(email, password, rememberMe, captcha)
     if (data.resultCode === ResultCodesEnum.Success) {
-        dispatch(authMe())
+        dispatch(authorizeMeThunk())
         dispatch(actions.loginErrorAC(null))
     } else {
         if (data.resultCode === ResultCodesEnum.CaptchaIsRequired) {
-            dispatch(getCaptchaURL())
+            dispatch(getCaptchaThunk())
         }
         dispatch(actions.loginErrorAC(data.messages))
     }
@@ -72,7 +72,7 @@ export const logoutThunk = (): ThunkType =>
     }
 }
 
-export const getCaptchaURL = (): ThunkType =>
+export const getCaptchaThunk = (): ThunkType =>
     async (dispatch) => {
     const data = await securityAPI.getCaptchaAPI()
     const captchaURL = data.url

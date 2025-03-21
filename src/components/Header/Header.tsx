@@ -4,7 +4,7 @@ import logo from './../../img/logo.png'
 import {NavLink} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppStateType} from '../../redux/store'
-import {logoutThunk, authMe} from '../../redux/authReducer'
+import {logoutThunk, authorizeMeThunk} from '../../redux/authReducer'
 import {LoginOutlined, LogoutOutlined} from '@ant-design/icons'
 
 const Header = () => {
@@ -14,7 +14,7 @@ const Header = () => {
 
 
     useEffect(() => {
-        dispatch(authMe())
+        dispatch(authorizeMeThunk())
     },[])
 
     const logout = ():void => {
