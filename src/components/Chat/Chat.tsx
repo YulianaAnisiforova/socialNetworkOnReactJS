@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {ChatMessageType, ChatStatusType} from '../../types/types'
 import style from './Chat.module.css'
 import {ArrowUpOutlined} from '@ant-design/icons'
@@ -31,6 +31,12 @@ const Chat: React.FC = () => {
 
 const Messages: React.FC = () => {
     const messages = useSelector((state: AppStateType) => state.chatPage.messages)
+    const autoScrollRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        autoScrollRef.current?.scrollIntoView({behavior: 'smooth'})
+
+    }, [messages])
 
     return (
         <div className={style.messagesBox}>
@@ -38,6 +44,7 @@ const Messages: React.FC = () => {
                 return <MsgItem key={index}
                                 message={message}/>
             })}
+                <div ref={autoScrollRef} />
         </div>
     )
 }
