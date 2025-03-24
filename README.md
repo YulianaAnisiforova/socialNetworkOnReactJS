@@ -1,4 +1,4 @@
-# Documentation for Samurai Social Network (IT-Kamasutra YouTube channel course)
+# Samurai Social Network (IT-Kamasutra YouTube channel course)
 
 ## Table of Contents
 1. [Overview](#overview)
