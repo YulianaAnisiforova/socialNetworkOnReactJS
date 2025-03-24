@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+# Documentation for Samurai Social Network (IT-Kamasutra YouTube channel course)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+1. [Overview](#overview)
+2. [Application Structure](#application-structure)
+3. [Features](#features)
+4. [Redux Store](#redux-store)
+5. [API Integration](#api-integration)
+6. [Routing](#routing)
+7. [Components](#components)
+8. [Technical Details](#technical-details)
 
-## Available Scripts
+## Overview
 
-In the project directory, you can run:
+Samurai Social Network is a React-based social media application with the following key features:
+- User profiles with posts
+- Messaging system (in progress)
+- User discovery and following
+- Real-time chat
+- Authentication system
+- News feed and multimedia sections (in progress)
 
-### `npm start`
+## Application Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The application follows a standard React-Redux structure with:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+src/
+├── components/         # React components
+├── redux/              # Redux store and reducers
+├── api/                # API communication layer
+├── types/              # TypeScript type definitions
+└── App.css             # Main styles
+```
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. User Authentication
+- Login/logout functionality
+- Form validation
+- Captcha protection for suspicious activity
+- Persistent sessions
 
-### `npm run build`
+### 2. User Profiles
+- View and edit profile information
+- Create posts
+- Upload profile photos
+- View and update status
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. Messaging (in progress)
+- Private messaging system
+- Conversation threads
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 4. Users Discovery
+- Browse all users
+- Filter users by name and follow status
+- Follow/unfollow functionality
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 5. Real-time Chat
+- WebSocket-based chat
+- Message history
+- Online status indicators
 
-### `npm run eject`
+### 6. Additional Sections (in progress)
+- News feed
+- Music player
+- Settings panel
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Redux Store
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The application uses Redux for state management with the following reducers:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 1. Auth Reducer
+- Manages authentication state
+- Handles login/logout
+- Stores user credentials
+- Captcha functionality
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 2. Profile Reducer
+- User posts data
+- Profile information
+- User status
+- Profile photo management
 
-## Learn More
+### 3. Dialogs Reducer
+- Private messages data
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 4. Users Reducer
+- Users list
+- Pagination
+- Following status
+- Filtering functionality
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 5. Chat Reducer
+- Real-time messages
+- WebSocket status
 
-### Code Splitting
+## API Integration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The app communicates with a backend API through these modules:
 
-### Analyzing the Bundle Size
+### 1. Auth API
+- `authorizeMeAPI()` - Checks current auth status
+- `loginAPI()` - Handles user login
+- `logoutAPI()` - Handles user logout
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2. Profile API
+- `getProfileAPI()` - Fetches user profile
+- `getStatusAPI()` - Gets user status
+- `updateStatusAPI()` - Updates user status
+- `saveAvatarAPI()` - Uploads profile photo
+- `saveProfileInfoAPI()` - Updates profile info
 
-### Making a Progressive Web App
+### 3. Users API
+- `getUsersAPI()` - Fetches users list
+- `followAPI()` - Follows a user
+- `unfollowAPI()` - Unfollows a user
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 4. Chat API
+- WebSocket-based communication
+- `startAPI()`/`stopAPI()` - Manages connection
+- `sendMessageToChatAPI()` - Sends new messages
+- Subscription handlers for real-time updates
 
-### Advanced Configuration
+## Routing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The app uses React Router with these routes:
 
-### Deployment
+| Path | Component | Description |
+|------|-----------|-------------|
+| `/` | Redirect | Redirects to login |
+| `/profile/:userId?` | ProfileContainer | User profile |
+| `/users` | UsersContainer | Users discovery |
+| `/dialogs/*` | Dialogs | Messaging system |
+| `/login` | Login | Authentication |
+| `/news` | News | News feed |
+| `/music` | Music | Music player |
+| `/settings` | Settings | App settings |
+| `/chat` | Chat | Real-time chat |
+| `*` | 404 | Not found page |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Components
 
-### `npm run build` fails to minify
+### Main Layout Components
+- `App` - Root component
+- `Header` - Top navigation bar
+- `NavBar` - Side navigation menu
+- `Footer` - Application footer
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Feature Components
+- `ProfileContainer` - User profile with posts
+- `UsersContainer` - Users discovery
+- `Dialogs` - Messaging system
+- `Chat` - Real-time chat
+- `Login` - Authentication form
+
+### UI Components
+- `Preloader` - Loading indicator
+- Various form controls and UI elements
+
+## Technical Details
+
+### Technologies Used
+- React 18 (with hooks)
+- Redux (with Thunk middleware)
+- React Router 6
+- TypeScript
+- WebSocket for real-time chat
+- Ant Design components
+
+### Performance Features
+- Code splitting with `React.lazy`
+- Suspense fallbacks for lazy loading
+- Optimized reducers with immutable updates
+- Memoization where appropriate
+
+### Type System
+- Comprehensive TypeScript types
+- Strongly typed Redux actions and thunks
+- Type inference utilities

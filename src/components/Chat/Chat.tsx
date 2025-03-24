@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {ChatMessageType, ChatStatusType} from '../../types/types'
+import {ChatMessageType} from '../../types/types'
 import style from './Chat.module.css'
 import {ArrowUpOutlined} from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
