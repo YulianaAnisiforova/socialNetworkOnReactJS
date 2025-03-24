@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {ChatMessageType} from '../../types/types'
+import {ChatMessageType, ChatStatusType} from '../../types/types'
 import style from './Chat.module.css'
 import {ArrowUpOutlined} from '@ant-design/icons'
 import {useDispatch, useSelector} from 'react-redux'
@@ -8,6 +8,7 @@ import {AppStateType} from '../../redux/store'
 
 const Chat: React.FC = () => {
     const dispatch = useDispatch<any>()
+    const status = useSelector((state: AppStateType) => state.chatPage.status)
 
     useEffect(() => {
         dispatch(startMessagesListeningThunk())
@@ -18,8 +19,12 @@ const Chat: React.FC = () => {
 
     return (
         <div>
-            <Messages />
-            <SendMessageToChatForm />
+            {status === 'error' ? <div>Error. please refresh the page</div> :
+                <>
+                    <Messages/>
+                    <SendMessageToChatForm/>
+                </>
+            }
         </div>
     )
 }
@@ -48,8 +53,7 @@ const MsgItem: React.FC<{ message: ChatMessageType }> = ({message}) => {
 
 const SendMessageToChatForm: React.FC = () => {
     const [message, setMessage] = useState('')
-    const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
-
+    const status = useSelector((state: AppStateType) => state.chatPage.status)
     const dispatch = useDispatch<any>()
 
     const onSendBtn = () => {
@@ -67,7 +71,9 @@ const SendMessageToChatForm: React.FC = () => {
                            setMessage(event.currentTarget.value)}/>
             </span>
             <span>
-                <button className={style.sendBtn} onClick={onSendBtn}>
+                <button className={style.sendBtn}
+                        disabled={status !== 'ready'}
+                        onClick={onSendBtn}>
                     <ArrowUpOutlined/>
                 </button>
             </span>

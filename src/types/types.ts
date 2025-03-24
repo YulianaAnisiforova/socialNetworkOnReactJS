@@ -55,3 +55,5 @@ export type ChatMessageType = {
     message: string,
     photo: string,
 }
+
+export type ChatStatusType = 'pending' | 'ready' | 'error'
